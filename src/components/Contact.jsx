@@ -103,20 +103,20 @@ export default function Contact() {
               </div>
               <div className="form-group checkbox-group" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', marginTop: '-0.5rem' }}>
                 <input type="checkbox" id="sendCopy" checked={formData.sendCopy} onChange={handleChange} style={{ width: 'auto', marginBottom: '0' }} disabled={status === 'loading'} />
-                <label htmlFor="sendCopy" style={{ marginBottom: '0', fontSize: '0.9rem', fontWeight: 'normal', cursor: 'pointer' }}>{t('form_send_copy')}</label>
+                <label htmlFor="sendCopy" style={{ marginBottom: '0', fontSize: '0.9rem', fontWeight: 'normal', cursor: 'pointer' }}>{t('contact.form_send_copy')}</label>
               </div>
 
               {status === 'success' && (
                 <div className="form-status success-message" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success-color, #10b981)', marginBottom: '1rem', padding: '1rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: 'var(--radius)', fontSize: '0.9rem' }}>
                   <CheckCircle2 size={18} />
-                  <span>{t('form_success')}</span>
+                  <span>{t('contact.form_success')}</span>
                 </div>
               )}
               
               {status === 'error' && (
                 <div className="form-status error-message" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--danger-color, #ef4444)', marginBottom: '1rem', padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: 'var(--radius)', fontSize: '0.9rem' }}>
                   <AlertCircle size={18} />
-                  <span>{t('form_error')}</span>
+                  <span>{t('contact.form_error')}</span>
                 </div>
               )}
 
