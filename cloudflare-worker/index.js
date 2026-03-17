@@ -42,7 +42,7 @@ export default {
 
       const emailsToSend = [
         {
-          from: "Website <hello@stormberry.as>", // Update this when sending from your actual domain
+          from: "Stormberry AS - Form <hello@stormberry.as>", // Update this when sending from your actual domain
           to: [adminEmail],
           subject: subject,
           html: htmlBody,
