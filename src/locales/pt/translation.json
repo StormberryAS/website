@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "services": "Serviços",
+    "ai_directive": "Diretiva IA",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "hero": {
+    "badge": "Consultoria de Próxima Geração",
+    "title_pt1": "Transforme Seu Negócio Com",
+    "title_pt2": "Excelência Estratégica",
+    "subtitle": "Vendas ágeis. Cultura global. Estratégia em IA.",
+    "btn_partner": "Seja Nosso Parceiro",
+    "btn_explore": "Explorar Serviços"
+  },
+  "services": {
+    "badge": "Nossa Expertise",
+    "title_pt1": "Impulsione Crescimento &",
+    "title_pt2": "Inovação",
+    "subtitle": "Soluções de consultoria abrangentes projetadas para escalar suas operações e preparar seu negócio para o futuro.",
+    "items": {
+      "sales": {
+        "title": "Excelência em Vendas",
+        "desc": "Eleve sua força de vendas com metodologias avançadas e treinamento de negociação de alto impacto."
+      },
+      "growth": {
+        "title": "Crescimento Estratégico",
+        "desc": "Estratégias baseadas em dados que alinham a visão corporativa com resultados práticos e mensuráveis."
+      },
+      "culture": {
+        "title": "Comunicação Intercultural",
+        "desc": "Supere barreiras globais com treinamentos de comunicação personalizados para prosperar internacionalmente."
+      },
+      "ai": {
+        "title": "Integração de IA Corporativa",
+        "desc": "Navegue no complexo cenário da IA. Oferecemos consultoria para integrar IA perfeitamente."
+      }
+    }
+  },
+  "ai": {
+    "badge": "TREINAMENTO CORPORATIVO ESPECIALIZADO",
+    "title_pt1": "Lei de IA da UE (Art. 4)",
+    "title_pt2": "Treinamento em Alfabetização em IA",
+    "desc": "A Lei de IA da UE (Artigo 4) exige que organizações que implementem sistemas de IA garantam um nível suficiente de conhecimento sobre IA para seus funcionários. Proteja sua empresa de responsabilidades regulatórias.",
+    "features": {
+      "compliance": {
+        "title": "Conformidade Regulatória",
+        "desc": "Cumpra suas obrigações legais sob a Lei de IA da UE, mitigando riscos e evitando penalidades."
+      },
+      "literacy": {
+        "title": "Literacia em IA",
+        "desc": "Equipe suas equipes com o conhecimento essencial para utilizar com segurança ferramentas como Copilot e ChatGPT."
+      },
+      "risk": {
+        "title": "Mitigação de Riscos",
+        "desc": "Previna vazamentos de dados sensíveis e gerencie implicações éticas e legais nas operações."
+      }
+    },
+    "btn": "Agendar uma Reunião",
+    "card": {
+      "title": "Conformidade Documentada",
+      "desc": "Receba certificação formal do treinamento para satisfazer requerimentos de auditoria da UE."
+    }
+  },
+  "about": {
+    "badge": "Perfil de Liderança",
+    "title_pt1": "Movidos pela",
+    "title_pt2": "Experiência",
+    "desc1": "A Stormberry A.S. preenche a lacuna entre a estratégia visionária e as realidades operacionais. Com uma base profunda em vendas, dinâmicas interculturais e IA, oferecemos uma abordagem multidisciplinar.",
+    "desc2": "Entendemos que uma verdadeira transformação exige uma abordagem holística. Ao combinar visão estratégica com capacidades tecnológicas, capacitamos nossos clientes.",
+    "badge_years": "Anos Experiência",
+    "languages": "Consultoria e Treinamento Global disponíveis em: Inglês, Norueguês, Português e Francês.",
+    "btn_linkedin": "Conectar no LinkedIn",
+    "btn_talk": "Vamos Conversar"
+  },
+  "contact": {
+    "badge": "Entre em Contato",
+    "title_pt1": "Inicie uma",
+    "title_pt2": "Conversa",
+    "subtitle": "Pronto para transformar sua estratégia de negócios? Contate-nos para agendar uma consulta.",
+    "email": "Nosso E-mail",
+    "call": "Ligue",
+    "hq": "Sede",
+    "hq_val": "Bergen, Noruega",
+    "form_name": "Nome Completo",
+    "form_name_ph": "João Silva",
+    "form_email": "Endereço de E-mail",
+    "form_email_ph": "joao@exemplo.com.br",
+    "form_service": "Serviço",
+    "form_service_select": "Selecione um Serviço",
+    "form_service_sales": "Treinamento de Vendas",
+    "form_service_strategy": "Crescimento Estratégico",
+    "form_service_culture": "Comunicação Intercultural",
+    "form_service_ai": "IA (inclui Lei IA da UE Art. 4)",
+    "form_service_other": "Outra Dúvida",
+    "form_message": "Mensagem",
+    "form_message_ph": "Como podemos ajudar?",
+    "form_btn": "Enviar Mensagem",
+    "email_address": "oi@stormberry.as"
+  },
+  "footer": {
+    "desc": "Vendas ágeis. Cultura global. Estratégia em IA.",
+    "rights": "Stormberry A.S. Todos os direitos reservados.",
+    "ai_notice": "Orgulhosamente impulsionado por agentes de IA soberanos.",
+    "email_address": "oi@stormberry.as"
+  }
+}

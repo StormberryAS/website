@@ -1,0 +1,88 @@
+.about {
+  position: relative;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.about-logo {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+
+
+
+
+.placeholder-text {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  letter-spacing: 2px;
+}
+
+
+
+.about-text {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.about-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.linkedin-btn {
+  background: #0077b5;
+  color: white;
+  border-color: #0077b5;
+}
+
+.linkedin-btn:hover {
+  background: #005885;
+  color: white;
+  border-color: #005885;
+}
+
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .about-image-container {
+    margin-bottom: 2rem;
+  }
+  
+  .about-actions {
+    justify-content: center;
+  }
+}
