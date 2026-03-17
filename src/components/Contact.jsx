@@ -1,22 +1,43 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { siteConfig } from '../config';
 import './Contact.css';
 
 export default function Contact() {
   const { t } = useTranslation();
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    name: '', email: '', service: '', message: '', sendCopy: false
+  });
+  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const service = document.getElementById('service').value;
-    const message = document.getElementById('message').value;
+    setStatus('loading');
     
-    const subject = encodeURIComponent(`Website Inquiry: ${service}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`);
-    const recipient = t('contact.email_address');
-    
-    window.open(`mailto:${recipient}?subject=${subject}&body=${body}`, '_blank');
+    try {
+      const response = await fetch(siteConfig.contact.formsgUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      setStatus('success');
+      setFormData({ name: '', email: '', service: '', message: '', sendCopy: false });
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+    }
   };
 
   return (
@@ -50,7 +71,7 @@ export default function Contact() {
               <MapPin className="info-icon" />
               <div>
                 <h4>{t('contact.hq')}</h4>
-                <p>{t('contact.hq_val')}</p>
+                <address style={{ fontStyle: 'normal' }}>{t('contact.hq_val')}</address>
               </div>
             </div>
           </div>
@@ -59,15 +80,15 @@ export default function Contact() {
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">{t('contact.form_name')}</label>
-                <input type="text" id="name" placeholder={t('contact.form_name_ph')} required />
+                <input type="text" id="name" value={formData.name} onChange={handleChange} placeholder={t('contact.form_name_ph')} required disabled={status === 'loading'} />
               </div>
               <div className="form-group">
                 <label htmlFor="email">{t('contact.form_email')}</label>
-                <input type="email" id="email" placeholder={t('contact.form_email_ph')} required />
+                <input type="email" id="email" value={formData.email} onChange={handleChange} placeholder={t('contact.form_email_ph')} required disabled={status === 'loading'} />
               </div>
               <div className="form-group">
                 <label htmlFor="service">{t('contact.form_service')}</label>
-                <select id="service" required defaultValue="">
+                <select id="service" value={formData.service} onChange={handleChange} required disabled={status === 'loading'}>
                   <option value="" disabled>{t('contact.form_service_select')}</option>
                   <option value="sales">{t('contact.form_service_sales')}</option>
                   <option value="strategy">{t('contact.form_service_strategy')}</option>
@@ -78,10 +99,33 @@ export default function Contact() {
               </div>
               <div className="form-group">
                 <label htmlFor="message">{t('contact.form_message')}</label>
-                <textarea id="message" rows="4" placeholder={t('contact.form_message_ph')} required></textarea>
+                <textarea id="message" value={formData.message} onChange={handleChange} rows="4" placeholder={t('contact.form_message_ph')} required disabled={status === 'loading'}></textarea>
               </div>
-              <button type="submit" className="btn btn-primary submit-btn">
-                {t('contact.form_btn')} <Send size={18} />
+              <div className="form-group checkbox-group" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', marginTop: '-0.5rem' }}>
+                <input type="checkbox" id="sendCopy" checked={formData.sendCopy} onChange={handleChange} style={{ width: 'auto', marginBottom: '0' }} disabled={status === 'loading'} />
+                <label htmlFor="sendCopy" style={{ marginBottom: '0', fontSize: '0.9rem', fontWeight: 'normal', cursor: 'pointer' }}>{t('form_send_copy')}</label>
+              </div>
+
+              {status === 'success' && (
+                <div className="form-status success-message" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success-color, #10b981)', marginBottom: '1rem', padding: '1rem', background: 'rgba(16, 185, 129, 0.1)', borderRadius: 'var(--radius)', fontSize: '0.9rem' }}>
+                  <CheckCircle2 size={18} />
+                  <span>{t('form_success')}</span>
+                </div>
+              )}
+              
+              {status === 'error' && (
+                <div className="form-status error-message" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--danger-color, #ef4444)', marginBottom: '1rem', padding: '1rem', background: 'rgba(239, 68, 68, 0.1)', borderRadius: 'var(--radius)', fontSize: '0.9rem' }}>
+                  <AlertCircle size={18} />
+                  <span>{t('form_error')}</span>
+                </div>
+              )}
+
+              <button type="submit" className="btn btn-primary submit-btn" disabled={status === 'loading'}>
+                {status === 'loading' ? (
+                  <><Loader2 size={18} className="spin" /> {t('contact.form_btn')}...</>
+                ) : (
+                  <>{t('contact.form_btn')} <Send size={18} /></>
+                )}
               </button>
             </form>
           </div>

@@ -96,6 +96,9 @@
     "form_message": "Message",
     "form_message_ph": "How can we help you?",
     "form_btn": "Send Message",
+    "form_send_copy": "Send a copy to my email",
+    "form_success": "Thank you for your message, we will come back to you as soon as possible.",
+    "form_error": "Failed to send message. Please try again later.",
     "email_address": "hello@stormberry.as"
   },
   "footer": {

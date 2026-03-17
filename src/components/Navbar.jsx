@@ -82,14 +82,14 @@ const Navbar = () => {
           <a href="#contact" className="btn btn-primary nav-btn" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</a>
           
           <div className="language-switcher">
-            <button className="current-lang" aria-label="Select language">
-              {getLanguageFlag(i18n.language)}
+            <button className="current-lang" aria-label="Current language">
+              <span aria-hidden="true">{getLanguageFlag(i18n.language)}</span>
             </button>
-            <div className="language-dropdown glass-panel">
-              <button onClick={() => changeLanguage('en')} title="English">🇬🇧</button>
-              <button onClick={() => changeLanguage('no')} title="Norwegian">🇳🇴</button>
-              <button onClick={() => changeLanguage('pt')} title="Portuguese">🇧🇷</button>
-              <button onClick={() => changeLanguage('fr')} title="French">🇫🇷</button>
+            <div className="language-dropdown glass-panel" role="menu" aria-label="Language options">
+              <button onClick={() => changeLanguage('en')} title="English" aria-label="English" role="menuitem"><span aria-hidden="true">🇬🇧</span></button>
+              <button onClick={() => changeLanguage('no')} title="Norwegian" aria-label="Norwegian" role="menuitem"><span aria-hidden="true">🇳🇴</span></button>
+              <button onClick={() => changeLanguage('pt')} title="Portuguese" aria-label="Portuguese" role="menuitem"><span aria-hidden="true">🇧🇷</span></button>
+              <button onClick={() => changeLanguage('fr')} title="French" aria-label="French" role="menuitem"><span aria-hidden="true">🇫🇷</span></button>
             </div>
           </div>
 

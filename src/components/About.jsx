@@ -1,6 +1,7 @@
 import React from 'react';
 import { Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { siteConfig } from '../config';
 import './About.css';
 
 export default function About() {
@@ -11,7 +12,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-image-container animate-fade-in delay-100">
             <div className="about-image-wrapper">
-              <img src="/logo.png" alt="Stormberry A.S. Logo" className="about-logo" />
+              <img src="/logo.webp" alt="Stormberry A.S. Logo" className="about-logo" />
             </div>
           </div>
           
@@ -38,7 +39,7 @@ export default function About() {
             </div>
             
             <div className="about-actions mt-4">
-              <a href="https://linkedin.com/company/stormberryas" target="_blank" rel="noopener noreferrer" className="btn btn-outline linkedin-btn">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-outline linkedin-btn">
                 <Linkedin size={20} /> {t('about.btn_linkedin')}
               </a>
               <a href="#contact" className="btn btn-primary">

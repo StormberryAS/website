@@ -15,6 +15,8 @@ const NostrLogo = () => (
   </svg>
 );
 
+import { siteConfig } from '../config';
+
 export default function Footer() {
   const { t } = useTranslation();
   return (
@@ -34,11 +36,11 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <div className="footer-social">
-            <a href="https://linkedin.com/company/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={24} /></a>
-            <a href="https://x.com/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><XLogo /></a>
-            <a href="https://github.com/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={24} /></a>
-            <a href="https://youtube.com/@StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={24} /></a>
-            <a href="nostr:npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa" target="_blank" rel="noopener noreferrer" aria-label="Nostr" title="Nostr: npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa"><NostrLogo /></a>
+            <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={24} /></a>
+            <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><XLogo /></a>
+            <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={24} /></a>
+            <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={24} /></a>
+            <a href={siteConfig.social.nostr} target="_blank" rel="noopener noreferrer" aria-label="Nostr" title={`Nostr: ${siteConfig.social.nostr.replace('nostr:', '')}`}><NostrLogo /></a>
           </div>
           <p>&copy; {new Date().getFullYear()} {t('footer.rights')} | <a href={`mailto:${t('footer.email_address')}`}>{t('footer.email_address')}</a></p>
           <p className="privacy-notice">{t('footer.privacy')}</p>

@@ -96,6 +96,9 @@
     "form_message": "Mensagem",
     "form_message_ph": "Como podemos ajudar?",
     "form_btn": "Enviar Mensagem",
+    "form_send_copy": "Enviar uma cópia para o meu e-mail",
+    "form_success": "Obrigado pela sua mensagem, entraremos em contato o mais rápido possível.",
+    "form_error": "Falha ao enviar mensagem. Por favor, tente novamente mais tarde.",
     "email_address": "oi@stormberry.as"
   },
   "footer": {

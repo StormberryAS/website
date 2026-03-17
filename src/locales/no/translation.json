@@ -96,6 +96,9 @@
     "form_message": "Melding",
     "form_message_ph": "Hvordan kan vi hjelpe deg?",
     "form_btn": "Send melding",
+    "form_send_copy": "Send en kopi til min e-post",
+    "form_success": "Takk for meldingen, vi kommer tilbake til deg så snart som mulig.",
+    "form_error": "Kunne ikke sende meldingen. Vennligst prøv igjen senere.",
     "email_address": "hei@stormberry.as"
   },
   "footer": {
