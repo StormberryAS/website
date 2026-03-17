@@ -87,9 +87,9 @@ const Navbar = () => {
             </button>
             <div className="language-dropdown glass-panel" role="menu" aria-label="Language options">
               <button onClick={() => changeLanguage('en')} title="English" aria-label="English" role="menuitem"><span aria-hidden="true">🇬🇧</span></button>
-              <button onClick={() => changeLanguage('no')} title="Norwegian" aria-label="Norwegian" role="menuitem"><span aria-hidden="true">🇳🇴</span></button>
-              <button onClick={() => changeLanguage('pt')} title="Portuguese" aria-label="Portuguese" role="menuitem"><span aria-hidden="true">🇧🇷</span></button>
-              <button onClick={() => changeLanguage('fr')} title="French" aria-label="French" role="menuitem"><span aria-hidden="true">🇫🇷</span></button>
+              <button onClick={() => changeLanguage('no')} title="Norsk" aria-label="Norsk" role="menuitem"><span aria-hidden="true">🇳🇴</span></button>
+              <button onClick={() => changeLanguage('pt')} title="Português" aria-label="Português" role="menuitem"><span aria-hidden="true">🇧🇷</span></button>
+              <button onClick={() => changeLanguage('fr')} title="Français" aria-label="Français" role="menuitem"><span aria-hidden="true">🇫🇷</span></button>
             </div>
           </div>
 
