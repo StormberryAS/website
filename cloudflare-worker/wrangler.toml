@@ -3,7 +3,9 @@ main = "index.js"
 compatibility_date = "2024-03-20"
 
 # [vars]
-# ADMIN_EMAIL = "admin@stormberry.no" # Change this
+# ADMIN_EMAIL = "admin@stormberry.no" # Change this to the inbox where inquiries should go
+# SENDER_EMAIL = "no-reply@stormberry.as" # Change this to a verified sender on your domain
 
-# To set the secret API key, run:
-# wrangler secret put RESEND_API_KEY
+# [[send_email]]
+# name = "SEB"
+# destination_address = "admin@stormberry.no" # Same as ADMIN_EMAIL above (optional restriction)

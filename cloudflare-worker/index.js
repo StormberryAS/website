@@ -1,3 +1,5 @@
+import { EmailMessage } from "cloudflare:email";
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -20,69 +22,37 @@ export default {
 
       // Basic validation
       if (!name || !email || !service || !message) {
-        return new Response("Missing required fields", { status: 400 });
-      }
-
-      const resendApiKey = env.RESEND_API_KEY;
-      const adminEmail = env.ADMIN_EMAIL; // The email of Stormberry where inquiries should go to
-
-      if (!resendApiKey) {
-        return new Response("Server error: Missing API Key", { status: 500 });
-      }
-
-      const subject = `New Inquiry: ${service} from ${name}`;
-      const htmlBody = `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Service:</strong> ${service}</p>
-        <p><strong>Message:</strong></p>
-        <p style="white-space: pre-wrap;">${message}</p>
-      `;
-
-      const emailsToSend = [
-        {
-          from: "Website <no-reply@yourdomain.com>", // Update this when sending from your actual domain
-          to: [adminEmail],
-          subject: subject,
-          html: htmlBody,
-          reply_to: email
-        }
-      ];
-
-      // If user requested a copy
-      if (sendCopy) {
-        emailsToSend.push({
-          from: "Stormberry AS <no-reply@yourdomain.com>", // Update to your domain
-          to: [email],
-          subject: `Copy of your inquiry to Stormberry: ${service}`,
-          html: `
-            <p>Hi ${name},</p>
-            <p>Thank you for reaching out to Stormberry AS. We have received your message and will get back to you as soon as possible.</p>
-            <hr />
-            <p><strong>Your Message:</strong></p>
-            <p style="white-space: pre-wrap;">${message}</p>
-          `
+        return new Response(JSON.stringify({ error: "Missing required fields" }), { 
+          status: 400,
+          headers: { "Access-Control-Allow-Origin": "*" }
         });
       }
 
-      // Send emails via Resend API
-      const promises = emailsToSend.map(emailPayload => 
-        fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(emailPayload)
-        })
-      );
+      const adminEmail = env.ADMIN_EMAIL; // Where inquiries should go
+      const senderEmail = env.SENDER_EMAIL; // Verified sender email on Cloudflare
 
-      const responses = await Promise.all(promises);
+      if (!adminEmail || !senderEmail) {
+        return new Response(JSON.stringify({ error: "Server error: Missing email configuration in Worker variables" }), { 
+          status: 500,
+          headers: { "Access-Control-Allow-Origin": "*" }
+        });
+      }
+
+      const subject = `New Inquiry: ${service} from ${name}`;
+      const textBody = `New Contact Form Submission\n\nName: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`;
+
+      // Construct raw MIME email for Admin
+      const adminMime = `From: ${senderEmail}\nTo: ${adminEmail}\nReply-To: ${email}\nSubject: ${subject}\n\n${textBody}`;
+      const adminMsg = new EmailMessage(senderEmail, adminEmail, adminMime);
       
-      const allSuccessful = responses.every(res => res.ok);
-      if (!allSuccessful) {
-        throw new Error("Failed to send email through Resend");
+      // Send to Admin via Cloudflare native Send Email Binding (SEB)
+      await env.SEB.send(adminMsg);
+
+      // If user requested a copy
+      if (sendCopy) {
+        const copyMime = `From: ${senderEmail}\nTo: ${email}\nSubject: Copy of your inquiry: ${service}\n\nHi ${name},\n\nThank you for reaching out to Stormberry AS. We have received your message and will get back to you as soon as possible.\n\nYour Message:\n${message}`;
+        const copyMsg = new EmailMessage(senderEmail, email, copyMime);
+        await env.SEB.send(copyMsg);
       }
 
       return new Response(JSON.stringify({ success: true }), {
