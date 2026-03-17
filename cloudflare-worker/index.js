@@ -42,7 +42,7 @@ export default {
 
       const emailsToSend = [
         {
-          from: "Website <no-reply@yourdomain.com>", // Update this when sending from your actual domain
+          from: "Website <hello@stormberry.as>", // Update this when sending from your actual domain
           to: [adminEmail],
           subject: subject,
           html: htmlBody,
@@ -53,7 +53,7 @@ export default {
       // If user requested a copy
       if (sendCopy) {
         emailsToSend.push({
-          from: "Stormberry AS <no-reply@yourdomain.com>", // Update to your domain
+          from: "Stormberry AS <hello@stormberry.as>", // Update to your domain
           to: [email],
           subject: `Copy of your inquiry to Stormberry: ${service}`,
           html: `
@@ -80,9 +80,16 @@ export default {
 
       const responses = await Promise.all(promises);
       
-      const allSuccessful = responses.every(res => res.ok);
-      if (!allSuccessful) {
-        throw new Error("Failed to send email through Resend");
+      const results = await Promise.all(responses.map(async r => ({
+        ok: r.ok,
+        status: r.status,
+        data: await r.json().catch(() => null)
+      })));
+
+      const failed = results.filter(r => !r.ok);
+      if (failed.length > 0) {
+        console.error("Resend API Errors:", JSON.stringify(failed, null, 2));
+        throw new Error(`Resend API Error: ${failed[0].data?.message || 'Unknown error'}`);
       }
 
       return new Response(JSON.stringify({ success: true }), {
