@@ -9,6 +9,6 @@ export const siteConfig = {
   contact: {
     // Note: The email addresses are managed via i18n translations, 
     // but the worker URL is configured here.
-    formsgUrl: "https://worker-example.example.workers.dev", // Replace with actual Cloudflare Worker URL
+    formsgUrl: "https://stormberry-contact-form.marcos-495.workers.dev",
   }
 };
