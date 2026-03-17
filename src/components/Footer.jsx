@@ -41,6 +41,7 @@ export default function Footer() {
             <a href="nostr:npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa" target="_blank" rel="noopener noreferrer" aria-label="Nostr" title="Nostr: npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa"><NostrLogo /></a>
           </div>
           <p>&copy; {new Date().getFullYear()} {t('footer.rights')} | <a href={`mailto:${t('footer.email_address')}`}>{t('footer.email_address')}</a></p>
+          <p className="privacy-notice">{t('footer.privacy')}</p>
           <p className="ai-notice">{t('footer.ai_notice')}</p>
         </div>
       </div>
