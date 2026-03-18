@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Mail, ArrowRight } from 'lucide-react';
+import { Linkedin, ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { siteConfig } from '../config';
 import './About.css';
@@ -12,7 +12,7 @@ export default function About() {
         <div className="about-grid">
           <div className="about-image-container animate-fade-in delay-100">
             <div className="about-image-wrapper">
-              <img src="/logo.webp" alt="Stormberry A.S. Logo" className="about-logo" />
+              <img src="/founder.webp" alt="Marcos Thomassen Povoa" className="about-photo" />
             </div>
           </div>
           
@@ -21,16 +21,19 @@ export default function About() {
             <h2 className="section-title">
               {t('about.title_pt1')} <span className="text-gradient">{t('about.title_pt2')}</span>
             </h2>
+            
+            <div className="leader-info">
+              <h3 className="leader-name">{t('about.leader_name')}</h3>
+              <p className="leader-title">{t('about.leader_title')}</p>
+            </div>
+            
             <p className="about-text">
-              {t('about.desc1')}
+              {t('about.leader_bio')}
             </p>
             <div className="experience-badge">
               <span className="years">10+</span>
               <span className="text">{t('about.badge_years')}</span>
             </div>
-            <p className="about-text">
-              {t('about.desc2')}
-            </p>
             
             <div className="languages-section mt-4 mb-4">
               <p className="languages-text" style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '500' }}>

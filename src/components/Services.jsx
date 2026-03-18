@@ -42,8 +42,7 @@ export default function Services() {
         
         <div className="services-grid">
           {services.map((service, index) => (
-            <a 
-              href="#contact"
+            <div 
               key={index} 
               className={`service-card glass-panel animate-fade-in-up delay-${(index % 3 + 1) * 100}`}
             >
@@ -52,7 +51,7 @@ export default function Services() {
               </div>
               <h3 className="service-title">{service.title}</h3>
               <p className="service-desc">{service.description}</p>
-            </a>
+            </div>
           ))}
         </div>
       </div>

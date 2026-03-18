@@ -7,8 +7,7 @@ export const siteConfig = {
     nostr: "nostr:npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa",
   },
   contact: {
-    // Note: The email addresses are managed via i18n translations, 
-    // but the worker URL is configured here.
     formsgUrl: "https://stormberry-contact-form.marcos-495.workers.dev",
+    turnstileSiteKey: "0x4AAAAAACsqoaM-PpNxpS3n",
   }
 };

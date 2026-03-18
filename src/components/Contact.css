@@ -55,6 +55,12 @@
   gap: 1.5rem;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -101,6 +107,12 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.turnstile-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
 .submit-btn {
   width: 100%;
   margin-top: 1rem;
@@ -115,3 +127,10 @@
     padding: 2rem;
   }
 }
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -63,11 +63,12 @@
     }
   },
   "about": {
-    "badge": "Profil de la Direction",
+    "badge": "À Propos de Nous",
     "title_pt1": "Propulsé par",
     "title_pt2": "L'Expérience",
-    "desc1": "Stormberry a été créée pour faire le pont entre la vision et l'opérationnel. Avec une solide expérience en ventes, et en IA avancée, nous offrons une approche unique.",
-    "desc2": "Nous comprenons que la transformation exige une approche holistique. En associant analyses stratégiques et technologie, nous vous aidons à bâtir.",
+    "leader_name": "Marcos Thomassen Povoa",
+    "leader_title": "Fondateur et PDG",
+    "leader_bio": "Marcos apporte plus d'une décennie d'expérience en ventes internationales, croissance stratégique et développement commercial interculturel en Europe et en Amérique latine. Avec un MBA et une expertise approfondie en conformité IA, il a fondé Stormberry pour combler le fossé entre la stratégie visionnaire et l'excellence opérationnelle.",
     "badge_years": "Années d'Expérience",
     "languages": "Conseil et formation mondiale disponibles en: anglais, norvégien, portugais et français.",
     "btn_linkedin": "LinkedIn",
@@ -86,7 +87,7 @@
     "form_name_ph": "Jean Dupont",
     "form_email": "Adresse E-mail",
     "form_email_ph": "jean@exemple.fr",
-    "form_service": "Service d'intérêt",
+    "form_service": "Service recherché",
     "form_service_select": "Sélectionnez un Service",
     "form_service_sales": "Formation Commerciale",
     "form_service_strategy": "Croissance Stratégique",
@@ -99,13 +100,13 @@
     "form_send_copy": "Envoyer une copie à mon email",
     "form_success": "Merci pour votre message, nous vous recontacterons dès que possible.",
     "form_error": "Échec de l'envoi du message. Veuillez réessayer plus tard.",
-    "email_address": "salut@stormberry.as"
+    "email_address": "info@stormberry.as"
   },
   "footer": {
     "desc": "Ventes agiles. Culture globale. Stratégie IA.",
     "rights": "Stormberry A.S. Tous droits réservés.",
     "ai_notice": "Fièrement propulsé par des agents IA souverains.",
     "privacy": "Priorité à la confidentialité : Nous ne collectons ni cookies ni données personnelles.",
-    "email_address": "salut@stormberry.as"
+    "email_address": "info@stormberry.as"
   }
 }

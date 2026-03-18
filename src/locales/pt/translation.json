@@ -63,11 +63,12 @@
     }
   },
   "about": {
-    "badge": "Perfil de Liderança",
+    "badge": "Sobre Nós",
     "title_pt1": "Movidos pela",
     "title_pt2": "Experiência",
-    "desc1": "A Stormberry A.S. preenche a lacuna entre a estratégia visionária e as realidades operacionais. Com uma base profunda em vendas, dinâmicas interculturais e IA, oferecemos uma abordagem multidisciplinar.",
-    "desc2": "Entendemos que uma verdadeira transformação exige uma abordagem holística. Ao combinar visão estratégica com capacidades tecnológicas, capacitamos nossos clientes.",
+    "leader_name": "Marcos Thomassen Povoa",
+    "leader_title": "Fundador e CEO",
+    "leader_bio": "Marcos traz mais de uma década de experiência em vendas internacionais, crescimento estratégico e desenvolvimento de negócios interculturais na Europa e América Latina. Com um MBA e profunda expertise em conformidade de IA, ele fundou a Stormberry para preencher a lacuna entre estratégia visionária e excelência operacional.",
     "badge_years": "Anos Experiência",
     "languages": "Consultoria e Treinamento Global disponíveis em: Inglês, Norueguês, Português e Francês.",
     "btn_linkedin": "Conectar no LinkedIn",
@@ -99,13 +100,13 @@
     "form_send_copy": "Enviar uma cópia para o meu e-mail",
     "form_success": "Obrigado pela sua mensagem, entraremos em contato o mais rápido possível.",
     "form_error": "Falha ao enviar mensagem. Por favor, tente novamente mais tarde.",
-    "email_address": "oi@stormberry.as"
+    "email_address": "info@stormberry.as"
   },
   "footer": {
     "desc": "Vendas ágeis. Cultura global. Estratégia em IA.",
     "rights": "Stormberry A.S. Todos os direitos reservados.",
     "ai_notice": "Orgulhosamente impulsionado por agentes de IA soberanos.",
     "privacy": "Privacidade em primeiro lugar: Não coletamos cookies ou dados pessoais.",
-    "email_address": "oi@stormberry.as"
+    "email_address": "info@stormberry.as"
   }
 }

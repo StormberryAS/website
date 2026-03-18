@@ -63,11 +63,12 @@
     }
   },
   "about": {
-    "badge": "Lederprofil",
+    "badge": "Om oss",
     "title_pt1": "Drevet av",
     "title_pt2": "Erfaring",
-    "desc1": "Stormberry A.S. ble etablert for å bygge bro mellom visjonær strategi og operasjonelle realiteter. Med et solid fundament i salg, tverrkulturell dynamikk og avansert AI, tilbyr vi en mangefasettert tilnærming.",
-    "desc2": "Vi forstår at ekte transformasjon krever en helhetlig tilnærming. Ved å kombinere dyp innsikt med teknologiske løsninger, gjør vi våre kunder i stand til å bygge robuste organisasjoner.",
+    "leader_name": "Marcos Thomassen Povoa",
+    "leader_title": "Grunnlegger og daglig leder",
+    "leader_bio": "Marcos har over ti års erfaring innen internasjonal salg, strategisk vekst og tverrkulturell forretningsutvikling i Europa og Latin-Amerika. Med en MBA og dyp ekspertise innen AI-samsvar grunnla han Stormberry for å bygge bro mellom visjonær strategi og operasjonell ekspertise.",
     "badge_years": "Års erfaring",
     "languages": "Global rådgivning tilgjengelig på: engelsk, norsk, portugisisk og fransk.",
     "btn_linkedin": "Koble til på LinkedIn",
@@ -99,13 +100,13 @@
     "form_send_copy": "Send en kopi til min e-post",
     "form_success": "Takk for meldingen, vi kommer tilbake til deg så snart som mulig.",
     "form_error": "Kunne ikke sende meldingen. Vennligst prøv igjen senere.",
-    "email_address": "hei@stormberry.as"
+    "email_address": "info@stormberry.as"
   },
   "footer": {
     "desc": "Smartere salg. Global kultur. AI-drevet strategi.",
     "rights": "Stormberry A.S. Med enerett.",
     "ai_notice": "Stolt drevet av suverene AI-agenter.",
     "privacy": "Personvern først: Vi samler ikke inn informasjonskapsler eller personopplysninger.",
-    "email_address": "hei@stormberry.as"
+    "email_address": "info@stormberry.as"
   }
 }

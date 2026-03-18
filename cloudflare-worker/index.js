@@ -1,7 +1,6 @@
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
-      // Handle CORS preflight requests
       return new Response(null, {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -16,15 +15,44 @@ export default {
     }
 
     try {
-      const { name, email, service, message, sendCopy } = await request.json();
+      const body = await request.json();
+      const { name, email, service, message, sendCopy } = body;
+      const turnstileToken = body["cf-turnstile-response"];
 
       // Basic validation
       if (!name || !email || !service || !message) {
         return new Response("Missing required fields", { status: 400 });
       }
 
+      // Validate Turnstile token
+      if (!turnstileToken) {
+        return new Response(JSON.stringify({ error: "Missing captcha verification" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+
+      const turnstileResult = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: turnstileToken,
+          remoteip: request.headers.get("CF-Connecting-IP"),
+        }),
+      });
+
+      const turnstileData = await turnstileResult.json();
+
+      if (!turnstileData.success) {
+        return new Response(JSON.stringify({ error: "Captcha verification failed" }), {
+          status: 403,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+
       const resendApiKey = env.RESEND_API_KEY;
-      const adminEmail = env.ADMIN_EMAIL; // The email of Stormberry where inquiries should go to
+      const adminEmail = env.ADMIN_EMAIL;
 
       if (!resendApiKey) {
         return new Response("Server error: Missing API Key", { status: 500 });
@@ -42,7 +70,7 @@ export default {
 
       const emailsToSend = [
         {
-          from: "Stormberry AS - Form <hello@stormberry.as>", // Update this when sending from your actual domain
+          from: "Stormberry AS - Form <info@stormberry.as>",
           to: [adminEmail],
           subject: subject,
           html: htmlBody,
@@ -53,7 +81,7 @@ export default {
       // If user requested a copy
       if (sendCopy) {
         emailsToSend.push({
-          from: "Stormberry AS <hello@stormberry.as>", // Update to your domain
+          from: "Stormberry AS <info@stormberry.as>",
           to: [email],
           subject: `Copy of your inquiry to Stormberry: ${service}`,
           html: `

@@ -15,10 +15,10 @@ i18n
       pt: { translation: ptTranslations },
       fr: { translation: frTranslations },
     },
-    lng: 'en', // default
+    lng: 'en', // default; overridden by LanguageRouter from URL
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, // react already safes from xss
+      escapeValue: false,
     },
   });
 

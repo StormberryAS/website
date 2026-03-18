@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const { lang } = useParams();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
@@ -56,34 +59,39 @@ const Navbar = () => {
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
+    navigate(`/${lng}`, { replace: true });
+    setMobileMenuOpen(false);
   };
 
   const getLanguageFlag = (lng) => {
     switch (lng) {
       case 'no': return '🇳🇴';
       case 'pt': return '🇧🇷';
+      case 'br': return '🇧🇷';
       case 'fr': return '🇫🇷';
       default: return '🇬🇧';
     }
   };
 
+  // Current language from URL (for flag display)
+  const currentLang = lang || 'en';
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#" className="logo">
+        <a href={`/${currentLang}`} className="logo">
           Stormberry<span className="text-gradient">.</span>
         </a>
         
         <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-          <a href="#services" onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</a>
-          <a href="#ai-directive" onClick={() => setMobileMenuOpen(false)}>{t('nav.ai_directive')}</a>
-          <a href="#about" onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</a>
-          <a href="#contact" className="btn btn-primary nav-btn" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</a>
+          <a href={`/${currentLang}#services`} onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</a>
+          <a href={`/${currentLang}#ai-directive`} onClick={() => setMobileMenuOpen(false)}>{t('nav.ai_directive')}</a>
+          <a href={`/${currentLang}#about`} onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</a>
+          <a href={`/${currentLang}#contact`} className="btn btn-primary nav-btn" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</a>
           
           <div className="language-switcher">
             <button className="current-lang" aria-label="Current language">
-              <span aria-hidden="true">{getLanguageFlag(i18n.language)}</span>
+              <span aria-hidden="true">{getLanguageFlag(currentLang)}</span>
             </button>
             <div className="language-dropdown glass-panel" role="menu" aria-label="Language options">
               <button onClick={() => changeLanguage('en')} title="English" aria-label="English" role="menuitem"><span aria-hidden="true">🇬🇧</span></button>
