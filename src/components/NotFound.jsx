@@ -25,7 +25,7 @@ export default function NotFound() {
             <button onClick={() => navigate(-1)} className="btn btn-outline">
               <ArrowLeft size={18} /> Go Back
             </button>
-            <a href="/en" className="btn btn-primary">
+            <a href="/" className="btn btn-primary">
               <Home size={18} /> Home
             </a>
           </div>

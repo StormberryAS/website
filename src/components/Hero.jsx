@@ -1,10 +1,8 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import './Hero.css';
 
 const Hero = () => {
-  const { t } = useTranslation();
   return (
     <section className="hero" id="home">
       <div className="hero-background">
@@ -14,20 +12,20 @@ const Hero = () => {
       
       <div className="container hero-container">
         <div className="hero-content animate-fade-in-up">
-          <div className="badge">{t('hero.badge')}</div>
+          <div className="badge">Next-Generation Consulting</div>
           <h1 className="hero-title">
-            {t('hero.title_pt1')} <br />
-            <span className="text-gradient">{t('hero.title_pt2')}</span>
+            Transform Your Business With <br />
+            <span className="text-gradient">Strategic Excellence</span>
           </h1>
           <p className="hero-subtitle delay-100">
-            {t('hero.subtitle')}
+            Smarter sales. Global culture. AI-driven strategy.
           </p>
           <div className="hero-actions delay-200">
             <a href="#contact" className="btn btn-primary">
-              {t('hero.btn_partner')} <ArrowRight size={18} />
+              Partner With Us <ArrowRight size={18} />
             </a>
             <a href="#services" className="btn btn-outline">
-              {t('hero.btn_explore')}
+              Explore Services
             </a>
           </div>
         </div>

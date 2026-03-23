@@ -1,11 +1,9 @@
 import React from 'react';
 import { Linkedin, ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { siteConfig } from '../config';
 import './About.css';
 
 export default function About() {
-  const { t } = useTranslation();
   return (
     <section id="about" className="about section">
       <div className="container">
@@ -17,36 +15,36 @@ export default function About() {
           </div>
           
           <div className="about-content animate-fade-in-up delay-200">
-            <div className="badge">{t('about.badge')}</div>
+            <div className="badge">About Us</div>
             <h2 className="section-title">
-              {t('about.title_pt1')} <span className="text-gradient">{t('about.title_pt2')}</span>
+              Driven by <span className="text-gradient">Experience</span>
             </h2>
             
             <div className="leader-info">
-              <h3 className="leader-name">{t('about.leader_name')}</h3>
-              <p className="leader-title">{t('about.leader_title')}</p>
+              <h3 className="leader-name">Marcos Thomassen Povoa</h3>
+              <p className="leader-title">Founder & CEO</p>
             </div>
             
             <p className="about-text">
-              {t('about.leader_bio')}
+              Marcos brings over a decade of experience in international sales, strategic growth, and cross-cultural business development across Europe and Latin America. With an MBA and deep expertise in AI compliance, he founded Stormberry to bridge the gap between visionary strategy and operational excellence.
             </p>
             <div className="experience-badge">
               <span className="years">10+</span>
-              <span className="text">{t('about.badge_years')}</span>
+              <span className="text">Years Experience</span>
             </div>
             
             <div className="languages-section mt-4 mb-4">
               <p className="languages-text" style={{ color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: '500' }}>
-                {t('about.languages')}
+                Global Consulting & Training available in: English, Norwegian, Portuguese and French.
               </p>
             </div>
             
             <div className="about-actions mt-4">
               <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-outline linkedin-btn">
-                <Linkedin size={20} /> {t('about.btn_linkedin')}
+                <Linkedin size={20} /> Connect on LinkedIn
               </a>
               <a href="#contact" className="btn btn-primary">
-                {t('about.btn_talk')} <ArrowRight size={18} />
+                Let's Talk <ArrowRight size={18} />
               </a>
             </div>
           </div>

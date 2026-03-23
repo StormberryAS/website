@@ -1,31 +1,28 @@
 import React from 'react';
 import { Target, TrendingUp, Globe2, Cpu } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import './Services.css';
 
 export default function Services() {
-  const { t } = useTranslation();
-
   const services = [
     {
       icon: <Target size={32} />,
-      title: t('services.items.sales.title'),
-      description: t('services.items.sales.desc')
+      title: "Sales Excellence",
+      description: "Elevate your sales force with advanced methodologies and high-impact negotiation training designed for modern markets."
     },
     {
       icon: <TrendingUp size={32} />,
-      title: t('services.items.growth.title'),
-      description: t('services.items.growth.desc')
+      title: "Strategic Growth",
+      description: "Data-driven business strategies that align your corporate vision with actionable, measurable outcomes."
     },
     {
       icon: <Globe2 size={32} />,
-      title: t('services.items.culture.title'),
-      description: t('services.items.culture.desc')
+      title: "Cross-Cultural Communications",
+      description: "Bridge global divides with tailored communication training, ensuring your teams thrive in diverse, international environments."
     },
     {
       icon: <Cpu size={32} />,
-      title: t('services.items.ai.title'),
-      description: t('services.items.ai.desc')
+      title: "Enterprise AI Integration",
+      description: "Navigate the complex landscape of AI. We provide strategic consulting to seamlessly integrate artificial intelligence into your workflows."
     }
   ];
 
@@ -33,10 +30,10 @@ export default function Services() {
     <section id="services" className="services section">
       <div className="container">
         <div className="section-header animate-fade-in-up">
-          <div className="badge">{t('services.badge')}</div>
-          <h2 className="section-title">{t('services.title_pt1')} <span className="text-gradient">{t('services.title_pt2')}</span></h2>
+          <div className="badge">Our Expertise</div>
+          <h2 className="section-title">Drive Growth & <span className="text-gradient">Innovation</span></h2>
           <p className="section-subtitle">
-            {t('services.subtitle')}
+            Comprehensive consulting solutions tailored to scale your operations and future-proof your business.
           </p>
         </div>
         

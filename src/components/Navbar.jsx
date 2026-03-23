@@ -1,109 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const { lang } = useParams();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  });
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
+    document.documentElement.setAttribute('data-theme', 'light');
     
-    // Set standard theme
-    document.documentElement.setAttribute('data-theme', theme);
-    
-    // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleThemeChange = (e) => {
-      const newTheme = e.matches ? 'dark' : 'light';
-      setTheme(newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
-    };
-    
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleThemeChange);
-    } else {
-      mediaQuery.addListener(handleThemeChange); // Safari fallback
-    }
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener('change', handleThemeChange);
-      } else {
-        mediaQuery.removeListener(handleThemeChange);
-      }
-    };
-  }, [theme]);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-
-  const changeLanguage = (lng) => {
-    navigate(`/${lng}`, { replace: true });
-    setMobileMenuOpen(false);
-  };
-
-  const getLanguageFlag = (lng) => {
-    switch (lng) {
-      case 'no': return '🇳🇴';
-      case 'pt': return '🇧🇷';
-      case 'br': return '🇧🇷';
-      case 'fr': return '🇫🇷';
-      default: return '🇬🇧';
-    }
-  };
-
-  // Current language from URL (for flag display)
-  const currentLang = lang || 'en';
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href={`/${currentLang}`} className="logo">
+        <a href="/" className="logo">
           Stormberry<span className="text-gradient">.</span>
         </a>
         
         <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-          <a href={`/${currentLang}#services`} onClick={() => setMobileMenuOpen(false)}>{t('nav.services')}</a>
-          <a href={`/${currentLang}#ai-directive`} onClick={() => setMobileMenuOpen(false)}>{t('nav.ai_directive')}</a>
-          <a href={`/${currentLang}#about`} onClick={() => setMobileMenuOpen(false)}>{t('nav.about')}</a>
-          <a href={`/${currentLang}#contact`} className="btn btn-primary nav-btn" onClick={() => setMobileMenuOpen(false)}>{t('nav.contact')}</a>
-          
-          <div className="language-switcher">
-            <button className="current-lang" aria-label="Current language">
-              <span aria-hidden="true">{getLanguageFlag(currentLang)}</span>
-            </button>
-            <div className="language-dropdown glass-panel" role="menu" aria-label="Language options">
-              <button onClick={() => changeLanguage('en')} title="English" aria-label="English" role="menuitem"><span aria-hidden="true">🇬🇧</span></button>
-              <button onClick={() => changeLanguage('no')} title="Norsk" aria-label="Norsk" role="menuitem"><span aria-hidden="true">🇳🇴</span></button>
-              <button onClick={() => changeLanguage('pt')} title="Português" aria-label="Português" role="menuitem"><span aria-hidden="true">🇧🇷</span></button>
-              <button onClick={() => changeLanguage('fr')} title="Français" aria-label="Français" role="menuitem"><span aria-hidden="true">🇫🇷</span></button>
-            </div>
-          </div>
-
-          <button className="theme-toggle" onClick={toggleTheme} aria-label={t('nav.theme_switch')}>
-            {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
+          <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
+          <a href="#ai-directive" onClick={() => setMobileMenuOpen(false)}>AI Directive</a>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
+          <a href="#contact" className="btn btn-primary nav-btn" onClick={() => setMobileMenuOpen(false)}>Contact Us</a>
         </div>
 
         <button className="mobile-toggle" onClick={toggleMenu}>

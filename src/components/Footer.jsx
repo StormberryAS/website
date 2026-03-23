@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Linkedin, Github, Youtube } from 'lucide-react';
 import './Footer.css';
 
@@ -18,20 +17,19 @@ const NostrLogo = () => (
 import { siteConfig } from '../config';
 
 export default function Footer() {
-  const { t } = useTranslation();
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <div className="footer-brand">
             <h3 className="logo">Stormberry<span className="text-gradient">.</span></h3>
-            <p className="footer-desc">{t('footer.desc')}</p>
+            <p className="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
           </div>
           <div className="footer-links">
-            <a href="#services">{t('nav.services')}</a>
-            <a href="#ai-directive">{t('nav.ai_directive')}</a>
-            <a href="#about">{t('nav.about')}</a>
-            <a href="#contact">{t('nav.contact')}</a>
+            <a href="#services">Services</a>
+            <a href="#ai-directive">AI Directive</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact Us</a>
           </div>
         </div>
         <div className="footer-bottom">
@@ -42,9 +40,9 @@ export default function Footer() {
             <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube"><Youtube size={24} /></a>
             <a href={siteConfig.social.nostr} target="_blank" rel="noopener noreferrer" aria-label="Nostr" title={`Nostr: ${siteConfig.social.nostr.replace('nostr:', '')}`}><NostrLogo /></a>
           </div>
-          <p>&copy; {new Date().getFullYear()} {t('footer.rights')} | <a href={`mailto:${t('footer.email_address')}`}>{t('footer.email_address')}</a></p>
-          <p className="privacy-notice">{t('footer.privacy')}</p>
-          <p className="ai-notice">{t('footer.ai_notice')}</p>
+          <p>&copy; {new Date().getFullYear()} Stormberry A.S. All rights reserved. | <a href={`mailto:info@stormberry.as`}>info@stormberry.as</a></p>
+          <p className="privacy-notice">Privacy First: We do not collect cookies or personal data.</p>
+          <p className="ai-notice">Proudly powered by sovereign AI agents.</p>
         </div>
       </div>
     </footer>

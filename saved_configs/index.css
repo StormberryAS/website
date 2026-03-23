@@ -22,6 +22,21 @@
   --shadow-color: rgba(0, 0, 0, 0.05);
 }
 
+[data-theme='dark'] {
+  /* Dark Mode Variables (Previous Navy theme) */
+  --bg-primary: #0A192F; 
+  --bg-secondary: #0F2341; 
+  --bg-tertiary: #172A45; 
+  
+  --text-primary: #E6F1FF; 
+  --text-secondary: #A8B2D1; 
+  --text-muted: #8892B0;
+  
+  --border-color: rgba(255, 255, 255, 0.05);
+  --glass-bg: rgba(15, 35, 65, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.04);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
 
 :root {
   /* Typography - Inter everywhere */
