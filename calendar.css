@@ -1,0 +1,128 @@
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.month-wrapper {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+.month-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: 700;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.day-cell {
+  min-height: 110px;
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-tertiary);
+  border: 1px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.day-cell:hover:not(.empty) {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.day-cell.empty {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+.day-number {
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.day-location {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+/* Day Rules */
+.day-cell.unavailable {
+  background: rgba(226, 30, 38, 0.05); /* very light red */
+  color: var(--text-muted);
+}
+.day-cell.unavailable .day-number {
+  color: #E21E26; /* var(--accent-primary) */
+  opacity: 0.6;
+}
+
+.day-cell.available {
+  background: rgba(16, 185, 129, 0.05); /* very light green */
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+.day-cell.available .day-number {
+  color: #059669; 
+}
+
+.day-cell.has-location {
+  background: rgba(16, 185, 129, 0.15); /* deeper green */
+  border-color: #10B981;
+}
+.day-cell.has-location .day-location {
+  color: #047857;
+}
+
+@media (max-width: 900px) {
+  .calendar-grid {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .month-wrapper {
+    padding: 1.5rem 1rem;
+  }
+  .day-cell {
+    min-height: 80px;
+    padding: 0.25rem;
+    border-radius: 8px;
+  }
+  .day-number {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .day-location {
+    font-size: 0.6rem;
+  }
+  .day-header {
+    font-size: 0.7rem;
+    letter-spacing: 0;
+  }
+}

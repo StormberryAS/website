@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "services": "Tjenester",
+    "ai_directive": "AI-direktiv",
+    "about": "Om oss",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "badge": "Neste generasjons rådgivning",
+    "title_pt1": "Transformer din bedrift med",
+    "title_pt2": "Strategisk dyktighet",
+    "subtitle": "Smartere salg. Global kultur. AI-drevet strategi.",
+    "btn_partner": "Samarbeid med oss",
+    "btn_explore": "Utforsk tjenester"
+  },
+  "services": {
+    "badge": "Vår ekspertise",
+    "title_pt1": "Driv vekst og",
+    "title_pt2": "Innovasjon",
+    "subtitle": "Omfattende rådgivningsløsninger skreddersydd for å skalere din virksomhet og fremtidssikre din bedrift.",
+    "items": {
+      "sales": {
+        "title": "Salgsekspertise",
+        "desc": "Løft salgsteamet ditt med avanserte metoder og effektive forhandlingsteknikker tilpasset moderne markeder."
+      },
+      "growth": {
+        "title": "Strategisk vekst",
+        "desc": "Datadrevne forretningsstrategier som samordner selskapets visjon med målbare resultater."
+      },
+      "culture": {
+        "title": "Tverrkulturell kommunikasjon",
+        "desc": "Bygg bro over globale barrierer med skreddersydd kommunikasjonstrening, slik at teamet ditt trives i internasjonale miljøer."
+      },
+      "ai": {
+        "title": "AI-integrering",
+        "desc": "Naviger i det komplekse AI-landskapet. Vi tilbyr strategisk rådgivning for sømløs integrering av kunstig intelligens i arbeidsflyten."
+      }
+    }
+  },
+  "ai": {
+    "badge": "SPESIALISERT BEDRIFTSOPPLÆRING",
+    "title_pt1": "EUs AI-forordning art. 4",
+    "title_pt2": "AI-kompetanse og samsvarsopplæring",
+    "desc": "EUs forordning om kunstig intelligens (art. 4) krever at alle organisasjoner som tar i bruk AI-systemer, sikrer tilstrekkelig AI-kompetanse blant ansatte. Beskytt bedriften din mot ansvar og gi arbeidsstyrken evnen til å bruke AI-verktøy sikkert med oss.",
+    "features": {
+      "compliance": {
+        "title": "Regulatorisk samsvar",
+        "desc": "Oppfyll dine juridiske forpliktelser under EUs AI-forordning, reduser risiko og unngå strenge straffer."
+      },
+      "literacy": {
+        "title": "AI-kompetanse",
+        "desc": "Gi teamene dine viktig kunnskap for å bruke verktøy som Copilot og ChatGPT trygt."
+      },
+      "risk": {
+        "title": "Risikostyring",
+        "desc": "Forhindre lekkasjer av sensitiv data og håndter implikasjoner ved integrering av generativ AI."
+      }
+    },
+    "btn": "Bestill en gjennomgang",
+    "card": {
+      "title": "Dokumentert samsvar",
+      "desc": "Motta formell sertifisering på AI-kompetanse for deltakende ansatte, som oppfyller EUs krav."
+    }
+  },
+  "about": {
+    "badge": "Om oss",
+    "title_pt1": "Drevet av",
+    "title_pt2": "Erfaring",
+    "leader_name": "Marcos Thomassen Povoa",
+    "leader_title": "Grunnlegger og daglig leder",
+    "leader_bio": "Marcos har over ti års erfaring innen internasjonal salg, strategisk vekst og tverrkulturell forretningsutvikling i Europa og Latin-Amerika. Med en MBA og dyp ekspertise innen AI-samsvar grunnla han Stormberry for å bygge bro mellom visjonær strategi og operasjonell ekspertise.",
+    "badge_years": "Års erfaring",
+    "languages": "Global rådgivning tilgjengelig på: engelsk, norsk, portugisisk og fransk.",
+    "btn_linkedin": "Koble til på LinkedIn",
+    "btn_talk": "Ta en prat"
+  },
+  "contact": {
+    "badge": "Ta kontakt",
+    "title_pt1": "Start en",
+    "title_pt2": "Samtale",
+    "subtitle": "Klar for å forbedre forretningsstrategien din? Kontakt oss for en innledende konsultasjon.",
+    "email": "E-post",
+    "call": "Ring oss",
+    "hq": "Hovedkontor",
+    "hq_val": "Bergen, Norge",
+    "form_name": "Fullt navn",
+    "form_name_ph": "Ola Nordmann",
+    "form_email": "E-postadresse",
+    "form_email_ph": "ola@eksempel.no",
+    "form_service": "Interesseområde",
+    "form_service_select": "Velg tjeneste",
+    "form_service_sales": "Salgsopplæring",
+    "form_service_strategy": "Strategisk vekst",
+    "form_service_culture": "Tverrkulturell kommunikasjon",
+    "form_service_ai": "AI (også EU AI-forordning art. 4)",
+    "form_service_other": "Annen henvendelse",
+    "form_message": "Melding",
+    "form_message_ph": "Hvordan kan vi hjelpe deg?",
+    "form_btn": "Send melding",
+    "form_send_copy": "Send en kopi til min e-post",
+    "form_success": "Takk for meldingen, vi kommer tilbake til deg så snart som mulig.",
+    "form_error": "Kunne ikke sende meldingen. Vennligst prøv igjen senere.",
+    "email_address": "info@stormberry.as"
+  },
+  "footer": {
+    "desc": "Smartere salg. Global kultur. AI-drevet strategi.",
+    "rights": "Stormberry A.S. Med enerett.",
+    "ai_notice": "Stolt drevet av suverene AI-agenter.",
+    "privacy": "Personvern først: Vi samler ikke inn informasjonskapsler eller personopplysninger.",
+    "email_address": "info@stormberry.as"
+  }
+}

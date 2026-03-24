@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "services": "Services",
+    "ai_directive": "Directive IA",
+    "about": "À Propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Consulting Nouvelle Génération",
+    "title_pt1": "Transformez Votre Entreprise Avec",
+    "title_pt2": "L'Excellence Stratégique",
+    "subtitle": "Ventes agiles. Culture globale. Stratégie IA.",
+    "btn_partner": "Devenez Partenaire",
+    "btn_explore": "Explorer nos Services"
+  },
+  "services": {
+    "badge": "Notre Expertise",
+    "title_pt1": "Stimuler la Croissance &",
+    "title_pt2": "L'Innovation",
+    "subtitle": "Des solutions de conseil complètes conçues pour développer vos opérations.",
+    "items": {
+      "sales": {
+        "title": "Excellence Commerciale",
+        "desc": "Améliorez votre force de vente avec des méthodologies avancées de négociation."
+      },
+      "growth": {
+        "title": "Croissance Stratégique",
+        "desc": "Des stratégies commerciales basées sur les données qui alignent votre vision avec des résultats mesurables."
+      },
+      "culture": {
+        "title": "Communication Interculturelle",
+        "desc": "Surmontez les barrières mondiales grâce à une formation en communication personnalisée."
+      },
+      "ai": {
+        "title": "Intégration d'IA en Entreprise",
+        "desc": "Nous offrons un conseil stratégique pour intégrer l'intelligence artificielle en toute sécurité."
+      }
+    }
+  },
+  "ai": {
+    "badge": "FORMATION PROFESSIONNELLE SPÉCIALISÉE",
+    "title_pt1": "Loi sur l'IA de l'UE (Art. 4)",
+    "title_pt2": "Formation à la Littératie en IA",
+    "desc": "L'Article 4 exige légalement que toutes les organisations déployant des systèmes d'IA assurent un niveau suffisant de compréhension de l'IA. Protégez votre entreprise avec notre programme.",
+    "features": {
+      "compliance": {
+        "title": "Conformité Réglementaire",
+        "desc": "Remplissez vos obligations légales selon la Loi de l'UE en atténuant vos risques."
+      },
+      "literacy": {
+        "title": "Littératie en IA",
+        "desc": "Dotez vos équipes des connaissances pour utiliser ChatGPT avec sécurité."
+      },
+      "risk": {
+        "title": "Atténuation des Risques",
+        "desc": "Prévenez les fuites de données et abordez les implications éthiques et juridiques."
+      }
+    },
+    "btn": "Planifier une Réunion",
+    "card": {
+      "title": "Conformité Documentée",
+      "desc": "Recevez une certification de formation répondant aux exigences d'audit de l'UE."
+    }
+  },
+  "about": {
+    "badge": "À Propos de Nous",
+    "title_pt1": "Propulsé par",
+    "title_pt2": "L'Expérience",
+    "leader_name": "Marcos Thomassen Povoa",
+    "leader_title": "Fondateur et PDG",
+    "leader_bio": "Marcos apporte plus d'une décennie d'expérience en ventes internationales, croissance stratégique et développement commercial interculturel en Europe et en Amérique latine. Avec un MBA et une expertise approfondie en conformité IA, il a fondé Stormberry pour combler le fossé entre la stratégie visionnaire et l'excellence opérationnelle.",
+    "badge_years": "Années d'Expérience",
+    "languages": "Conseil et formation mondiale disponibles en: anglais, norvégien, portugais et français.",
+    "btn_linkedin": "LinkedIn",
+    "btn_talk": "Discutons-en"
+  },
+  "contact": {
+    "badge": "Contactez-nous",
+    "title_pt1": "Entamez une",
+    "title_pt2": "Conversation",
+    "subtitle": "Prêt à transformer votre stratégie d'entreprise ? Contactez-nous pour une consultation.",
+    "email": "Notre E-mail",
+    "call": "Appelez-nous",
+    "hq": "Siège Social",
+    "hq_val": "Bergen, Norvège",
+    "form_name": "Nom Complet",
+    "form_name_ph": "Jean Dupont",
+    "form_email": "Adresse E-mail",
+    "form_email_ph": "jean@exemple.fr",
+    "form_service": "Service recherché",
+    "form_service_select": "Sélectionnez un Service",
+    "form_service_sales": "Formation Commerciale",
+    "form_service_strategy": "Croissance Stratégique",
+    "form_service_culture": "Communication Interculturelle",
+    "form_service_ai": "IA (Aussi Loi IA de l'UE, Art. 4)",
+    "form_service_other": "Autre demande",
+    "form_message": "Message",
+    "form_message_ph": "Comment pouvons-nous vous aider ?",
+    "form_btn": "Envoyer le Message",
+    "form_send_copy": "Envoyer une copie à mon email",
+    "form_success": "Merci pour votre message, nous vous recontacterons dès que possible.",
+    "form_error": "Échec de l'envoi du message. Veuillez réessayer plus tard.",
+    "email_address": "info@stormberry.as"
+  },
+  "footer": {
+    "desc": "Ventes agiles. Culture globale. Stratégie IA.",
+    "rights": "Stormberry A.S. Tous droits réservés.",
+    "ai_notice": "Fièrement propulsé par des agents IA souverains.",
+    "privacy": "Priorité à la confidentialité : Nous ne collectons ni cookies ni données personnelles.",
+    "email_address": "info@stormberry.as"
+  }
+}

@@ -1,0 +1,13 @@
+export const siteConfig = {
+  social: {
+    linkedin: "https://linkedin.com/company/StormberryAS",
+    x: "https://x.com/StormberryAS",
+    github: "https://github.com/StormberryAS",
+    youtube: "https://youtube.com/@StormberryAS",
+    nostr: "nostr:npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa",
+  },
+  contact: {
+    formsgUrl: "https://stormberry-contact-form.marcos-495.workers.dev",
+    turnstileSiteKey: "0x4AAAAAACsqoaM-PpNxpS3n",
+  }
+};
