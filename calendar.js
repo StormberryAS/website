@@ -1,40 +1,41 @@
 const calendarLocations = {
-  "2026-04-24": "London, GBR",
-  "2026-04-27": "Birmingham, GBR",
-  "2026-05-08": "Edinburgh, GBR",
-  "2026-05-11": "Glasgow, GBR",
-  "2026-05-15": "Cardiff, GBR",
-  "2026-05-18": "Newport, GBR",
-  "2026-05-22": "Belfast, GBR",
-  "2026-05-25": "Dublin, IRL",
-  "2026-05-29": "Paris, FRA",
-  "2026-06-01": "Toulouse, FRA",
-  "2026-06-05": "Frankfurt, DEU",
-  "2026-06-08": "Munich, DEU",
-  "2026-06-12": "Brussels, BEL",
-  "2026-06-15": "Antwerp, BEL",
-  "2026-06-19": "Amsterdam, NLD",
-  "2026-06-22": "Rotterdam, NLD",
-  "2026-06-26": "Zurich, CHE",
-  "2026-06-29": "Vienna, AUT",
-  "2026-07-03": "Helsinki, FIN",
-  "2026-07-06": "Copenhagen, DNK",
-  "2026-09-04": "Madrid, ESP",
-  "2026-09-07": "Barcelona, ESP",
-  "2026-09-11": "Milan, ITA",
-  "2026-09-14": "Rome, ITA",
-  "2026-09-18": "Athens, GRC",
-  "2026-09-25": "Warsaw, POL",
-  "2026-09-28": "Prague, CZE",
-  "2026-10-02": "Vilnius, LTU",
-  "2026-10-05": "Riga, LVA",
-  "2026-10-09": "Tallinn, EST"
+  "2026-04-24": "London",
+  "2026-04-25": "London",
+  "2026-04-27": "Birmingham",
+  "2026-05-08": "Edinburgh",
+  "2026-05-11": "Glasgow",
+  "2026-05-15": "Cardiff",
+  "2026-05-18": "Newport",
+  "2026-05-22": "Belfast",
+  "2026-05-25": "Dublin",
+  "2026-05-29": "Paris",
+  "2026-06-01": "Toulouse",
+  "2026-06-05": "Frankfurt",
+  "2026-06-08": "Munich",
+  "2026-06-12": "Brussels",
+  "2026-06-15": "Antwerp",
+  "2026-06-19": "Amsterdam",
+  "2026-06-22": "Rotterdam",
+  "2026-06-26": "Zurich",
+  "2026-06-29": "Vienna",
+  "2026-07-03": "Helsinki",
+  "2026-07-06": "Copenhagen",
+  "2026-09-04": "Madrid",
+  "2026-09-07": "Barcelona",
+  "2026-09-11": "Milan",
+  "2026-09-14": "Rome",
+  "2026-09-18": "Athens",
+  "2026-09-25": "Warsaw",
+  "2026-09-28": "Prague",
+  "2026-10-02": "Vilnius",
+  "2026-10-05": "Riga",
+  "2026-10-09": "Tallinn"
 };
 
 // Portugal Tour explicitly populating remaining days 14-27 Jul
 for (let d = 14; d <= 27; d++) {
   const dateStr = `2026-07-${String(d).padStart(2, '0')}`;
-  calendarLocations[dateStr] = "Lisbon, Porto, Braga, Coimbra, Faro, PRT";
+  calendarLocations[dateStr] = "Lisbon, Porto, Braga, Coimbra, Faro";
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,7 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = `<div class="month-wrapper">
       <div class="calendar-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <button id="prev-month" class="btn btn-outline" style="padding: 0.5rem 1rem; opacity: ${index === 0 ? '0.5' : '1'}; pointer-events: ${index === 0 ? 'none' : 'auto'};">&larr; Prev</button>
-        <h3 class="month-title" style="margin-bottom: 0;">${m.name} ${m.year}</h3>
+        <h3 class="month-title" style="margin-bottom: 0; line-height: 1.2;">
+          <span style="display: block;">${m.name}</span>
+          <span style="display: block; font-size: 0.85em; opacity: 0.9;">${m.year}</span>
+        </h3>
         <button id="next-month" class="btn btn-outline" style="padding: 0.5rem 1rem; opacity: ${index === months.length - 1 ? '0.5' : '1'}; pointer-events: ${index === months.length - 1 ? 'none' : 'auto'};">Next &rarr;</button>
       </div>
       <div class="calendar-grid">`;
@@ -95,7 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "2026-12-17", "2026-12-18", "2026-12-19"
       ];
       
-      if (explicitGreenDates.includes(dateString)) {
+      if (dateString === "2026-04-24" || dateString === "2026-04-25") {
+         isUnavailable = true;
+      } else if (explicitGreenDates.includes(dateString)) {
          isUnavailable = false;
       } else if (dateString < "2026-04-23" || dateString === "2026-05-01" || dateString === "2026-05-02" || dateString > "2026-12-17") {
          isUnavailable = true;
@@ -110,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       let loc = '';
-      if (!isUnavailable) {
+      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-25") {
         loc = calendarLocations[dateString] || "";
       }
 

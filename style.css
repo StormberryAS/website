@@ -343,6 +343,7 @@ ul {
   .mobile-toggle {
     display: block;
     z-index: 1001;
+    padding-right: 15px;
   }
 
   .nav-links {
@@ -669,9 +670,11 @@ ul {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: flex-start;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .about-image-container {
@@ -777,7 +780,7 @@ ul {
 @media (max-width: 992px) {
   .about-grid {
     grid-template-columns: 1fr;
-    text-align: center;
+    text-align: left;
   }
   
   .about-image-container {
