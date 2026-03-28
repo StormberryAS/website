@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  let currentIndex = 0;
+  let currentIndex = 1; // Default to May 2026 (index 1)
 
   function renderMonth(index) {
     const m = months[index];
