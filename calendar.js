@@ -1,6 +1,5 @@
 const calendarLocations = {
   "2026-04-24": "London",
-  "2026-04-25": "London",
   "2026-04-27": "Birmingham",
   "2026-05-08": "Edinburgh",
   "2026-05-11": "Glasgow",
@@ -99,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "2026-12-17", "2026-12-18", "2026-12-19"
       ];
       
-      if (dateString === "2026-04-24" || dateString === "2026-04-25") {
+      if (dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27") {
          isUnavailable = true;
       } else if (explicitGreenDates.includes(dateString)) {
          isUnavailable = false;
@@ -116,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       let loc = '';
-      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-25") {
+      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-27") {
         loc = calendarLocations[dateString] || "";
       }
 
