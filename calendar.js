@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "2026-12-17", "2026-12-18", "2026-12-19"
       ];
       
-      if (dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27") {
+      if (dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27" || dateString === "2026-05-04" || dateString === "2026-05-08" || dateString === "2026-05-09") {
          isUnavailable = true;
       } else if (explicitGreenDates.includes(dateString)) {
          isUnavailable = false;
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       
       let loc = '';
-      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-27") {
+      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27" || dateString === "2026-05-04" || dateString === "2026-05-08" || dateString === "2026-05-09") {
         loc = calendarLocations[dateString] || "";
       }
 
