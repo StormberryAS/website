@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <button id="next-month" class="btn btn-outline" style="padding: 0.5rem 1rem; opacity: ${index === months.length - 1 ? '0.5' : '1'}; pointer-events: ${index === months.length - 1 ? 'none' : 'auto'};">Next &rarr;</button>
       </div>
       <div class="calendar-grid">`;
-    
+
     // Headers
     daysOfWeek.forEach(day => {
       html += `<div class="day-header">${day}</div>`;
@@ -87,35 +87,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const date = new Date(m.year, m.month, day);
       const dayOfWeek = date.getDay();
       const dateString = `${m.year}-${String(m.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      
+
       let isPortugalTour = (dateString >= "2026-07-14" && dateString <= "2026-07-27");
-      
+
       let isUnavailable = false;
       const explicitGreenDates = [
-        "2026-05-12", "2026-05-13", "2026-05-14",
         "2026-12-08", "2026-12-09", "2026-12-10",
         "2026-12-14", "2026-12-15", "2026-12-16",
         "2026-12-17", "2026-12-18", "2026-12-19"
       ];
-      
-      if (dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27" || dateString === "2026-05-04" || dateString === "2026-05-08" || dateString === "2026-05-09") {
-         isUnavailable = true;
-      } else if (explicitGreenDates.includes(dateString)) {
-         isUnavailable = false;
-      } else if (dateString < "2026-04-23" || dateString === "2026-05-01" || dateString === "2026-05-02" || dateString > "2026-12-17") {
-         isUnavailable = true;
+
+      if (explicitGreenDates.includes(dateString)) {
+        isUnavailable = false;
+      } else if (dateString < "2026-05-17" || dateString > "2026-12-17") {
+        isUnavailable = true;
       } else if (dateString >= "2026-08-01" && dateString <= "2026-08-18") {
-         isUnavailable = true;
+        isUnavailable = true;
       } else if (dateString >= "2026-08-19" && dateString <= "2026-08-31") {
-         isUnavailable = (dayOfWeek !== 1 && dayOfWeek !== 5); // Exclusively Mondays and Fridays are green in August>18
+        isUnavailable = (dayOfWeek !== 1 && dayOfWeek !== 5); // Exclusively Mondays and Fridays are green in August>18
       } else if (isPortugalTour) {
-         isUnavailable = (dayOfWeek === 0);
+        isUnavailable = (dayOfWeek === 0);
       } else {
-         isUnavailable = (dayOfWeek === 0 || dayOfWeek === 2 || dayOfWeek === 3 || dayOfWeek === 4);
+        isUnavailable = (dayOfWeek === 0 || dayOfWeek === 2 || dayOfWeek === 3 || dayOfWeek === 4);
       }
-      
+
       let loc = '';
-      if (!isUnavailable || dateString === "2026-04-24" || dateString === "2026-04-25" || dateString === "2026-04-27" || dateString === "2026-05-04" || dateString === "2026-05-08" || dateString === "2026-05-09") {
+      if (!isUnavailable || dateString < "2026-05-17") {
         loc = calendarLocations[dateString] || "";
       }
 
