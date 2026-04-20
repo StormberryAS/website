@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (explicitGreenDates.includes(dateString)) {
         isUnavailable = false;
-      } else if (dateString < "2026-05-17" || dateString > "2026-12-17") {
+      } else if (dateString < "2026-05-21" || dateString > "2026-12-17") {
         isUnavailable = true;
       } else if (dateString >= "2026-08-01" && dateString <= "2026-08-18") {
         isUnavailable = true;
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       let loc = '';
-      if (!isUnavailable || dateString < "2026-05-17") {
+      if (!isUnavailable || dateString < "2026-05-21") {
         loc = calendarLocations[dateString] || "";
       }
 
