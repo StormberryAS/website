@@ -129,7 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      html += `<div class="${classes.join(' ')}" ${loc ? `title="${loc}"` : ''}>
+      let locText = loc ? loc.replace(/<[^>]*>?/gm, '') : '';
+      html += `<div class="${classes.join(' ')}" ${locText ? `title="${locText.replace(/"/g, '&quot;')}"` : ''}>
         <div class="day-number">${day}</div>
         <div class="day-location">${loc}</div>
       </div>`;
