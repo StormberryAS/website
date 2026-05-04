@@ -1,6 +1,9 @@
 const calendarLocations = {
   "2026-04-24": "London",
   "2026-04-27": "Birmingham",
+  "2026-05-05": "<a href=\"https://havexpo.no/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: inherit; text-decoration: underline;\">HavExpo, Bergen</a>",
+  "2026-05-06": "<a href=\"https://havexpo.no/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: inherit; text-decoration: underline;\">HavExpo, Bergen</a>",
+  "2026-05-07": "<a href=\"https://havexpo.no/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: inherit; text-decoration: underline;\">HavExpo, Bergen</a>",
   "2026-05-08": "Edinburgh",
   "2026-05-11": "Glasgow",
   "2026-05-15": "Cardiff",
