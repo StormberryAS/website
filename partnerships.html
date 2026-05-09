@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--
+      Sirach 6:14 - Sixto-Clementine Vulgate / Douay-Rheims
+      Amicus fidelis, protectio fortis: qui autem invenit illum, invenit thesaurum.
+      A faithful friend is a strong defence: and he that hath found him, hath found a treasure.
+    -->
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stormberry AS is the official OnSide AI distribution partner for Norway, bringing real-time AI video intelligence to Norwegian industry." />
+    <meta name="theme-color" content="#F8F9FA" />
+    <link rel="apple-touch-icon" href="/logo.webp" />
+    <script src="/script.js"></script>
+    <script src="/lucide.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+    <title>Stormberry AS | OnSide AI · Norway Distribution Partner</title>
+    <style>
+      /* ---- Eyebrow with bracketed monospace label + pulsing dot ---- */
+      .sn-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 1.4rem;
+      }
+      .sn-eyebrow .bracket { color: var(--text-muted); opacity: 0.55; }
+      .status-dot {
+        display: inline-block;
+        width: 0.55rem;
+        height: 0.55rem;
+        background: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+        animation: sn-pulse 2s ease-out infinite;
+      }
+      @keyframes sn-pulse {
+        0%   { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.6); }
+        70%  { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0); }
+      }
+
+      /* ---- Hero ---- */
+      .partner-hero {
+        padding: 5rem 0 3rem;
+        text-align: center;
+      }
+      .partner-lockup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .partner-lockup .stormberry-mark {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+      }
+      .partner-lockup .stormberry-mark .dot {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .partner-lockup .lockup-x {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        font-weight: 300;
+      }
+      .partner-lockup img.onside-mark {
+        height: 44px;
+        width: auto;
+        object-fit: contain;
+      }
+      .partner-hero-subhead {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 640px;
+        margin: 0 auto 1rem;
+        font-weight: 400;
+      }
+      .partner-hero-lede {
+        max-width: 680px;
+        margin: 0 auto 2rem;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+      .partner-hero-ctas {
+        display: inline-flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* ---- Official Technology Partner strip (Milestone) ---- */
+      .partner-strip {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        text-align: center;
+        padding: 2.5rem 1rem 3rem;
+      }
+      .partner-strip-label { color: var(--text-muted); }
+      .partner-strip-logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 2.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        box-shadow: 0 4px 24px var(--shadow-color);
+        transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      }
+      .partner-strip-logo-wrap:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px var(--shadow-color);
+      }
+      .partner-strip-logo-wrap img {
+        height: 64px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+      }
+      .partner-strip-tagline {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 560px;
+      }
+      .partner-strip-tagline a {
+        color: var(--accent-primary);
+        font-weight: 500;
+      }
+      .partner-strip-tagline a:hover { text-decoration: underline; }
+
+      /* ---- Sentinel "How it works" step frames ---- */
+      .step-section { padding: 4rem 0; }
+      .sn-steps {
+        list-style: none;
+        padding: 0;
+        margin: 3rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+      }
+      .sn-step {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .sn-step.reverse { grid-template-columns: 1.15fr 1fr; }
+      .sn-step.reverse .sn-step-text { order: 2; }
+      .sn-step.reverse .sn-step-frame { order: 1; }
+      .sn-step-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .sn-step-num {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--accent-primary);
+      }
+      .sn-step-rule {
+        flex: 0 0 24px;
+        height: 1px;
+        background: var(--border-color);
+      }
+      .sn-step-tag {
+        background: rgba(226, 30, 38, 0.08);
+        color: var(--accent-primary);
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+      .sn-step-text h3 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+      .sn-step-text p {
+        color: var(--text-secondary);
+        margin-bottom: 1.25rem;
+        line-height: 1.65;
+      }
+      .sn-prompt-card {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        background: #13171f;
+        color: #f5f7fb;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-left: 3px solid #6366f1;
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.88rem;
+        margin-top: 1rem;
+      }
+      .sn-prompt-card .arrow { color: #818cf8; }
+      .sn-prompt-card .cursor {
+        display: inline-block;
+        width: 0.5rem;
+        height: 1rem;
+        background: #818cf8;
+        animation: sn-cursor 1s steps(2) infinite;
+      }
+      @keyframes sn-cursor {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+      .sn-step-foot {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.85rem;
+        font-style: italic;
+      }
+      .sn-step-frame {
+        background: #0d111a;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(15, 18, 36, 0.18), 0 0 0 1px rgba(99, 102, 241, 0.08);
+        margin: 0;
+      }
+      .sn-step-frame-chrome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        background: #0a0d14;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.04em;
+        color: #8b94a8;
+      }
+      .sn-step-frame-chrome .chrome-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: #10b981;
+        letter-spacing: 0.12em;
+      }
+      .sn-step-frame-chrome .chrome-conf {
+        color: #10b981;
+        letter-spacing: 0.08em;
+      }
+      .sn-step-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .sn-status-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1rem;
+      }
+      .sn-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--glass-border);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+      }
+      .sn-status-pill.alert {
+        background: rgba(239, 68, 68, 0.08);
+        color: #b91c1c;
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+      .sn-status-pill .dot-red {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #ef4444;
+        animation: sn-pulse-red 2s ease-out infinite;
+      }
+      @keyframes sn-pulse-red {
+        0%   { box-shadow: 0 0 0 0   rgba(239, 68, 68, 0.6); }
+        70%  { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        100% { box-shadow: 0 0 0 0   rgba(239, 68, 68, 0); }
+      }
+      .sn-evidence-strip {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-top: 1px solid var(--border-color);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.85rem;
+      }
+      .sn-evidence-strip .ev-key {
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+
+      /* ---- Sectors ---- */
+      .sectors-section { padding: 3rem 0; }
+      .sectors-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: center;
+        max-width: 880px;
+        margin: 1.5rem auto 1.5rem;
+      }
+      .sector-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        padding: 0.5rem 0.95rem;
+        border-radius: 999px;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        transition: all var(--transition-fast);
+      }
+      .sector-tag:hover {
+        background: rgba(226, 30, 38, 0.06);
+        border-color: rgba(226, 30, 38, 0.4);
+      }
+      .sector-tag .sector-dot {
+        width: 0.4rem;
+        height: 0.4rem;
+        background: var(--accent-primary);
+        border-radius: 50%;
+      }
+      .sectors-closer {
+        text-align: center;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        font-style: italic;
+      }
+
+      /* ---- Deployment / config panel ---- */
+      .config-panel {
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 16px 40px var(--shadow-color);
+        max-width: 760px;
+        margin: 2.5rem auto 0;
+      }
+      .config-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--glass-border);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+      }
+      .config-header .title {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+      }
+      .config-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .config-list li {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .config-list li:last-child { border-bottom: 0; }
+      .cfg-num {
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        font-weight: 700;
+      }
+      .cfg-text h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .cfg-text p {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+        margin: 0;
+      }
+      .cfg-toggle {
+        width: 38px;
+        height: 22px;
+        border-radius: 999px;
+        background: #10b981;
+        position: relative;
+        cursor: default;
+        flex-shrink: 0;
+      }
+      .cfg-toggle::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      }
+
+      /* ---- Final CTA ---- */
+      .final-cta {
+        text-align: center;
+        padding: 4rem 0 5rem;
+      }
+      .final-cta-mark {
+        margin-top: 2.5rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+
+      .section-divider {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 0;
+      }
+
+      /* ---- Responsive ---- */
+      @media (max-width: 768px) {
+        .sn-step,
+        .sn-step.reverse {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .sn-step.reverse .sn-step-text { order: 1; }
+        .sn-step.reverse .sn-step-frame { order: 2; }
+        .partner-strip-logo-wrap img { height: 48px; }
+        .partner-lockup img.onside-mark { height: 36px; }
+        .partner-lockup .stormberry-mark { font-size: 1.6rem; }
+        .config-list li { grid-template-columns: auto 1fr; }
+        .config-list li .cfg-toggle { grid-column: 2; justify-self: end; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <nav class="navbar">
+        <div class="container nav-container">
+          <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
+          <div class="nav-links">
+            <div class="dropdown">
+              <a href="/services.html" class="dropbtn" style="display:flex; align-items:center; gap:4px;">Services <i data-lucide="chevron-down" style="width:16px; height:16px;"></i></a>
+              <div class="dropdown-content">
+                <a href="/sales.html">Sales Excellence</a>
+                <a href="/strategy.html">Strategic Growth</a>
+                <a href="/culture.html">Cross-Cultural Communications</a>
+                <a href="/ai.html">Enterprise AI Integration</a>
+              </div>
+            </div>
+            <a href="/labs.html">Labs</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/about.html">About</a>
+            <a href="/partnerships.html">OnSide AI</a>
+            <a href="/availability.html">Availability</a>
+            <a href="/contact.html" class="btn btn-primary nav-btn">Contact Us</a>
+          </div>
+        </div>
+        <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+      </nav>
+
+      <main style="padding-top: 60px;">
+
+        <!-- HERO -->
+        <section class="partner-hero section">
+          <div class="container">
+            <div class="animate-fade-in-up">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span>
+                ONSIDE&nbsp;/&nbsp;NORWAY
+                <span class="status-dot" aria-hidden="true"></span>
+                LIVE
+                <span class="bracket">]</span>
+              </p>
+
+              <div class="partner-lockup">
+                <span class="stormberry-mark">Stormberry<span class="dot">.</span></span>
+                <span class="lockup-x">&times;</span>
+                <img src="/partners/onsideai/onside-textlogo.png" alt="OnSide AI" class="onside-mark" />
+              </div>
+
+              <h1 class="section-title" style="max-width: 760px; margin: 0 auto 1.25rem;">
+                Sentinel <span class="text-gradient">in Norway.</span>
+              </h1>
+              <p class="partner-hero-subhead">
+                Real-time AI surveillance, deployed locally with our official distribution partner.
+              </p>
+              <p class="partner-hero-lede">
+                OnSide AI's Sentinel platform turns the cameras you already own into analysts that watch in real time. Rules written in plain English, alerts in seconds. Now available in Norway through Stormberry.
+              </p>
+              <div class="partner-hero-ctas">
+                <a href="mailto:marcos@onsideai.org?subject=Sentinel%20%C2%B7%20Norway%20enquiry" class="btn btn-primary">
+                  Talk to us <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                </a>
+                <a href="https://onsideai.org/norway" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                  Visit OnSide / Norway <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- OFFICIAL TECHNOLOGY PARTNER STRIP (Milestone) -->
+        <section class="section" style="padding: 0;">
+          <div class="container">
+            <div class="partner-strip animate-fade-in-up">
+              <p class="sn-eyebrow partner-strip-label">
+                <span class="bracket">[</span>
+                Official Technology Partner
+                <span class="bracket">]</span>
+              </p>
+              <a href="https://www.milestonesys.com/" target="_blank" rel="noopener noreferrer" class="partner-strip-logo-wrap" aria-label="Milestone Systems (opens in new tab)">
+                <img src="/partners/onsideai/milestone-logo.png" alt="Milestone Systems" />
+              </a>
+              <p class="partner-strip-tagline">
+                OnSide AI is an official Milestone Systems technology partner. Sentinel integrates natively with <strong>Milestone XProtect</strong>, the open-platform VMS from Brøndby, Denmark used widely across Norwegian enterprise and public sector. <a href="https://www.milestonesys.com/" target="_blank" rel="noopener noreferrer">milestonesys.com&nbsp;<i data-lucide="external-link" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i></a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- HOW IT WORKS (3 STEPS WITH SCREENSHOTS) -->
+        <section id="how-it-works" class="step-section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> How It Works <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">From sentence to <span class="text-gradient">signal</span>.</h2>
+              <p class="section-subtitle">
+                Three steps. You write the first. The next two happen without you.
+              </p>
+            </div>
+
+            <ol class="sn-steps">
+              <!-- Step 01 -->
+              <li class="sn-step animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">01</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Prompt</span>
+                  </div>
+                  <h3>Type a rule.</h3>
+                  <p>Operators type in plain English. No models to train, no code to write, no data scientists to hire.</p>
+                  <div class="sn-prompt-card">
+                    <span class="arrow">&gt;</span>
+                    <span style="flex: 1;">tell me if a vessel approaches within 500m of the platform</span>
+                    <span class="cursor"></span>
+                  </div>
+                  <p class="sn-step-foot">Sentinel expands the rule, picks the cameras, and starts watching the next frame.</p>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span>configuration · queries</span>
+                    <span></span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-01-prompt.png" alt="Operator typing a plain-English detection rule into Sentinel's configuration panel" />
+                </figure>
+              </li>
+
+              <!-- Step 02 -->
+              <li class="sn-step reverse animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">02</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Watch</span>
+                  </div>
+                  <h3>Watch every camera.</h3>
+                  <p>Sentinel scores every frame from every assigned camera against your rule, in real time. Hundreds of rules can run in parallel.</p>
+                  <div class="sn-status-row">
+                    <span class="sn-status-pill"><span class="status-dot" aria-hidden="true"></span> 3 of 16 Online</span>
+                    <span class="sn-status-pill alert"><span class="dot-red" aria-hidden="true"></span> 6 Alerts</span>
+                    <span class="sn-status-pill">24 FPS</span>
+                  </div>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span></span>
+                    <span class="chrome-status"><span class="status-dot" aria-hidden="true"></span> Live</span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-02-monitor.png" alt="Sentinel's live operator dashboard showing camera feeds and real-time alerts" />
+                </figure>
+              </li>
+
+              <!-- Step 03 -->
+              <li class="sn-step animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">03</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Alert</span>
+                  </div>
+                  <h3>Get the evidence.</h3>
+                  <p>When a rule fires you get the frame, the observation, the confidence, and the timestamp. Decide once. Move on.</p>
+                  <div class="sn-evidence-strip">
+                    <span class="ev-key">Rule</span>
+                    <span>tell me if someone falls down on the ground</span>
+                  </div>
+                  <div class="sn-evidence-strip">
+                    <span class="ev-key">Confidence</span>
+                    <span>85%</span>
+                  </div>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span>incident · evidence frame</span>
+                    <span class="chrome-conf">85% conf</span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-03-alert.png" alt="Sentinel alert detail showing the matched evidence frame and the rule that fired" />
+                </figure>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- SECTORS -->
+        <section class="sectors-section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Where It Fits in Norway <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Built for the sites that <span class="text-gradient">matter</span>.</h2>
+            </div>
+            <div class="sectors-grid animate-fade-in-up delay-100">
+              <span class="sector-tag"><span class="sector-dot"></span>Energy</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Oil &amp; Gas</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Offshore</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Maritime</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Ports &amp; Cargo</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Aquaculture</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Power &amp; Grid</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Pipelines</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Heavy Industry</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Logistics</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Critical Infrastructure</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Public Safety</span>
+            </div>
+            <p class="sectors-closer">
+              Hundreds of pre-built prompts. Any sentence you can write becomes a sensor, tuned for your site by Stormberry.
+            </p>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- DEPLOYMENT -->
+        <section class="section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Deployment <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Local rollout. <span class="text-gradient">Local support.</span></h2>
+              <p class="section-subtitle">
+                Sentinel is delivered, deployed, and supported in Norway by Stormberry, with the local relationships, language, and operational knowledge to roll it out across Norwegian sites.
+              </p>
+            </div>
+
+            <div class="config-panel animate-fade-in-up delay-100">
+              <div class="config-header">
+                <span class="title"><span class="status-dot" aria-hidden="true"></span> Sentinel · Norway Rollout</span>
+                <span>4 / 4 Active</span>
+              </div>
+              <ol class="config-list">
+                <li>
+                  <span class="cfg-num">01</span>
+                  <div class="cfg-text">
+                    <h4>Delivered by Stormberry.</h4>
+                    <p>Discovery, deployment, and tuning handled locally by Stormberry in Norway.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Active"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">02</span>
+                  <div class="cfg-text">
+                    <h4>Works with your cameras.</h4>
+                    <p>No rip-and-replace. Sentinel runs on the cameras you already own.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Active"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">03</span>
+                  <div class="cfg-text">
+                    <h4>Cloud, on-prem, or hybrid.</h4>
+                    <p>Deploy where it fits your security posture. Same product, same prompts, same alerts, wherever the workload lives.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Active"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">04</span>
+                  <div class="cfg-text">
+                    <h4>Stays on your network.</h4>
+                    <p>Encrypted end-to-end and authenticated on both ends. No public internet exposure.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Active"></span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- FINAL CTA -->
+        <section class="final-cta">
+          <div class="container">
+            <div class="animate-fade-in-up">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Norway Enquiries <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">See it on your <span class="text-gradient">cameras</span>.</h2>
+              <p class="section-subtitle" style="font-style: italic;">
+                Real footage. Real prompts. Real alerts.
+              </p>
+              <p class="section-subtitle" style="max-width: 620px; margin: 1.5rem auto 2rem;">
+                Schedule a discovery call. We'll show you Sentinel running on a sector that mirrors yours, with Stormberry leading the rollout in Norway.
+              </p>
+              <a href="mailto:marcos@onsideai.org?subject=Sentinel%20%C2%B7%20Norway%20enquiry" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem;">
+                <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+                Book a discovery call
+              </a>
+              <p class="final-cta-mark">
+                <span style="display:block;">OnSide AI Inc. · Stormberry AS</span>
+                <span style="display:block;">Think it. Prompt it. Protected.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
+            </div>
+            <div class="footer-links">
+              <a href="/services.html">Services</a>
+              <a href="/labs.html">Labs</a>
+              <a href="/blog.html">Blog</a>
+              <a href="/about.html">About</a>
+              <a href="/partnerships.html">OnSide AI</a>
+              <a href="/availability.html">Availability</a>
+              <a href="/contact.html">Contact Us</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-social">
+              <a href="https://linkedin.com/company/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="https://github.com/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3 0 6-2 6-6a4.6 4.6 0 0 0-1.39-3.23 4.1 4.1 0 0 0 0-3.24s-1.1-.35-3.5 1.25a11.3 11.3 0 0 0-6 0c-2.4-1.6-3.5-1.25-3.5-1.25a4.1 4.1 0 0 0 0 3.24A4.6 4.6 0 0 0 2 10.74c0 4 3 6 6 6a4.8 4.8 0 0 0-1 3.26v4"/><path d="M9 20c-4.1 1.4-5-2.5-5-2.5"/></svg></a>
+            </div>
+            <p>&copy; 2026 Stormberry AS &middot; Org.nr. NO 999 999 999 MVA &middot; Askøy, Norway &middot; <a href="#" class="protected-email" data-user="info" data-domain="stormberry.as"></a> &middot; <a href="/privacy.html">Privacy</a></p>
+            <p class="privacy-notice" style="margin-top: 5px; opacity: 0.8; font-size: 0.9rem;">Privacy First: We do not collect cookies or personal data.</p>
+            <p class="ai-notice" style="margin-top: 5px; opacity: 0.8; font-size: 0.9rem;">Proudly powered by sovereign AI agents.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
