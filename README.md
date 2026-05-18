@@ -1,16 +1,27 @@
-# React + Vite
+# Stormberry Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the source code for the Stormberry AS corporate website.
 
-Currently, two official plugins are available:
+## Architecture
+- **Vanilla HTML/CSS/JS**: The site is built with static files for maximum speed, security, and simplicity.
+- **Privacy First**: No cookies, no trackers, no external dependencies that compromise user privacy.
+- **Sovereign AI**: Built and maintained using high-speed agentic workflows.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Standard Operating Procedures (SOPs)
 
-## React Compiler
+### Blog Archiving
+To maintain performance and a clean feed, we follow a strict monthly archiving rule for the blog:
+1. `blog.html` MUST only contain posts for the **current month**.
+2. Past months are archived in files named `blogYYYYMM.html`. For example, all April 2026 posts are in `blog202604.html`.
+3. When a new month starts, you must create the archive file for the previous month, move all those posts into it, and leave only the new month's posts in `blog.html`.
+4. All blog imagery MUST be stored in the `/pictures` directory to keep the root directory clean.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Image Management
+- Use `1.91:1` aspect ratio (1200x628) for LinkedIn compatibility.
+- Ensure images match the dark, cinematic, glassmorphism visual identity of Stormberry.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Local Development
+Since this is a static site, you can run it locally with any simple web server:
+```bash
+python3 -m http.server 8000
+```
