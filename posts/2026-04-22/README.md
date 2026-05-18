@@ -3,7 +3,7 @@
 ## Post Details
 - **Date:** 22 April 2026
 - **Topic:** Cross-cultural communication, Norwegian directness vs global relational contexts.
-- **Image:** [20260422cross-cultural.png](../../20260422cross-cultural.png)
+- **Image:** [20260422cross-cultural.png](../../pictures/20260422cross-cultural.png)
 
 ## Post Text
 Norwegians are among the most direct communicators in the world. This is a superpower -- at home.

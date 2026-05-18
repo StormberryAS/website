@@ -3,7 +3,7 @@
 ## Post Details
 - **Date:** 20 April 2026
 - **Topic:** B2B Sales Systems, Discipline, and Process.
-- **Image:** [20260420sales-pillar.png](../../20260420sales-pillar.png)
+- **Image:** [20260420sales-pillar.png](../../pictures/20260420sales-pillar.png)
 
 ## Post Text
 Most people think salespeople are born, not made. After 14 years selling complex technical systems across Europe, the Americas, and Asia, I disagree.
