@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const classes = ['day-cell'];
       classes.push(isUnavailable ? 'unavailable' : 'available');
-      if (loc) classes.push('has-location');
+      // has-location adds a green background overlay, so only apply it on available days.
+      // Unavailable days still display the city text, but the cell stays red.
+      if (loc && !isUnavailable) classes.push('has-location');
 
       const locText = loc ? loc.replace(/<[^>]*>?/gm, '') : '';
       html += `<div class="${classes.join(' ')}" ${locText ? `title="${locText.replace(/"/g, '&quot;')}"` : ''}>
