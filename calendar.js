@@ -10,31 +10,10 @@ const calendarLocations = {
   "2026-05-18": "Newport",
   "2026-05-22": "Belfast",
   "2026-05-25": "Dublin",
-  "2026-05-29": "Paris",
-  "2026-06-01": "Toulouse",
-  "2026-06-05": "Frankfurt",
-  "2026-06-08": "Munich",
-  "2026-06-12": "Brussels",
-  "2026-06-15": "Antwerp",
-  "2026-06-19": "Amsterdam",
-  "2026-06-22": "Rotterdam",
-  "2026-06-26": "Zurich",
-  "2026-06-29": "Vienna",
-  "2026-07-03": "Helsinki",
-  "2026-07-06": "Copenhagen",
-  "2026-09-04": "Madrid",
-  "2026-09-07": "Barcelona",
-  "2026-09-11": "Milan",
-  "2026-09-14": "Rome",
-  "2026-09-18": "Athens",
-  "2026-09-25": "Warsaw",
-  "2026-09-28": "Prague",
-  "2026-10-02": "Vilnius",
-  "2026-10-05": "Riga",
-  "2026-10-09": "Tallinn"
+  "2026-05-29": "Paris"
 };
 
-// Portugal Tour explicitly populating remaining days 14-27 Jul
+// Portugal tour: 14-27 July, all days carry the city list
 for (let d = 14; d <= 27; d++) {
   const dateStr = `2026-07-${String(d).padStart(2, '0')}`;
   calendarLocations[dateStr] = "Lisbon, Porto, Braga, Coimbra, Faro";
@@ -58,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  let currentIndex = 1; // Default to May 2026 (index 1)
+  let currentIndex = 1; // Default to May 2026
 
   function renderMonth(index) {
     const m = months[index];
@@ -73,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="calendar-grid">`;
 
-    // Headers
     daysOfWeek.forEach(day => {
       html += `<div class="day-header">${day}</div>`;
     });
@@ -81,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstDay = new Date(m.year, m.month, 1).getDay();
     const daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
 
-    // Empty cells for alignment
     for (let i = 0; i < firstDay; i++) {
       html += `<div class="day-cell empty"></div>`;
     }
@@ -91,45 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const dayOfWeek = date.getDay();
       const dateString = `${m.year}-${String(m.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-      let isPortugalTour = (dateString >= "2026-07-14" && dateString <= "2026-07-27");
-
-      let isUnavailable = false;
-      const explicitGreenDates = [
-        "2026-12-08", "2026-12-09", "2026-12-10",
-        "2026-12-14", "2026-12-15", "2026-12-16",
-        "2026-12-17", "2026-12-18", "2026-12-19"
-      ];
-
-      if (explicitGreenDates.includes(dateString)) {
-        isUnavailable = false;
-      } else if (dateString < "2026-05-21" || dateString > "2026-12-17") {
-        isUnavailable = true;
-      } else if (dateString >= "2026-08-01" && dateString <= "2026-08-18") {
-        isUnavailable = true;
-      } else if (dateString >= "2026-08-19" && dateString <= "2026-08-31") {
-        isUnavailable = (dayOfWeek !== 1 && dayOfWeek !== 5); // Exclusively Mondays and Fridays are green in August>18
-      } else if (isPortugalTour) {
+      // Availability rules (effective 2026-05-28):
+      //   Green window 1: 2026-06-01 to 2026-07-31, Mon-Sat green, Sun red.
+      //   Vacation buffer: 2026-08-01 to 2026-08-02 always red.
+      //   Green window 2: 2026-08-03 to 2026-12-19, Mon-Sat green, Sun red.
+      //   May 2026: all days red, but city text still shown.
+      //   Everything outside those windows: red.
+      let isUnavailable;
+      const inGreenWindow1 = dateString >= "2026-06-01" && dateString <= "2026-07-31";
+      const inGreenWindow2 = dateString >= "2026-08-03" && dateString <= "2026-12-19";
+      if (inGreenWindow1 || inGreenWindow2) {
         isUnavailable = (dayOfWeek === 0);
       } else {
-        isUnavailable = (dayOfWeek === 0 || dayOfWeek === 2 || dayOfWeek === 3 || dayOfWeek === 4);
+        isUnavailable = true;
       }
 
-      let loc = '';
-      if (!isUnavailable || dateString < "2026-05-21") {
-        loc = calendarLocations[dateString] || "";
-      }
+      // City text shows whenever the data has an entry, regardless of red/green.
+      const loc = calendarLocations[dateString] || "";
 
-      let classes = ['day-cell'];
-      if (isUnavailable) {
-        classes.push('unavailable');
-      } else {
-        classes.push('available');
-        if (loc) {
-          classes.push('has-location');
-        }
-      }
+      const classes = ['day-cell'];
+      classes.push(isUnavailable ? 'unavailable' : 'available');
+      if (loc) classes.push('has-location');
 
-      let locText = loc ? loc.replace(/<[^>]*>?/gm, '') : '';
+      const locText = loc ? loc.replace(/<[^>]*>?/gm, '') : '';
       html += `<div class="${classes.join(' ')}" ${locText ? `title="${locText.replace(/"/g, '&quot;')}"` : ''}>
         <div class="day-number">${day}</div>
         <div class="day-location">${loc}</div>
@@ -161,6 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Initialize
   renderMonth(currentIndex);
 });
