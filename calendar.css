@@ -77,12 +77,13 @@
 
 /* Day Rules */
 .day-cell.unavailable {
-  background: rgba(226, 30, 38, 0.05); /* very light red */
+  background: rgba(226, 30, 38, 0.18); /* clearer red, ~3x opacity */
+  border: 1px solid rgba(226, 30, 38, 0.25);
   color: var(--text-muted);
 }
 .day-cell.unavailable .day-number {
   color: #E21E26; /* var(--accent-primary) */
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .day-cell.available {
