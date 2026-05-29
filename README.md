@@ -20,7 +20,7 @@ The blog follows a strict monthly archiving rule to keep the feed clean and the 
 
 ### Image management
 - Use `1.91:1` aspect ratio (1200x628 minimum) for LinkedIn compatibility.
-- Match the dark, cinematic, glassmorphism visual identity of Stormberry.
+- **Blog/social images only:** generate them in a dark, cinematic, glassmorphism style. This art direction applies to generated post imagery — it is **not** the visual identity of the website itself, which is light and clean (off-white surfaces, charcoal text, a single red accent).
 
 ## Local development
 Static site, runnable with any simple web server:
