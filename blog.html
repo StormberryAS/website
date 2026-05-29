@@ -135,11 +135,11 @@
 
                     <!-- Post 28: May 27, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
-                      <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <video controls poster="/pictures/20260527stormberry-rafael-thumbnail.png" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                          <source src="/videos/20260527stormberry-rafael.mp4" type="video/mp4">
-                          Seu navegador não suporta a tag de vídeo.
-                        </video>
+                      <div class="blog-post-image video-thumbnail-container" data-video-src="/videos/20260527stormberry-rafael.mp4" style="width: 100%; height: 350px; overflow: hidden; background: #000; position: relative; cursor: pointer;">
+                        <img src="/pictures/20260527stormberry-rafael-thumbnail.png" alt="Vídeo de Rafael Hollanda sobre a Stormberry" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <div class="play-button-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+                          <i data-lucide="play" style="color: white; width: 32px; height: 32px; margin-left: 4px;"></i>
+                        </div>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -433,6 +433,17 @@
       </footer>
     </div>
     
+    <!-- Video Modal -->
+    <div id="video-modal" class="video-modal">
+      <div class="video-modal-content">
+        <button id="close-video-modal" class="close-video-modal"><i data-lucide="x"></i></button>
+        <video id="modal-video-player" controls style="width: 100%; max-height: 80vh; background: #000; border-radius: 8px;">
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
     <script>
       lucide.createIcons();
     </script>

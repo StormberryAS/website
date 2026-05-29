@@ -126,4 +126,43 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Video Modal Logic
+  const videoThumbnails = document.querySelectorAll('.video-thumbnail-container');
+  const videoModal = document.getElementById('video-modal');
+  const modalVideoPlayer = document.getElementById('modal-video-player');
+  const closeVideoModalBtn = document.getElementById('close-video-modal');
+
+  if (videoThumbnails.length > 0 && videoModal && modalVideoPlayer) {
+    videoThumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        const videoSrc = this.getAttribute('data-video-src');
+        if (videoSrc) {
+          modalVideoPlayer.src = videoSrc;
+          videoModal.classList.add('active');
+          modalVideoPlayer.play();
+        }
+      });
+    });
+
+    const closeModal = () => {
+      videoModal.classList.remove('active');
+      modalVideoPlayer.pause();
+      modalVideoPlayer.src = '';
+    };
+
+    closeVideoModalBtn.addEventListener('click', closeModal);
+    
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
 });
