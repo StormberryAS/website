@@ -20,85 +20,91 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://stormberry.as/" />
   </url>
   <url>
-    <loc>https://stormberry.as/services.html</loc>
+    <loc>https://stormberry.as/services</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/ai.html</loc>
+    <loc>https://stormberry.as/ai</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/sales.html</loc>
+    <loc>https://stormberry.as/sales</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/strategy.html</loc>
+    <loc>https://stormberry.as/strategy</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/culture.html</loc>
+    <loc>https://stormberry.as/culture</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/partnerships.html</loc>
+    <loc>https://stormberry.as/partnerships</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/about.html</loc>
+    <loc>https://stormberry.as/about</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/labs.html</loc>
+    <loc>https://stormberry.as/labs</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/contact.html</loc>
+    <loc>https://stormberry.as/contact</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/ai-act-artikkel-4-opplaering.html</loc>
+    <loc>https://stormberry.as/ai-act-artikkel-4-opplaering</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/availability.html</loc>
+    <loc>https://stormberry.as/availability</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/blog.html</loc>
+    <loc>https://stormberry.as/blog</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/blog202604.html</loc>
+    <loc>https://stormberry.as/blog202604</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://stormberry.as/privacy.html</loc>
+    <loc>https://stormberry.as/blog202605</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://stormberry.as/privacy</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
