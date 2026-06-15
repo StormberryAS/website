@@ -68,14 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const dayOfWeek = date.getDay();
       const dateString = `${m.year}-${String(m.month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-      // Availability rules (effective 2026-05-28):
-      //   Green window 1: 2026-06-01 to 2026-07-31, Mon-Sat green, Sun red.
+      // Availability rules:
+      //   June 1-20 2026: all days red.
+      //   Green window 1: 2026-06-21 to 2026-07-31, Mon-Sat green, Sun red.
       //   Vacation buffer: 2026-08-01 to 2026-08-02 always red.
       //   Green window 2: 2026-08-03 to 2026-12-19, Mon-Sat green, Sun red.
       //   May 2026: all days red, but city text still shown.
       //   Everything outside those windows: red.
       let isUnavailable;
-      const inGreenWindow1 = dateString >= "2026-06-01" && dateString <= "2026-07-31";
+      const inGreenWindow1 = dateString >= "2026-06-21" && dateString <= "2026-07-31";
       const inGreenWindow2 = dateString >= "2026-08-03" && dateString <= "2026-12-19";
       if (inGreenWindow1 || inGreenWindow2) {
         isUnavailable = (dayOfWeek === 0);
