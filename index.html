@@ -39,75 +39,121 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Stormberry AS",
-  "legalName": "Stormberry AS",
-  "alternateName": ["Stormberry", "Stormberry Consulting"],
-  "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
-  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
-  "foundingDate": "2026-04-07",
-  "vatID": "NO937751249",
-  "taxID": "937751249",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Askøy",
-    "addressRegion": "Vestland",
-    "addressCountry": "NO"
-  },
-  "email": "info@stormberry.as",
-  "telephone": "+47 950 43 789",
-  "availableLanguage": [
-    {"@type": "Language", "name": "English", "alternateName": "en"},
-    {"@type": "Language", "name": "Norwegian", "alternateName": "no"},
-    {"@type": "Language", "name": "Portuguese", "alternateName": "pt"},
-    {"@type": "Language", "name": "French", "alternateName": "fr"}
-  ],
-  "areaServed": [
-    {"@type": "Country", "name": "Norway"},
-    {"@type": "Place", "name": "European Economic Area"},
-    {"@type": "Country", "name": "Switzerland"},
-    {"@type": "Country", "name": "United States"},
-    {"@type": "Country", "name": "Brazil"},
-    {"@type": "Place", "name": "Worldwide"}
-  ],
-  "knowsAbout": [
-    "Operational AI",
-    "AI implementation",
-    "AI implementering",
-    "KI implementering",
-    "AI-rådgivning",
-    "Salgsrådgivning",
-    "Strategirådgivning",
-    "Krysskulturell kommunikasjon",
-    "Kursvirksomhet",
-    "EU AI Act Article 4",
-    "EU AI Act Artikkel 4",
-    "AI literacy training",
-    "AI-kompetanse",
-    "Sales consulting",
-    "Strategy advisory",
-    "Cross-cultural communication",
-    "B2B sales transformation",
-    "Industrial AI"
-  ],
-  "keywords": "operational AI, AI implementation, AI implementering, KI implementering, AI-rådgivning, salgsrådgivning, strategirådgivning, krysskulturell kommunikasjon, EU AI Act Article 4, EU AI Act Artikkel 4, AI literacy training, AI-kompetanse, sales consulting, strategy advisory, cross-cultural communication, B2B sales, industrial AI, Norway, Vestland, Askøy",
-  "founder": {
-    "@type": "Person",
-    "name": "Marcos Thomassen Povoa",
-    "jobTitle": "Founder & CEO",
-    "knowsLanguage": ["en", "no", "pt", "es"]
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Thomassen Povoa Holding AS",
-    "taxID": "937432178"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/StormberryAS",
-    "https://github.com/StormberryAS",
-    "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://stormberry.as/#website",
+      "url": "https://stormberry.as/",
+      "name": "Stormberry AS",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://stormberry.as/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://stormberry.as/#organization",
+      "name": "Stormberry AS",
+      "legalName": "Stormberry AS",
+      "alternateName": ["Stormberry", "Stormberry Consulting"],
+      "url": "https://stormberry.as/",
+      "logo": "https://stormberry.as/logo.png",
+      "image": "https://stormberry.as/logo.png",
+      "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+      "foundingDate": "2026-04-07",
+      "vatID": "NO937751249",
+      "taxID": "937751249",
+      "identifier": [
+        { "@type": "PropertyValue", "propertyID": "Norwegian organisation number", "value": "937 751 249" },
+        { "@type": "PropertyValue", "propertyID": "DUNS", "value": "348463484" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Askøy",
+        "addressRegion": "Vestland",
+        "addressCountry": "NO"
+      },
+      "email": "info@stormberry.as",
+      "telephone": "+47 950 43 789",
+      "availableLanguage": [
+        {"@type": "Language", "name": "English", "alternateName": "en"},
+        {"@type": "Language", "name": "Norwegian", "alternateName": "no"},
+        {"@type": "Language", "name": "Portuguese", "alternateName": "pt"},
+        {"@type": "Language", "name": "French", "alternateName": "fr"}
+      ],
+      "areaServed": [
+        {"@type": "Country", "name": "Norway"},
+        {"@type": "Place", "name": "European Economic Area"},
+        {"@type": "Country", "name": "Switzerland"},
+        {"@type": "Country", "name": "United States"},
+        {"@type": "Country", "name": "Brazil"},
+        {"@type": "Place", "name": "Worldwide"}
+      ],
+      "knowsAbout": [
+        "Operational AI",
+        "AI implementation",
+        "AI implementering",
+        "KI implementering",
+        "AI-rådgivning",
+        "Salgsrådgivning",
+        "Strategirådgivning",
+        "Krysskulturell kommunikasjon",
+        "Kursvirksomhet",
+        "EU AI Act Article 4",
+        "EU AI Act Artikkel 4",
+        "AI literacy training",
+        "AI-kompetanse",
+        "Sales consulting",
+        "Strategy advisory",
+        "Cross-cultural communication",
+        "B2B sales transformation",
+        "Industrial AI"
+      ],
+      "keywords": "operational AI, AI implementation, AI implementering, KI implementering, AI-rådgivning, salgsrådgivning, strategirådgivning, krysskulturell kommunikasjon, EU AI Act Article 4, EU AI Act Artikkel 4, AI literacy training, AI-kompetanse, sales consulting, strategy advisory, cross-cultural communication, B2B sales, industrial AI, Norway, Vestland, Askøy",
+      "founder": { "@id": "https://stormberry.as/#marcos" },
+      "employee": { "@id": "https://stormberry.as/#marcos" },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Thomassen Povoa Holding AS",
+        "taxID": "937432178"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/StormberryAS",
+        "https://github.com/StormberryAS",
+        "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://stormberry.as/#marcos",
+      "name": "Marcos Thomassen Povoa",
+      "givenName": "Marcos",
+      "familyName": "Thomassen Povoa",
+      "jobTitle": "Founder & CEO",
+      "description": "Founder and CEO of Stormberry AS. Fourteen years selling complex industrial and maritime systems across Europe, the Americas, and Asia before building Stormberry as an operational AI partner.",
+      "url": "https://stormberry.as/about",
+      "worksFor": { "@id": "https://stormberry.as/#organization" },
+      "knowsLanguage": ["en", "no", "pt", "es"],
+      "knowsAbout": [
+        "Operational AI",
+        "B2B sales",
+        "Industrial and maritime systems",
+        "Strategy advisory",
+        "Cross-cultural communication",
+        "EU AI Act Article 4"
+      ],
+      "workLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Askøy",
+          "addressRegion": "Vestland",
+          "addressCountry": "NO"
+        }
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcospovoa",
+        "https://github.com/marcospovoa"
+      ]
+    }
   ]
 }
 </script>
@@ -131,7 +177,6 @@
             <a href="/labs">Labs</a>
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
-            <a href="/availability">Availability</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
           </div></div>
           <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
@@ -220,7 +265,6 @@
               <a href="/labs">Labs</a>
               <a href="/blog">Blog</a>
             <a href="/about">About</a>
-              <a href="/availability">Availability</a>
               <a href="/contact">Contact Us</a>
             </div>
           </div>
