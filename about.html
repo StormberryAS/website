@@ -9,16 +9,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="About Stormberry AS, founded by Marcos Thomassen Povoa in 2026 after 14 years selling complex industrial and maritime systems across Europe, the Americas, and Asia. Norway-based, working in English, Norwegian, Portuguese, and French. Operational AI partner built on functioning prototypes, not theory." />
+    <meta name="description" content="Stormberry AS, an operational AI partner founded by Marcos Thomassen Povoa after 14 years in industrial and maritime sales. Norway-based, delivering globally." />
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/about" />
-    <script src="/script.js"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js" defer></script>
+    <script src="/lucide.min.js" defer></script>
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
-    <title>About | Stormberry AS</title>
-      <meta property="og:title" content="About Stormberry AS" />
-    <meta property="og:description" content="About Stormberry AS, founded by Marcos Thomassen Povoa in 2026 after 14 years selling complex industrial and maritime systems across Europe, the Americas, and Asia. Norway-based, working in English, Norwegian, Portuguese, and French. Operational AI partner built on functioning prototypes, not theory." />
+    <title>About Stormberry AS | Operational AI Partner in Norway</title>
+      <meta property="og:title" content="About Stormberry AS | Operational AI Partner in Norway" />
+    <meta property="og:description" content="Stormberry AS, an operational AI partner founded by Marcos Thomassen Povoa after 14 years in industrial and maritime sales. Norway-based, delivering globally." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://stormberry.as/about" />
     <meta property="og:image" content="https://stormberry.as/og-image.jpg" />
@@ -29,8 +30,8 @@
     <meta property="og:site_name" content="Stormberry AS" />
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="About Stormberry AS" />
-    <meta name="twitter:description" content="About Stormberry AS, founded by Marcos Thomassen Povoa in 2026 after 14 years selling complex industrial and maritime systems across Europe, the Americas, and Asia. Norway-based, working in English, Norwegian, Portuguese, and French. Operational AI partner built on functioning prototypes, not theory." />
+    <meta name="twitter:title" content="About Stormberry AS | Operational AI Partner in Norway" />
+    <meta name="twitter:description" content="Stormberry AS, an operational AI partner founded by Marcos Thomassen Povoa after 14 years in industrial and maritime sales. Norway-based, delivering globally." />
     <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
     <script type="application/ld+json">
 {
@@ -43,8 +44,8 @@
       "legalName": "Stormberry AS",
       "alternateName": ["Stormberry", "Stormberry Consulting"],
       "url": "https://stormberry.as/",
-      "logo": "https://stormberry.as/logo.png",
-      "image": "https://stormberry.as/logo.png",
+      "logo": "https://stormberry.as/logo.webp",
+      "image": "https://stormberry.as/logo.webp",
       "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
       "foundingDate": "2026-04-07",
       "vatID": "NO937751249",
@@ -112,7 +113,7 @@
   </head>
   <body>
     <div class="app-container">
-      <nav class="navbar">
+      <nav class="navbar" lang="en">
         <div class="container nav-container">
           <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
                     <div class="nav-links">
@@ -130,8 +131,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -143,9 +148,9 @@
               <div class="about-content animate-fade-in-up delay-200">
                 <div style="text-align: center;">
                   <div class="badge">About Us</div>
-                  <h2 class="section-title">
+                  <h1 class="section-title">
                     Driven by <span class="text-gradient">Experience</span>
-                  </h2>
+                  </h1>
                   
                   <div class="leader-info" style="margin-bottom: 0.5rem;">
                     <h3 class="leader-name">Marcos Thomassen Povoa</h3>
@@ -161,7 +166,7 @@
 
                 <div class="about-image-container animate-fade-in delay-100" style="margin-bottom: 2.5rem; justify-content: center;">
                   <div class="about-image-wrapper">
-                    <img src="/founder.webp" alt="Marcos Thomassen Povoa" class="about-photo" />
+                    <img src="/founder.webp" alt="Marcos Thomassen Povoa" class="about-photo" width="400" height="600" />
                   </div>
                 </div>
                 
@@ -196,11 +201,11 @@
       </main>
 
 
-      <footer class="footer">
+      <footer class="footer" lang="en">
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -233,8 +238,6 @@
       </footer>
     </div>
     
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>

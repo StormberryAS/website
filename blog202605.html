@@ -13,8 +13,8 @@
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/blog202605" />
-    <script src="/script.js?v=1.1"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js?v=1.1" defer></script>
+    <script src="/lucide.min.js" defer></script>
     <link rel="stylesheet" href="/style.css?v=1.1" />
     <title>Stormberry Blog: May 2026 Archive</title>
       <meta property="og:title" content="Stormberry Blog: May 2026 Archive" />
@@ -35,44 +35,296 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Stormberry AS",
-  "legalName": "Stormberry AS",
-  "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
-  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
-  "foundingDate": "2026-04-07",
-  "vatID": "NO937751249",
-  "taxID": "937751249",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Askøy",
-    "addressRegion": "Vestland",
-    "addressCountry": "NO"
-  },
-  "email": "info@stormberry.as",
-  "telephone": "+47 950 43 789",
-  "founder": {
-    "@type": "Person",
-    "name": "Marcos Thomassen Povoa",
-    "jobTitle": "Founder & CEO"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Thomassen Povoa Holding AS",
-    "taxID": "937432178"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/StormberryAS",
-    "https://github.com/StormberryAS"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stormberry.as/#organization",
+      "name": "Stormberry AS",
+      "legalName": "Stormberry AS",
+      "alternateName": [
+        "Stormberry",
+        "Stormberry Consulting"
+      ],
+      "url": "https://stormberry.as/",
+      "logo": "https://stormberry.as/logo.webp",
+      "image": "https://stormberry.as/logo.webp",
+      "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+      "foundingDate": "2026-04-07",
+      "vatID": "NO937751249",
+      "taxID": "937751249",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Norwegian organisation number",
+          "value": "937 751 249"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "DUNS",
+          "value": "348463484"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Askøy",
+        "addressRegion": "Vestland",
+        "addressCountry": "NO"
+      },
+      "email": "info@stormberry.as",
+      "telephone": "+47 950 43 789",
+      "founder": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Thomassen Povoa Holding AS",
+        "taxID": "937432178"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/StormberryAS",
+        "https://github.com/StormberryAS",
+        "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://stormberry.as/#marcos",
+      "name": "Marcos Thomassen Povoa",
+      "givenName": "Marcos",
+      "familyName": "Thomassen Povoa",
+      "jobTitle": "Founder & CEO",
+      "url": "https://stormberry.as/about",
+      "worksFor": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcospovoa",
+        "https://github.com/marcospovoa"
+      ]
+    },
+    {
+      "@type": [
+        "CollectionPage",
+        "Blog"
+      ],
+      "@id": "https://stormberry.as/blog202605#blog",
+      "url": "https://stormberry.as/blog202605",
+      "name": "Stormberry Blog, May 2026",
+      "isPartOf": {
+        "@id": "https://stormberry.as/#website"
+      },
+      "author": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "publisher": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "inLanguage": "en",
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Stormberry is now reachable over Tor",
+          "datePublished": "2026-05-30",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260530website-onion.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberry-is-now-reachable-over-tor-our-share-7466584665261481984-NYhQ/"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The architecture behind the most capable AI workflows in 2026",
+          "datePublished": "2026-05-29",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260529ai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_one-ai-model-trying-to-do-everything-is-like-activity-7466163716082810883-WChU"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Vídeo de Rafael Hollanda sobre a Stormberry",
+          "datePublished": "2026-05-27",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "pt",
+          "image": "https://stormberry.as/pictures/20260527stormberry-rafael-thumbnail.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_quando-o-comunicador-advogado-e-escritor-activity-7465326012143276033-lVTe"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Stormberry joins OnSide AI as their distribution partner for Norway",
+          "datePublished": "2026-05-26",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260526onsideai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_today-were-announcing-stormberrys-partnership-activity-7464888053468377088-Zvgb"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The shift from chatbot to agent, why it matters for your business",
+          "datePublished": "2026-05-22",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260522ai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_most-people-still-picture-ai-as-a-chatbot-activity-7463438495580278784-elxb"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Launch of AstroQuiz, the privacy-first offline astronomical trivia game. Seventh app in the Stormberry Labs arc",
+          "datePublished": "2026-05-21",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260521astroquiz.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_thursday-vibes-is-back-the-apps-arc-continues-activity-7463076113859371008-c46D"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Stormberry on the floor at EURO EXPO IndustriMesse Bergen, what we are scouting for",
+          "datePublished": "2026-05-20",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260520industrimesse.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_at-euro-expo-industrimesse-bergen-today-activity-7462713719840759808-kLY1"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Why AI changes your competitive strategy more than you think",
+          "datePublished": "2026-05-19",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260519strategy.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_ai-doesnt-just-make-your-team-faster-it-activity-7462351332683976704-WtmN"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Relationship selling still wins, here is why",
+          "datePublished": "2026-05-18",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260518sales.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_everyone-talks-about-digital-first-sales-activity-7461988946248638464-tVPu"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "🇳🇴 Gratulerer med dagen! 🇳🇴",
+          "datePublished": "2026-05-17",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260517-17mai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_gratulerer-med-dagen-on-17-may-activity-7461641661438267392-TGEX"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "StarMap is LIVE! ⭐",
+          "datePublished": "2026-05-15",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260515starmap.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/starmap-is-live-thursday-vibes-a-day-late-share-7461090983720587264-GHKZ"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "PlanetPulse is LIVE! 🪐",
+          "datePublished": "2026-05-07",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260507planetpulse.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_planetpulse-is-live-thursday-vibes-continues-activity-7458098333652299776-oava"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Stormberry at HavExpo",
+          "datePublished": "2026-05-04",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260504havexpo.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202605",
+          "url": "https://www.linkedin.com/posts/stormberryas_stormberry-will-be-at-havexpo-this-week-activity-7457031287820955648--jyp"
+        }
+      ]
+    }
   ]
 }
 </script>
   </head>
   <body>
     <div class="app-container">
-      <nav class="navbar">
+      <nav class="navbar" lang="en">
         <div class="container nav-container">
           <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
                     <div class="nav-links">
@@ -90,8 +342,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -103,9 +359,9 @@
               <div class="about-content animate-fade-in-up delay-200">
                 <div style="text-align: center;">
                   <div class="badge">Insights</div>
-                  <h2 class="section-title">
+                  <h1 class="section-title">
                     May 2026 <span class="text-gradient">Archive</span>
-                  </h2>
+                  </h1>
                 </div>
 
                 <div class="blog-posts-container" style="max-width: 800px; margin: 3rem auto;">
@@ -117,7 +373,7 @@
                     <!-- Post 30: May 30, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260530website-onion.png" alt="Stormberry is now reachable over Tor" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260530website-onion.png" loading="lazy" alt="Stormberry is now reachable over Tor" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -137,7 +393,7 @@
                     <!-- Post 29: May 29, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260529ai.png" alt="The architecture behind the most capable AI workflows in 2026" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260529ai.png" loading="lazy" alt="The architecture behind the most capable AI workflows in 2026" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -159,7 +415,7 @@
                     <!-- Post 28: May 27, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image video-thumbnail-container" data-video-src="/videos/20260527stormberry-rafael.mp4" style="width: 100%; height: 350px; overflow: hidden; background: #000; position: relative; cursor: pointer;">
-                        <img src="/pictures/20260527stormberry-rafael-thumbnail.png" alt="Vídeo de Rafael Hollanda sobre a Stormberry" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260527stormberry-rafael-thumbnail.png" loading="lazy" alt="Vídeo de Rafael Hollanda sobre a Stormberry" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                         <div class="play-button-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none;">
                           <i data-lucide="play" style="color: white; width: 32px; height: 32px; margin-left: 4px;"></i>
                         </div>
@@ -186,7 +442,7 @@
                     <!-- Post 27: May 26, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260526onsideai.png" alt="Stormberry joins OnSide AI as their distribution partner for Norway" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260526onsideai.png" loading="lazy" alt="Stormberry joins OnSide AI as their distribution partner for Norway" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -208,7 +464,7 @@
                     <!-- Post 26: May 22, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260522ai.png" alt="The shift from chatbot to agent, why it matters for your business" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260522ai.png" loading="lazy" alt="The shift from chatbot to agent, why it matters for your business" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -228,7 +484,7 @@
                     <!-- Post 25: May 21, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260521astroquiz.png" alt="Launch of AstroQuiz, the privacy-first offline astronomical trivia game. Seventh app in the Stormberry Labs arc" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260521astroquiz.png" loading="lazy" alt="Launch of AstroQuiz, the privacy-first offline astronomical trivia game. Seventh app in the Stormberry Labs arc" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -249,7 +505,7 @@
                     <!-- Post 24: May 20, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260520industrimesse.png" alt="Stormberry on the floor at EURO EXPO IndustriMesse Bergen, what we are scouting for" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260520industrimesse.png" loading="lazy" alt="Stormberry on the floor at EURO EXPO IndustriMesse Bergen, what we are scouting for" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -270,7 +526,7 @@
                     <!-- Post 23: May 19, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260519strategy.png" alt="Why AI changes your competitive strategy more than you think" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260519strategy.png" loading="lazy" alt="Why AI changes your competitive strategy more than you think" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -290,7 +546,7 @@
                     <!-- Post 22: May 18, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260518sales.png" alt="Relationship selling still wins, here is why" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260518sales.png" loading="lazy" alt="Relationship selling still wins, here is why" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -311,7 +567,7 @@
                     <!-- Post 21: May 17, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260517-17mai.png" alt="Gratulerer med dagen!" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260517-17mai.png" loading="lazy" alt="Gratulerer med dagen!" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -334,7 +590,7 @@
                     <!-- Post 20: May 15, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260515starmap.png" alt="StarMap Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260515starmap.png" loading="lazy" alt="StarMap Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -359,7 +615,7 @@
                     <!-- Post 19: May 07, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260507planetpulse.png" alt="PlanetPulse is LIVE!" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260507planetpulse.png" loading="lazy" alt="PlanetPulse is LIVE!" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -383,7 +639,7 @@
                     <!-- Post 18: May 04, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260504havexpo.png" alt="Stormberry at HavExpo" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260504havexpo.png" loading="lazy" alt="Stormberry at HavExpo" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -426,11 +682,11 @@
       </main>
 
 
-      <footer class="footer">
+      <footer class="footer" lang="en">
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -474,8 +730,6 @@
       </div>
     </div>
 
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>

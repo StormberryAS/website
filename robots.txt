@@ -1,5 +1,17 @@
+# Stormberry AS - robots.txt
+# Policy: allow search engines and AI assistants to read, index, and cite the site.
+# Content signals are advisory (honoured by compliant crawlers): https://contentsignals.org
+#   search   = appear in search indexes and results
+#   ai-input = be read in real time to answer / cite (RAG, grounding, AI search)
+#   ai-train = be used to train or fine-tune AI models
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
-# Sitemaps
+# Single exception: a crawler that ignores rate limits and crawls abusively.
+# (robots.txt is advisory; to hard-block it, add a Cloudflare WAF rule on the user agent.)
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://stormberry.as/sitemap.xml

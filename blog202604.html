@@ -9,16 +9,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Stormberry Blog April 2026 archive. The first month of LinkedIn posts and longer essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology. Includes the launch of SunApp, MoonApp, PhotoTimer, LunarGarden, PlanetPulse, and StarMap." />
+    <meta name="description" content="Stormberry blog, April 2026: the first month of posts and essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology." />
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/blog202604" />
-    <script src="/script.js"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js" defer></script>
+    <script src="/lucide.min.js" defer></script>
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
     <title>Stormberry Blog: April 2026 Archive</title>
       <meta property="og:title" content="Stormberry Blog: April 2026 Archive" />
-    <meta property="og:description" content="Stormberry Blog April 2026 archive. The first month of LinkedIn posts and longer essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology. Includes the launch of SunApp, MoonApp, PhotoTimer, LunarGarden, PlanetPulse, and StarMap." />
+    <meta property="og:description" content="Stormberry blog, April 2026: the first month of posts and essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://stormberry.as/blog202604" />
     <meta property="og:image" content="https://stormberry.as/og-image.jpg" />
@@ -30,49 +31,361 @@
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Stormberry Blog: April 2026 Archive" />
-    <meta name="twitter:description" content="Stormberry Blog April 2026 archive. The first month of LinkedIn posts and longer essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology. Includes the launch of SunApp, MoonApp, PhotoTimer, LunarGarden, PlanetPulse, and StarMap." />
+    <meta name="twitter:description" content="Stormberry blog, April 2026: the first month of posts and essays on operational AI, sales discipline, strategy, and the functioning-prototype methodology." />
     <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Stormberry AS",
-  "legalName": "Stormberry AS",
-  "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
-  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
-  "foundingDate": "2026-04-07",
-  "vatID": "NO937751249",
-  "taxID": "937751249",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Askøy",
-    "addressRegion": "Vestland",
-    "addressCountry": "NO"
-  },
-  "email": "info@stormberry.as",
-  "telephone": "+47 950 43 789",
-  "founder": {
-    "@type": "Person",
-    "name": "Marcos Thomassen Povoa",
-    "jobTitle": "Founder & CEO"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Thomassen Povoa Holding AS",
-    "taxID": "937432178"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/StormberryAS",
-    "https://github.com/StormberryAS"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stormberry.as/#organization",
+      "name": "Stormberry AS",
+      "legalName": "Stormberry AS",
+      "alternateName": [
+        "Stormberry",
+        "Stormberry Consulting"
+      ],
+      "url": "https://stormberry.as/",
+      "logo": "https://stormberry.as/logo.webp",
+      "image": "https://stormberry.as/logo.webp",
+      "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+      "foundingDate": "2026-04-07",
+      "vatID": "NO937751249",
+      "taxID": "937751249",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Norwegian organisation number",
+          "value": "937 751 249"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "DUNS",
+          "value": "348463484"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Askøy",
+        "addressRegion": "Vestland",
+        "addressCountry": "NO"
+      },
+      "email": "info@stormberry.as",
+      "telephone": "+47 950 43 789",
+      "founder": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Thomassen Povoa Holding AS",
+        "taxID": "937432178"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/StormberryAS",
+        "https://github.com/StormberryAS",
+        "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://stormberry.as/#marcos",
+      "name": "Marcos Thomassen Povoa",
+      "givenName": "Marcos",
+      "familyName": "Thomassen Povoa",
+      "jobTitle": "Founder & CEO",
+      "url": "https://stormberry.as/about",
+      "worksFor": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcospovoa",
+        "https://github.com/marcospovoa"
+      ]
+    },
+    {
+      "@type": [
+        "CollectionPage",
+        "Blog"
+      ],
+      "@id": "https://stormberry.as/blog202604#blog",
+      "url": "https://stormberry.as/blog202604",
+      "name": "Stormberry Blog, April 2026",
+      "isPartOf": {
+        "@id": "https://stormberry.as/#website"
+      },
+      "author": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "publisher": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "inLanguage": "en",
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "LunarGarden is LIVE! 🌱",
+          "datePublished": "2026-04-30",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260430lunargarden.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/lunargarden-is-live-the-gardeners-companion-share-7455597982659264512-qpku"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Disagreeing with the CEO",
+          "datePublished": "2026-04-29",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260429leadership.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_in-norway-you-can-disagree-with-your-ceo-activity-7455103603192623104-n50R"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Strategy is Subtraction",
+          "datePublished": "2026-04-28",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260428strategy-subtraction.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_we-want-to-grow-30-this-year-goal-activity-7454741248675905536-xNwc"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The Reality of Complex Deals",
+          "datePublished": "2026-04-27",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260427complex-sales.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_a-10m-contract-doesnt-close-in-one-meeting-activity-7454457157812547584-Hlq_"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Week 2 Wrap-up",
+          "datePublished": "2026-04-25",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260425week2wrapup.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/week-2-in-four-lines-sales-is-a-system-share-7453706341766017025-y4o9"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "PhotoTimer is LIVE! 📷",
+          "datePublished": "2026-04-23",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260423phototimer.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_phototimer-is-live-the-photographers-activity-7452929266410823680-sHX4"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Bilingual in Communication Styles",
+          "datePublished": "2026-04-22",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260422cross-cultural.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/norwegians-are-among-the-most-direct-communicators-share-7452632324703338496-kgGc"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Strategy is a Decision Filter",
+          "datePublished": "2026-04-21",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260421strategy-filter.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_most-strategy-documents-are-too-long-too-activity-7452283271775969280-r9Q8"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Sales Systems > Rainmakers",
+          "datePublished": "2026-04-20",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260420sales-pillar.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/most-people-think-salespeople-are-born-not-share-7451951705686089728-wydo"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Week 1 Wrap-up",
+          "datePublished": "2026-04-17",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260417wrap-up.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_week-1-is-done-three-posts-here-is-what-activity-7450754936126136320-Ik7o"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "MoonApp is LIVE! 🌔",
+          "datePublished": "2026-04-16",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260416moonapp.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_thursdayvibes-moonapp-stormberry-activity-7450407678612234240-ZEtk"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The Reality of Direct Communication",
+          "datePublished": "2026-04-15",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260415-cross_cultural_comm.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/globalbusiness-communicationstyles-stormberry-share-7450066295074582528-j6oG"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "What is Strategy?",
+          "datePublished": "2026-04-14",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260414strategy.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_businessstrategy-sme-stormberry-activity-7449816986982785024-etnR"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The Nuances of Global Feedback",
+          "datePublished": "2026-04-10",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260410feedback.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/globalbusiness-feedback-leadership-share-7448267118405378048-vuLp"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "SunApp is LIVE! 🌅 | Thursday Vibes",
+          "datePublished": "2026-04-09",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260409sunapp.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/sunapp-sunrise-solar-noon-sunset-calculator-share-7447855843867410432-cSG_"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Stormberry is officially LIVE. 🚀",
+          "datePublished": "2026-04-07",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260407website.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_stormberry-strategy-sales-activity-7447508559858253824-tCMO/"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Easter Greetings from Stormberry",
+          "datePublished": "2026-04-07",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260407Easter.png",
+          "mainEntityOfPage": "https://stormberry.as/blog202604",
+          "url": "https://www.linkedin.com/posts/stormberryas_stormberry-easter-activity-7447179077909819392-NqOQ"
+        }
+      ]
+    }
   ]
 }
 </script>
   </head>
   <body>
     <div class="app-container">
-      <nav class="navbar">
+      <nav class="navbar" lang="en">
         <div class="container nav-container">
           <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
                     <div class="nav-links">
@@ -90,8 +403,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -103,9 +420,9 @@
               <div class="about-content animate-fade-in-up delay-200">
                 <div style="text-align: center;">
                   <div class="badge">Insights</div>
-                  <h2 class="section-title">
+                  <h1 class="section-title">
                     April 2026 <span class="text-gradient">Archive</span>
-                  </h2>
+                  </h1>
                 </div>
 
                 <div class="blog-posts-container" style="max-width: 800px; margin: 3rem auto;">
@@ -117,7 +434,7 @@
                     <!-- Post 17: April 30, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260430lunargarden.png" alt="LunarGarden Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260430lunargarden.png" loading="lazy" alt="LunarGarden Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -139,7 +456,7 @@
                     <!-- Post 16: April 29, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260429leadership.png" alt="Cross-cultural Leadership" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260429leadership.png" loading="lazy" alt="Cross-cultural Leadership" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -160,7 +477,7 @@
                     <!-- Post 15: April 28, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260428strategy-subtraction.png" alt="Strategy is Subtraction" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260428strategy-subtraction.png" loading="lazy" alt="Strategy is Subtraction" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -181,7 +498,7 @@
                     <!-- Post 14: April 27, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260427complex-sales.png" alt="Complex B2B Sales" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260427complex-sales.png" loading="lazy" alt="Complex B2B Sales" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -206,7 +523,7 @@
                     <!-- Post 13: April 25, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260425week2wrapup.png" alt="Week 2 Wrap-up" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260425week2wrapup.png" loading="lazy" alt="Week 2 Wrap-up" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -231,7 +548,7 @@
                     <!-- Post 12: April 23, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260423phototimer.png" alt="PhotoTimer Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260423phototimer.png" loading="lazy" alt="PhotoTimer Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -254,7 +571,7 @@
                     <!-- Post 11: April 22, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260422cross-cultural.png" alt="Cross-Cultural Communication" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260422cross-cultural.png" loading="lazy" alt="Cross-Cultural Communication" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -275,7 +592,7 @@
                     <!-- Post 10: April 21, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260421strategy-filter.png" alt="Strategy Filter" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260421strategy-filter.png" loading="lazy" alt="Strategy Filter" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -302,7 +619,7 @@
                     <!-- Post 9: April 20, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260420sales-pillar.png" alt="Stormberry Sales Pillar" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260420sales-pillar.png" loading="lazy" alt="Stormberry Sales Pillar" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -322,7 +639,7 @@
                     <!-- Post 8: April 17, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260417wrap-up.png" alt="Week 1 Wrap-up" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260417wrap-up.png" loading="lazy" alt="Week 1 Wrap-up" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -344,7 +661,7 @@
                     <!-- Post 7: April 16, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260416moonapp.png" alt="MoonApp Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260416moonapp.png" loading="lazy" alt="MoonApp Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -368,7 +685,7 @@
                     <!-- Post 6: April 15, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260415-cross_cultural_comm.png" alt="Cross-Cultural Communication" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260415-cross_cultural_comm.png" loading="lazy" alt="Cross-Cultural Communication" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -389,7 +706,7 @@
                     <!-- Post 5: April 14, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260414strategy.png" alt="What is Strategy" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260414strategy.png" loading="lazy" alt="What is Strategy" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -410,7 +727,7 @@
                     <!-- Post 4: April 10, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260410feedback.png" alt="Global Feedback and Leadership" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260410feedback.png" loading="lazy" alt="Global Feedback and Leadership" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -429,7 +746,7 @@
                     <!-- Post 3: April 9, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260409sunapp.png" alt="SunApp Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260409sunapp.png" loading="lazy" alt="SunApp Launch" style="width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -450,7 +767,7 @@
                     <!-- Post 2: April 8, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260407website.png" alt="Stormberry Update" style="width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260407website.png" loading="lazy" alt="Stormberry Update" style="width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -476,7 +793,7 @@
                     <!-- Post 1: April 7, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260407Easter.png" alt="Illuminated manuscript of the Agnus Dei" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260407Easter.png" loading="lazy" alt="Illuminated manuscript of the Agnus Dei" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -534,11 +851,11 @@ Allelúja!
       </main>
 
 
-      <footer class="footer">
+      <footer class="footer" lang="en">
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -571,8 +888,6 @@ Allelúja!
       </footer>
     </div>
     
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>

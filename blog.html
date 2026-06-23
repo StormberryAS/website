@@ -9,16 +9,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The Stormberry blog. Field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS. Archive of LinkedIn posts and longer essays, organised by month." />
+    <meta name="description" content="The Stormberry blog: field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS." />
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/blog" />
-    <script src="/script.js?v=1.1"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js?v=1.1" defer></script>
+    <script src="/lucide.min.js" defer></script>
     <link rel="stylesheet" href="/style.css?v=1.1" />
-    <title>Stormberry Blog</title>
-      <meta property="og:title" content="Stormberry Blog" />
-    <meta property="og:description" content="The Stormberry blog. Field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS. Archive of LinkedIn posts and longer essays, organised by month." />
+    <title>Stormberry Blog | Field Notes on Operational AI</title>
+      <meta property="og:title" content="Stormberry Blog | Field Notes on Operational AI" />
+    <meta property="og:description" content="The Stormberry blog: field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://stormberry.as/blog" />
     <meta property="og:image" content="https://stormberry.as/og-image.jpg" />
@@ -29,50 +29,212 @@
     <meta property="og:site_name" content="Stormberry AS" />
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Stormberry Blog" />
-    <meta name="twitter:description" content="The Stormberry blog. Field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS. Archive of LinkedIn posts and longer essays, organised by month." />
+    <meta name="twitter:title" content="Stormberry Blog | Field Notes on Operational AI" />
+    <meta name="twitter:description" content="The Stormberry blog: field notes on operational AI, sales discipline, strategy, and cross-cultural delivery from the founder of Stormberry AS." />
     <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Stormberry AS",
-  "legalName": "Stormberry AS",
-  "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
-  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
-  "foundingDate": "2026-04-07",
-  "vatID": "NO937751249",
-  "taxID": "937751249",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Askøy",
-    "addressRegion": "Vestland",
-    "addressCountry": "NO"
-  },
-  "email": "info@stormberry.as",
-  "telephone": "+47 950 43 789",
-  "founder": {
-    "@type": "Person",
-    "name": "Marcos Thomassen Povoa",
-    "jobTitle": "Founder & CEO"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Thomassen Povoa Holding AS",
-    "taxID": "937432178"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/StormberryAS",
-    "https://github.com/StormberryAS"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stormberry.as/#organization",
+      "name": "Stormberry AS",
+      "legalName": "Stormberry AS",
+      "alternateName": [
+        "Stormberry",
+        "Stormberry Consulting"
+      ],
+      "url": "https://stormberry.as/",
+      "logo": "https://stormberry.as/logo.webp",
+      "image": "https://stormberry.as/logo.webp",
+      "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+      "foundingDate": "2026-04-07",
+      "vatID": "NO937751249",
+      "taxID": "937751249",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "Norwegian organisation number",
+          "value": "937 751 249"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "DUNS",
+          "value": "348463484"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Askøy",
+        "addressRegion": "Vestland",
+        "addressCountry": "NO"
+      },
+      "email": "info@stormberry.as",
+      "telephone": "+47 950 43 789",
+      "founder": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Thomassen Povoa Holding AS",
+        "taxID": "937432178"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/StormberryAS",
+        "https://github.com/StormberryAS",
+        "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://stormberry.as/#marcos",
+      "name": "Marcos Thomassen Povoa",
+      "givenName": "Marcos",
+      "familyName": "Thomassen Povoa",
+      "jobTitle": "Founder & CEO",
+      "url": "https://stormberry.as/about",
+      "worksFor": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcospovoa",
+        "https://github.com/marcospovoa"
+      ]
+    },
+    {
+      "@type": [
+        "CollectionPage",
+        "Blog"
+      ],
+      "@id": "https://stormberry.as/blog#blog",
+      "url": "https://stormberry.as/blog",
+      "name": "Stormberry Blog",
+      "isPartOf": {
+        "@id": "https://stormberry.as/#website"
+      },
+      "author": {
+        "@id": "https://stormberry.as/#marcos"
+      },
+      "publisher": {
+        "@id": "https://stormberry.as/#organization"
+      },
+      "inLanguage": "en",
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "When to walk away from a deal",
+          "datePublished": "2026-06-15",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260615sales.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7472240666308296704"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Annual planning in 2026 needs a rewrite",
+          "datePublished": "2026-06-09",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260609strategy.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7469961483473489920"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Local inference, consumer GPUs, Apple Silicon, the honest breakdown",
+          "datePublished": "2026-06-08",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260608ai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7469665773121245184"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "AI projects that fail in 2026 fail for the same reason 1990s ERP did",
+          "datePublished": "2026-06-04",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260604ai.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7468200277586792448"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The feedback paradox, why \"perfect scores\" tell you nothing",
+          "datePublished": "2026-06-03",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260603culture.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7467787154392526848"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "100 followers. Thank you.",
+          "datePublished": "2026-06-02",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260602-100-followers.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7467453148702490624"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "The hidden cost of a bad sales hire",
+          "datePublished": "2026-06-01",
+          "author": {
+            "@id": "https://stormberry.as/#marcos"
+          },
+          "publisher": {
+            "@id": "https://stormberry.as/#organization"
+          },
+          "inLanguage": "en",
+          "image": "https://stormberry.as/pictures/20260601sales.png",
+          "mainEntityOfPage": "https://stormberry.as/blog",
+          "url": "https://www.linkedin.com/posts/stormberryas_a-bad-sales-hire-costs-more-than-their-salary-activity-7467062388702416896-MzKM"
+        }
+      ]
+    }
   ]
 }
 </script>
   </head>
   <body>
     <div class="app-container">
-      <nav class="navbar">
+      <nav class="navbar" lang="en">
         <div class="container nav-container">
           <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
                     <div class="nav-links">
@@ -90,8 +252,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -103,9 +269,9 @@
               <div class="about-content animate-fade-in-up delay-200">
                 <div style="text-align: center;">
                   <div class="badge">Insights</div>
-                  <h2 class="section-title">
+                  <h1 class="section-title">
                     Our <span class="text-gradient">Blog</span>
-                  </h2>
+                  </h1>
                 </div>
 
                 <div class="blog-posts-container" style="max-width: 800px; margin: 3rem auto;">
@@ -117,7 +283,7 @@
                     <!-- Post 37: 15/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260615sales.png" alt="When to walk away from a deal" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260615sales.png" loading="lazy" alt="When to walk away from a deal" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -139,7 +305,7 @@
                     <!-- Post 36: 09/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260609strategy.png" alt="Annual planning in 2026 needs a rewrite" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260609strategy.png" loading="lazy" alt="Annual planning in 2026 needs a rewrite" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -160,7 +326,7 @@
                     <!-- Post 35: 08/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260608ai.png" alt="Local inference, consumer GPUs, Apple Silicon, the honest breakdown" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260608ai.png" loading="lazy" alt="Local inference, consumer GPUs, Apple Silicon, the honest breakdown" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -185,7 +351,7 @@
                     <!-- Post 34: 04/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260604ai.png" alt="AI projects that fail in 2026 fail for the same reason 1990s ERP did" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260604ai.png" loading="lazy" alt="AI projects that fail in 2026 fail for the same reason 1990s ERP did" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -206,7 +372,7 @@
                     <!-- Post 33: 03/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260603culture.png" alt="The feedback paradox, why &quot;perfect scores&quot; tell you nothing" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260603culture.png" loading="lazy" alt="The feedback paradox, why &quot;perfect scores&quot; tell you nothing" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -227,7 +393,7 @@
                     <!-- Post 32: 02/Jun/2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260602-100-followers.png" alt="100 followers. Thank you." style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260602-100-followers.png" loading="lazy" alt="100 followers. Thank you." style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -248,7 +414,7 @@
                     <!-- Post 31: Jun 01, 2026 -->
                     <article class="blog-post-card" style="background: var(--bg-secondary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow-color); text-align: left;">
                       <div class="blog-post-image" style="width: 100%; height: 350px; overflow: hidden; background: #000;">
-                        <img src="/pictures/20260601sales.png" alt="The hidden cost of a bad sales hire" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+                        <img src="/pictures/20260601sales.png" loading="lazy" alt="The hidden cost of a bad sales hire" style="width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.3s; opacity: 0.9;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
                       </div>
                       <div class="blog-post-content" style="padding: 2.5rem;">
                         <div class="blog-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
@@ -291,11 +457,11 @@
       </main>
 
 
-      <footer class="footer">
+      <footer class="footer" lang="en">
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -339,8 +505,6 @@
       </div>
     </div>
 
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>
