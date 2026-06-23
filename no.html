@@ -8,18 +8,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Stormberry AS, operasjonell AI-partner med base på Askøy i Vestland. AI-rådgivning i Bergen og Vestland, AI-implementering, salgsrådgivning, strategirådgivning og EU AI Act Artikkel 4 opplæring. Leveranse globalt på fire språk." />
+    <meta name="description" content="Operasjonell AI-partner i Vestland. AI-rådgivning og KI-rådgivning i Bergen, AI-implementering, salgs- og strategirådgivning, EU AI Act Artikkel 4. Stormberry AS." />
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/no" />
     <link rel="alternate" hreflang="en" href="https://stormberry.as/" />
     <link rel="alternate" hreflang="no" href="https://stormberry.as/no" />
     <link rel="alternate" hreflang="x-default" href="https://stormberry.as/" />
-    <script src="/script.js"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js" defer></script>
+    <script src="/lucide.min.js" defer></script>
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
-    <title>Stormberry AS | AI-rådgivning i Bergen og Vestland | Operasjonell AI-partner</title>
-    <meta property="og:title" content="Stormberry AS: AI-rådgivning i Bergen og Vestland" />
+    <title>AI-rådgivning i Bergen og Vestland | Stormberry AS</title>
+    <meta property="og:title" content="AI-rådgivning i Bergen og Vestland | Stormberry AS" />
     <meta property="og:description" content="Operasjonell AI-partner med base på Askøy i Vestland. AI-rådgivning i Bergen og Vestland, AI-implementering, og EU AI Act Artikkel 4 opplæring." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://stormberry.as/no" />
@@ -32,19 +33,20 @@
     <meta property="og:locale" content="nb_NO" />
     <meta property="og:locale:alternate" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Stormberry AS: AI-rådgivning i Bergen og Vestland" />
+    <meta name="twitter:title" content="AI-rådgivning i Bergen og Vestland | Stormberry AS" />
     <meta name="twitter:description" content="Operasjonell AI-partner med base på Askøy i Vestland. AI-rådgivning i Bergen og Vestland, AI-implementering, og EU AI Act Artikkel 4 opplæring." />
     <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://stormberry.as/#organization",
   "name": "Stormberry AS",
   "legalName": "Stormberry AS",
   "alternateName": ["Stormberry", "Stormberry Consulting"],
   "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
+  "logo": "https://stormberry.as/logo.webp",
+  "image": "https://stormberry.as/logo.webp",
   "description": "Operasjonell AI-partner i Norge. Tre bevegelser i ett kontinuerlig kretsløp: AI i daglig drift, AI i salgspipelinen mot strategien, og feltintelligens-syntese klar til neste strategigjennomgang.",
   "foundingDate": "2026-04-07",
   "vatID": "NO937751249",
@@ -124,8 +126,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -144,7 +150,7 @@
                 <span class="text-gradient">koblet tilbake til strategien.</span>
               </h1>
               <p class="hero-subtitle delay-100">
-                Stormberry AS hjelper bedrifter med å strukturere salg og strategi i en global sammenheng, og kjører deretter AI-kretsløpet kontinuerlig slik at neste strategigjennomgang lander på virkeligheten i feltet, ikke på gjetning. Tre bevegelser: AI i daglig drift, AI i salgspipelinen mot strategien, og en syntese klar til neste strategigjennomgang når den enn skjer.
+                Stormberry AS bruker kunstig intelligens (KI) til å hjelpe bedrifter med å strukturere salg og strategi i en global sammenheng, og kjører deretter AI-kretsløpet kontinuerlig slik at neste strategigjennomgang lander på virkeligheten i feltet, ikke på gjetning. Tre bevegelser: AI i daglig drift, AI i salgspipelinen mot strategien, og en syntese klar til neste strategigjennomgang når den enn skjer.
               </p>
               <div class="hero-actions delay-200">
                 <a href="/contact" class="btn btn-primary">
@@ -254,7 +260,7 @@
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -286,6 +292,6 @@
         </div>
       </footer>
     </div>
-    <script>lucide.createIcons();</script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>

@@ -13,10 +13,11 @@
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/privacy" />
-    <script src="/script.js"></script>
-    <script src="/lucide.min.js"></script>
+    <script src="/script.js" defer></script>
+    <script src="/lucide.min.js" defer></script>
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
-    <title>Stormberry AS | Privacy Policy</title>
+    <title>Privacy Policy | Stormberry AS</title>
       <meta property="og:title" content="Privacy Policy | Stormberry AS" />
     <meta property="og:description" content="Stormberry AS privacy policy. We do not use cookies or analytics. We do not sell, share, or monetise your data." />
     <meta property="og:type" content="website" />
@@ -36,11 +37,12 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://stormberry.as/#organization",
   "name": "Stormberry AS",
   "legalName": "Stormberry AS",
   "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
+  "logo": "https://stormberry.as/logo.webp",
+  "image": "https://stormberry.as/logo.webp",
   "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
   "foundingDate": "2026-04-07",
   "vatID": "NO937751249",
@@ -72,7 +74,7 @@
   </head>
   <body>
     <div class="app-container">
-      <nav class="navbar">
+      <nav class="navbar" lang="en">
         <div class="container nav-container">
           <a href="/" class="logo">Stormberry<span class="text-gradient">.</span></a>
                     <div class="nav-links">
@@ -90,8 +92,12 @@
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
           </div></div>
-          <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
         </div>
       </nav>
 
@@ -101,9 +107,9 @@
 
             <div style="text-align: center; margin-bottom: 2.5rem;">
               <div class="badge">Privacy</div>
-              <h2 class="section-title">
+              <h1 class="section-title">
                 Privacy <span class="text-gradient">Policy</span>
-              </h2>
+              </h1>
               <p style="opacity: 0.75; font-size: 0.95rem; margin-top: 0.5rem;">Last updated: 6 May 2026</p>
             </div>
 
@@ -235,11 +241,11 @@
       </main>
 
 
-      <footer class="footer">
+      <footer class="footer" lang="en">
         <div class="container">
           <div class="footer-content">
             <div class="footer-brand">
-              <h3 class="logo">Stormberry<span class="text-gradient">.</span></h3>
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
               <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
             </div>
             <div class="footer-links">
@@ -272,8 +278,6 @@
       </footer>
     </div>
 
-    <script>
-      lucide.createIcons();
-    </script>
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
   </body>
 </html>
