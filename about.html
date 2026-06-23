@@ -35,37 +35,77 @@
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Stormberry AS",
-  "legalName": "Stormberry AS",
-  "url": "https://stormberry.as",
-  "logo": "https://stormberry.as/logo.png",
-  "image": "https://stormberry.as/logo.png",
-  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
-  "foundingDate": "2026-04-07",
-  "vatID": "NO937751249",
-  "taxID": "937751249",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Askøy",
-    "addressRegion": "Vestland",
-    "addressCountry": "NO"
-  },
-  "email": "info@stormberry.as",
-  "telephone": "+47 950 43 789",
-  "founder": {
-    "@type": "Person",
-    "name": "Marcos Thomassen Povoa",
-    "jobTitle": "Founder & CEO"
-  },
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "Thomassen Povoa Holding AS",
-    "taxID": "937432178"
-  },
-  "sameAs": [
-    "https://linkedin.com/company/StormberryAS",
-    "https://github.com/StormberryAS"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stormberry.as/#organization",
+      "name": "Stormberry AS",
+      "legalName": "Stormberry AS",
+      "alternateName": ["Stormberry", "Stormberry Consulting"],
+      "url": "https://stormberry.as/",
+      "logo": "https://stormberry.as/logo.png",
+      "image": "https://stormberry.as/logo.png",
+      "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+      "foundingDate": "2026-04-07",
+      "vatID": "NO937751249",
+      "taxID": "937751249",
+      "identifier": [
+        { "@type": "PropertyValue", "propertyID": "Norwegian organisation number", "value": "937 751 249" },
+        { "@type": "PropertyValue", "propertyID": "DUNS", "value": "348463484" }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Askøy",
+        "addressRegion": "Vestland",
+        "addressCountry": "NO"
+      },
+      "email": "info@stormberry.as",
+      "telephone": "+47 950 43 789",
+      "founder": { "@id": "https://stormberry.as/#marcos" },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Thomassen Povoa Holding AS",
+        "taxID": "937432178"
+      },
+      "sameAs": [
+        "https://linkedin.com/company/StormberryAS",
+        "https://github.com/StormberryAS",
+        "https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://stormberry.as/#marcos",
+      "name": "Marcos Thomassen Povoa",
+      "givenName": "Marcos",
+      "familyName": "Thomassen Povoa",
+      "jobTitle": "Founder & CEO",
+      "description": "Founder and CEO of Stormberry AS. Fourteen years selling complex industrial and maritime systems across Europe, the Americas, and Asia before building Stormberry as an operational AI partner.",
+      "url": "https://stormberry.as/about",
+      "worksFor": { "@id": "https://stormberry.as/#organization" },
+      "knowsLanguage": ["en", "no", "pt", "es"],
+      "knowsAbout": [
+        "Operational AI",
+        "B2B sales",
+        "Industrial and maritime systems",
+        "Strategy advisory",
+        "Cross-cultural communication",
+        "EU AI Act Article 4"
+      ],
+      "workLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Askøy",
+          "addressRegion": "Vestland",
+          "addressCountry": "NO"
+        }
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marcospovoa",
+        "https://github.com/marcospovoa"
+      ]
+    }
   ]
 }
 </script>
@@ -89,7 +129,6 @@
             <a href="/labs">Labs</a>
             <a href="/blog">Blog</a>
             <a href="/about">About</a>
-            <a href="/availability">Availability</a>
             <a href="/contact" class="btn btn-primary nav-btn">Contact Us</a>
           </div></div>
           <button class="mobile-toggle"><i data-lucide="menu" color="var(--text-primary)"></i></button>
@@ -170,7 +209,6 @@
               <a href="/labs">Labs</a>
               <a href="/blog">Blog</a>
             <a href="/about">About</a>
-              <a href="/availability">Availability</a>
               <a href="/contact">Contact Us</a>
             </div>
           </div>
