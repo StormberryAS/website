@@ -707,14 +707,20 @@ ul {
   gap: 1rem;
 }
 
-.author-info h4 {
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
 .author-info p {
   color: var(--text-secondary);
   font-size: 0.9rem;
+}
+
+/* Testimonial names are not section headings, so they are <p>, not <h4>.
+   These declarations restore what the global h1-h6 rule used to supply. */
+.author-info .author-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
 }
 
 @media (max-width: 768px) {
