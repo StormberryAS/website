@@ -5,5 +5,17 @@ compatibility_date = "2024-03-20"
 [vars]
 ADMIN_EMAIL = "info@stormberry.as"
 
-# To set the secret API key, run:
-# wrangler secret put RESEND_API_KEY
+# Persist console.log/console.error to Workers Logs in the dashboard, so a
+# delivery problem is visible without having to be tailing at the time.
+[observability]
+enabled = true
+
+# Secrets (set with `wrangler secret put <NAME>`, never committed):
+#   RESEND_API_KEY         sending key for the verified stormberry.as domain
+#   TURNSTILE_SECRET_KEY   Turnstile secret for sitekey 0x4AAAAAACsqoaM-PpNxpS3n
+#   RESEND_WEBHOOK_SECRET  whsec_... shown once when the webhook is created
+#   ALERT_EMAIL            bounce alerts go here; must NOT be info@stormberry.as
+#
+# Resend webhook endpoint to register in the dashboard:
+#   https://stormberry-contact-form.marcos-495.workers.dev/resend-webhook
+#   events: email.bounced, email.complained, email.delivery_delayed, email.failed
