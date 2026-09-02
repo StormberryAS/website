@@ -1,0 +1,31 @@
+# Stormberry AS - Operational AI Partner
+
+> Stormberry AS is an operational AI partner based in Norway, delivering AI capabilities that integrate directly into daily operations, sales pipelines, and strategic planning, across cultures and languages.
+
+## About Us
+Founded by Marcos Thomassen Povoa after 14 years in industrial and maritime sales. We help businesses structure their sales and strategy in a global context and run a continuous AI loop to keep that structure sharp. We are sovereign by default: your data remains on your infrastructure, and agents run behind your firewall.
+
+## The Loop
+Our AI practice operates in three continuous motions:
+
+1. **Daily Operations (Motion 1)**: AI handles reporting, data cleaning, maintenance planning, and customer communication. This includes specialized corporate training to comply with EU AI Act Article 4 (AI Literacy & Compliance).
+2. **Sales Pipeline (Motion 2)**: AI scores every deal against your strategic priorities, highlighting opportunities that align with your actual goals. Less time on noise, more on the right deals.
+3. **Strategy (Motion 3)**: A field-intelligence synthesis ready for your next strategy review. We use actual pipeline and operations data to update the strategy, turning it into a description of reality plus an aim, rather than a wish list.
+
+## Global Delivery
+Cross-cultural communication is built into every motion of our loop. We operate natively in four languages: English, Norwegian, Portuguese, and French. Our deliverables adapt to local communication styles, whether direct in Oslo, warm in Rio, or indirect in Tokyo.
+
+## Key Links
+- Main Website: https://stormberry.as
+- How We Work (The Loop): https://stormberry.as/services
+- AI in Sales: https://stormberry.as/sales
+- AI in Strategy: https://stormberry.as/strategy
+- Global Delivery: https://stormberry.as/culture
+- Labs: https://stormberry.as/labs
+- Contact: https://stormberry.as/contact
+- Privacy Policy: https://stormberry.as/privacy
+
+## Contact Information
+- Email: info@stormberry.as
+- Address: Askøy, Vestland, Norway
+- Phone: +47 950 43 789
