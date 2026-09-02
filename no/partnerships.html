@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <!--
+      Sirach 6:14 - Sixto-Clementine Vulgate / Douay-Rheims
+      Amicus fidelis, protectio fortis: qui autem invenit illum, invenit thesaurum.
+      A faithful friend is a strong defence: and he that hath found him, hath found a treasure.
+    -->
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stormberry AS er offisiell OnSide AI distribusjonspartner for Norge, og bringer sanntids KI-videoovervåking til norsk industri." />
+    <meta name="theme-color" content="#F8F9FA" />
+    <link rel="apple-touch-icon" href="/logo.webp" />
+    <link rel="canonical" href="https://stormberry.as/no/partnerships" />
+    <link rel="alternate" hreflang="en" href="https://stormberry.as/" />
+    <link rel="alternate" hreflang="no" href="https://stormberry.as/no/" />
+    <link rel="alternate" hreflang="x-default" href="https://stormberry.as/" />
+    <script src="/script.js" defer></script>
+    <script src="/lucide.min.js?v=3" defer></script>
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Stormberry AS | OnSide AI · Norsk Distribusjonspartner</title>
+    <style>
+      /* ---- Eyebrow with bracketed monospace label + pulsing dot ---- */
+      .sn-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 1.4rem;
+      }
+      .sn-eyebrow .bracket { color: var(--text-muted); opacity: 0.55; }
+      .status-dot {
+        display: inline-block;
+        width: 0.55rem;
+        height: 0.55rem;
+        background: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+        animation: sn-pulse 2s ease-out infinite;
+      }
+      @keyframes sn-pulse {
+        0%   { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.6); }
+        70%  { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0); }
+      }
+
+      /* ---- Hero ---- */
+      .partner-hero {
+        padding: 5rem 0 3rem;
+        text-align: center;
+      }
+      .partner-lockup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+      .partner-lockup .stormberry-mark {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+        font-family: var(--font-heading);
+      }
+      .partner-lockup .stormberry-mark .dot {
+        background: var(--accent-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .partner-lockup .lockup-x {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        font-weight: 300;
+      }
+      .partner-lockup img.onside-mark {
+        height: 44px;
+        width: auto;
+        object-fit: contain;
+      }
+      .partner-hero-subhead {
+        font-family: var(--font-heading);
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        max-width: 640px;
+        margin: 0 auto 1rem;
+        font-weight: 400;
+      }
+      .partner-hero-lede {
+        max-width: 680px;
+        margin: 0 auto 2rem;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+      .partner-hero-ctas {
+        display: inline-flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* ---- Official Technology Partner strip (Milestone) ---- */
+      .partner-strip {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        text-align: center;
+        padding: 2.5rem 1rem 3rem;
+      }
+      .partner-strip-label { color: var(--text-muted); }
+      .partner-strip-logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 2.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        border-radius: 16px;
+        box-shadow: 0 4px 24px var(--shadow-color);
+        transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      }
+      .partner-strip-logo-wrap:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px var(--shadow-color);
+      }
+      .partner-strip-logo-wrap img {
+        height: 64px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+      }
+      .partner-strip-tagline {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 560px;
+      }
+      .partner-strip-tagline a {
+        color: var(--accent-primary);
+        font-weight: 500;
+      }
+      .partner-strip-tagline a:hover { text-decoration: underline; }
+
+      /* ---- Sentinel "How it works" step frames ---- */
+      .step-section { padding: 4rem 0; }
+      .sn-steps {
+        list-style: none;
+        padding: 0;
+        margin: 3rem 0 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+      }
+      .sn-step {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .sn-step.reverse { grid-template-columns: 1.15fr 1fr; }
+      .sn-step.reverse .sn-step-text { order: 2; }
+      .sn-step.reverse .sn-step-frame { order: 1; }
+      .sn-step-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+      .sn-step-num {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--accent-primary);
+      }
+      .sn-step-rule {
+        flex: 0 0 24px;
+        height: 1px;
+        background: var(--border-color);
+      }
+      .sn-step-tag {
+        background: rgba(226, 30, 38, 0.08);
+        color: var(--accent-primary);
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+      .sn-step-text h3 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+      .sn-step-text p {
+        color: var(--text-secondary);
+        margin-bottom: 1.25rem;
+        line-height: 1.65;
+      }
+      .sn-prompt-card {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        background: #13171f;
+        color: #f5f7fb;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-left: 3px solid #6366f1;
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.88rem;
+        margin-top: 1rem;
+      }
+      .sn-prompt-card .arrow { color: #818cf8; }
+      .sn-prompt-card .cursor {
+        display: inline-block;
+        width: 0.5rem;
+        height: 1rem;
+        background: #818cf8;
+        animation: sn-cursor 1s steps(2) infinite;
+      }
+      @keyframes sn-cursor {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+      .sn-step-foot {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.85rem;
+        font-style: italic;
+      }
+      .sn-step-frame {
+        background: #0d111a;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(15, 18, 36, 0.18), 0 0 0 1px rgba(99, 102, 241, 0.08);
+        margin: 0;
+      }
+      .sn-step-frame-chrome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.55rem 0.95rem;
+        background: #0a0d14;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.04em;
+        color: #8b94a8;
+      }
+      .sn-step-frame-chrome .chrome-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        color: #10b981;
+        letter-spacing: 0.12em;
+      }
+      .sn-step-frame-chrome .chrome-conf {
+        color: #10b981;
+        letter-spacing: 0.08em;
+      }
+      .sn-step-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .sn-status-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1rem;
+      }
+      .sn-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--glass-border);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+      }
+      .sn-status-pill.alert {
+        background: rgba(239, 68, 68, 0.08);
+        color: #b91c1c;
+        border-color: rgba(239, 68, 68, 0.3);
+      }
+      .sn-status-pill .dot-red {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #ef4444;
+        animation: sn-pulse-red 2s ease-out infinite;
+      }
+      @keyframes sn-pulse-red {
+        0%   { box-shadow: 0 0 0 0   rgba(239, 68, 68, 0.6); }
+        70%  { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+        100% { box-shadow: 0 0 0 0   rgba(239, 68, 68, 0); }
+      }
+      .sn-evidence-strip {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem 0;
+        border-top: 1px solid var(--border-color);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.85rem;
+      }
+      .sn-evidence-strip .ev-key {
+        color: var(--text-muted);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+      }
+
+      /* ---- Sectors ---- */
+      .sectors-section { padding: 3rem 0; }
+      .sectors-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: center;
+        max-width: 880px;
+        margin: 1.5rem auto 1.5rem;
+      }
+      .sector-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        padding: 0.5rem 0.95rem;
+        border-radius: 999px;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        transition: all var(--transition-fast);
+      }
+      .sector-tag:hover {
+        background: rgba(226, 30, 38, 0.06);
+        border-color: rgba(226, 30, 38, 0.4);
+      }
+      .sector-tag .sector-dot {
+        width: 0.4rem;
+        height: 0.4rem;
+        background: var(--accent-primary);
+        border-radius: 50%;
+      }
+      .sectors-closer {
+        text-align: center;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 1rem auto 0;
+        font-style: italic;
+      }
+
+      /* ---- Deployment / config panel ---- */
+      .config-panel {
+        background: var(--bg-secondary);
+        border: 1px solid var(--glass-border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 16px 40px var(--shadow-color);
+        max-width: 760px;
+        margin: 2.5rem auto 0;
+      }
+      .config-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--glass-border);
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+      }
+      .config-header .title {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+      }
+      .config-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .config-list li {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .config-list li:last-child { border-bottom: 0; }
+      .cfg-num {
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+        font-weight: 700;
+      }
+      .cfg-text h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .cfg-text p {
+        color: var(--text-secondary);
+        font-size: 0.92rem;
+        margin: 0;
+      }
+      .cfg-toggle {
+        width: 38px;
+        height: 22px;
+        border-radius: 999px;
+        background: #10b981;
+        position: relative;
+        cursor: default;
+        flex-shrink: 0;
+      }
+      .cfg-toggle::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      }
+
+      /* ---- Final CTA ---- */
+      .final-cta {
+        text-align: center;
+        padding: 4rem 0 5rem;
+      }
+      .final-cta-mark {
+        margin-top: 2.5rem;
+        font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+
+      .section-divider {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 0;
+      }
+
+      /* ---- Responsive ---- */
+      @media (max-width: 768px) {
+        .sn-step,
+        .sn-step.reverse {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .sn-step.reverse .sn-step-text { order: 1; }
+        .sn-step.reverse .sn-step-frame { order: 2; }
+        .partner-strip-logo-wrap img { height: 48px; }
+        .partner-lockup img.onside-mark { height: 36px; }
+        .partner-lockup .stormberry-mark { font-size: 1.6rem; }
+        .config-list li { grid-template-columns: auto 1fr; }
+        .config-list li .cfg-toggle { grid-column: 2; justify-self: end; }
+      }
+    </style>
+      <meta property="og:title" content="Stormberry AS | OnSide AI · Norsk Distribusjonspartner" />
+    <meta property="og:description" content="Stormberry AS er offisiell OnSide AI distribusjonspartner for Norge, og bringer sanntids KI-videoovervåking til norsk industri." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stormberry.as/no/partnerships" />
+    <meta property="og:image" content="https://stormberry.as/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="Stormberry AS, Operational AI Partner" />
+    <meta property="og:site_name" content="Stormberry AS" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stormberry AS | OnSide AI · Norsk Distribusjonspartner" />
+    <meta name="twitter:description" content="Stormberry AS er offisiell OnSide AI distribusjonspartner for Norge, og bringer sanntids KI-videoovervåking til norsk industri." />
+    <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://stormberry.as/#organization",
+  "name": "Stormberry AS",
+  "legalName": "Stormberry AS",
+  "url": "https://stormberry.as",
+  "logo": "https://stormberry.as/logo.webp",
+  "image": "https://stormberry.as/logo.webp",
+  "description": "Operational AI partner in Norway. Three motions in one continuous loop: AI in daily operations, AI on the sales pipeline against strategy, and field-intelligence synthesis ready for your next strategy review.",
+  "foundingDate": "2026-04-07",
+  "vatID": "NO937751249",
+  "taxID": "937751249",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Askøy",
+    "addressRegion": "Vestland",
+    "addressCountry": "NO"
+  },
+  "email": "info@stormberry.as",
+  "telephone": "+47 950 43 789",
+  "founder": {
+    "@type": "Person",
+    "name": "Marcos Thomassen Povoa",
+    "jobTitle": "Founder & CEO"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Thomassen Povoa Holding AS",
+    "taxID": "937432178"
+  },
+  "sameAs": [
+    "https://linkedin.com/company/StormberryAS",
+    "https://github.com/StormberryAS"
+  ]
+}
+</script>
+  </head>
+  <body>
+    <div class="app-container">
+            <nav class="navbar" lang="no">
+        <div class="container nav-container">
+          <a href="/no/" class="logo">Stormberry<span class="text-gradient">.</span></a>
+          <div class="nav-links">
+            <div class="dropdown">
+              <a href="/no/services" class="dropbtn" style="display:flex; align-items:center; gap:4px;">Slik jobber vi <i data-lucide="chevron-down" style="width:16px; height:16px;"></i></a>
+              <div class="dropdown-content">
+                <a href="/no/ai">Kretsløpet</a>
+                <a href="/no/sales">KI i salg</a>
+                <a href="/no/strategy">KI i strategi</a>
+                <a href="/no/culture">Global leveranse</a>
+              </div>
+            </div>
+            <a href="/no/partnerships">OnSide AI</a>
+            <a href="/labs">Labs</a>
+            <a href="/blog">Blogg</a>
+            <a href="/no/about">Om oss</a>
+            <a href="/no/contact" class="btn btn-primary nav-btn">Kontakt oss</a>
+            <span class="lang-switch">
+              <a href="/" hreflang="en" aria-label="English"><img src="/flags/gb.svg" alt="English" width="22" height="16" /></a>
+              <a href="/no/" hreflang="no" aria-label="Norsk"><img src="/flags/no.svg" alt="Norsk" width="22" height="16" /></a>
+            </span>
+          </div>
+          <button class="mobile-toggle" type="button" aria-label="Åpne meny" aria-expanded="false"><i data-lucide="menu" color="var(--text-primary)"></i></button>
+        </div>
+      </nav>
+
+      <main>
+        <!-- HERO -->
+        <section class="partner-hero section">
+          <div class="container">
+            <div class="animate-fade-in-up">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span>
+                ONSIDE&nbsp;/&nbsp;NORGE
+                <span class="status-dot" aria-hidden="true"></span>
+                LIVE
+                <span class="bracket">]</span>
+              </p>
+
+              <div class="partner-lockup">
+                <span class="stormberry-mark">Stormberry<span class="dot">.</span></span>
+                <span class="lockup-x">&times;</span>
+                <img src="/partners/onsideai/onside-textlogo.webp" width="488" height="163" alt="OnSide AI" class="onside-mark" />
+              </div>
+
+              <h1 class="section-title" style="max-width: 760px; margin: 0 auto 1.25rem;">
+                Sentinel <span class="text-gradient">i Norge.</span>
+              </h1>
+              <p class="partner-hero-subhead">
+                Sanntids KI-videoovervåking fra OnSide AI, rullet ut over hele Norge av Stormberry som deres offisielle distribusjonspartner.
+              </p>
+              <p class="partner-hero-lede">
+                OnSide AIs Sentinel-plattform gjør kameraene du allerede eier om til analytikere som ser alt i sanntid. Regler skrives i klartekst, varsler kommer på sekunder. Nå tilgjengelig i Norge gjennom Stormberry.
+              </p>
+              <div class="partner-hero-ctas">
+                <a href="mailto:marcos@onsideai.org?subject=Sentinel%20%C2%B7%20Forespørsel%20Norge" class="btn btn-primary">
+                  Snakk med oss <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                </a>
+                <a href="https://onsideai.org/norway" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                  Besøk OnSide / Norge <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- OFFICIAL TECHNOLOGY PARTNER STRIP (Milestone) -->
+        <section class="section" style="padding: 0;">
+          <div class="container">
+            <div class="partner-strip animate-fade-in-up">
+              <p class="sn-eyebrow partner-strip-label">
+                <span class="bracket">[</span>
+                Offisiell Teknologipartner
+                <span class="bracket">]</span>
+              </p>
+              <a href="https://www.milestonesys.com/" target="_blank" rel="noopener noreferrer" class="partner-strip-logo-wrap" aria-label="Milestone Systems (åpnes i ny fane)">
+                <img src="/partners/onsideai/milestone-logo.webp" width="1200" height="473" loading="lazy" alt="Milestone Systems" />
+              </a>
+              <p class="partner-strip-tagline">
+                OnSide AI er en offisiell Milestone Systems teknologipartner. Sentinel integreres nativt med <strong>Milestone XProtect</strong>, den åpne VMS-plattformen fra Brøndby, Danmark, som er mye brukt i norske bedrifter og offentlig sektor. <a href="https://www.milestonesys.com/" target="_blank" rel="noopener noreferrer">milestonesys.com&nbsp;<i data-lucide="external-link" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i></a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- HOW IT WORKS (3 STEPS WITH SCREENSHOTS) -->
+        <section id="how-it-works" class="step-section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Hvordan det fungerer <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Fra setning til <span class="text-gradient">signal</span>.</h2>
+              <p class="section-subtitle">
+                Tre steg. Du skriver det første. De to neste skjer uten deg.
+              </p>
+            </div>
+
+            <ol class="sn-steps">
+              <!-- Step 01 -->
+              <li class="sn-step animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">01</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Instruks</span>
+                  </div>
+                  <h3>Skriv en regel.</h3>
+                  <p>Operatører skriver i vanlig klartekst. Ingen modeller å trene, ingen kode å skrive, ingen dataforskere å ansette.</p>
+                  <div class="sn-prompt-card">
+                    <span class="arrow">&gt;</span>
+                    <span style="flex: 1;">si fra hvis et fartøy nærmer seg innenfor 500m fra plattformen</span>
+                    <span class="cursor"></span>
+                  </div>
+                  <p class="sn-step-foot">Sentinel utvider regelen, velger kameraene og begynner å overvåke neste bilde.</p>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span>konfigurasjon · forespørsler</span>
+                    <span></span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-01-prompt.webp" width="1200" height="1010" loading="lazy" alt="Operatør som skriver en klartekst deteksjonsregel inn i Sentinels konfigurasjonspanel" />
+                </figure>
+              </li>
+
+              <!-- Step 02 -->
+              <li class="sn-step reverse animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">02</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Overvåk</span>
+                  </div>
+                  <h3>Overvåk hvert kamera.</h3>
+                  <p>Sentinel vurderer hvert bilde fra alle tildelte kameraer mot regelen din, i sanntid. Hundrevis av regler kan kjøre parallelt.</p>
+                  <div class="sn-status-row">
+                    <span class="sn-status-pill"><span class="status-dot" aria-hidden="true"></span> 3 av 16 Online</span>
+                    <span class="sn-status-pill alert"><span class="dot-red" aria-hidden="true"></span> 6 Varsler</span>
+                    <span class="sn-status-pill">24 FPS</span>
+                  </div>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span></span>
+                    <span class="chrome-status"><span class="status-dot" aria-hidden="true"></span> Live</span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-02-monitor.webp" width="1200" height="683" loading="lazy" alt="Sentinels live operatørdashbord som viser kamerastrømmer og sanntidsvarsler" />
+                </figure>
+              </li>
+
+              <!-- Step 03 -->
+              <li class="sn-step animate-fade-in-up">
+                <div class="sn-step-text">
+                  <div class="sn-step-meta">
+                    <span class="sn-step-num">03</span>
+                    <span class="sn-step-rule"></span>
+                    <span class="sn-step-tag">Varsel</span>
+                  </div>
+                  <h3>Få beviset.</h3>
+                  <p>Når en regel utløses får du bildet, observasjonen, sikkerhetsgraden (konfidens), og tidsstempelet. Ta en beslutning. Gå videre.</p>
+                  <div class="sn-evidence-strip">
+                    <span class="ev-key">Regel</span>
+                    <span>si fra hvis noen faller ned på bakken</span>
+                  </div>
+                  <div class="sn-evidence-strip">
+                    <span class="ev-key">Konfidens</span>
+                    <span>85%</span>
+                  </div>
+                </div>
+                <figure class="sn-step-frame">
+                  <div class="sn-step-frame-chrome">
+                    <span>hendelse · bevisbilde</span>
+                    <span class="chrome-conf">85% konfidens</span>
+                  </div>
+                  <img src="/partners/onsideai/sentinel-step-03-alert.webp" width="1200" height="1059" loading="lazy" alt="Sentinel varseldetalj som viser det samsvarende bevisbildet og regelen som ble utløst" />
+                </figure>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- SECTORS -->
+        <section class="sectors-section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Hvor det passer i Norge <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Bygget for anleggene som <span class="text-gradient">betyr noe</span>.</h2>
+            </div>
+            <div class="sectors-grid animate-fade-in-up delay-100">
+              <span class="sector-tag"><span class="sector-dot"></span>Energi</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Olje &amp; Gass</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Offshore</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Maritimt</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Havner &amp; Last</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Havbruk</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Kraft &amp; Nett</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Rørledninger</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Tungindustri</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Logistikk</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Kritisk Infrastruktur</span>
+              <span class="sector-tag"><span class="sector-dot"></span>Offentlig Sikkerhet</span>
+            </div>
+            <p class="sectors-closer">
+              Hundrevis av forhåndsbygde instruksjoner. Enhver setning du kan skrive blir en sensor, tilpasset ditt anlegg av Stormberry.
+            </p>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- DEPLOYMENT -->
+        <section class="section">
+          <div class="container">
+            <div class="section-header animate-fade-in-up" style="text-align: center;">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Implementering <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Lokal utrulling. <span class="text-gradient">Lokal støtte.</span></h2>
+              <p class="section-subtitle">
+                Sentinel leveres, implementeres og støttes i Norge av Stormberry, med de lokale relasjonene, språket og den operasjonelle kunnskapen til å rulle det ut på tvers av norske anlegg.
+              </p>
+            </div>
+
+            <div class="config-panel animate-fade-in-up delay-100">
+              <div class="config-header">
+                <span class="title"><span class="status-dot" aria-hidden="true"></span> Sentinel · Norsk Utrulling</span>
+                <span>4 / 4 Aktive</span>
+              </div>
+              <ol class="config-list">
+                <li>
+                  <span class="cfg-num">01</span>
+                  <div class="cfg-text">
+                    <h4>Leveres av Stormberry.</h4>
+                    <p>Utforskning, utrulling og tilpasning håndteres lokalt av Stormberry i Norge.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Aktiv"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">02</span>
+                  <div class="cfg-text">
+                    <h4>Fungerer med dine kameraer.</h4>
+                    <p>Ingen utskiftning nødvendig. Sentinel kjører på kameraene du allerede eier.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Aktiv"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">03</span>
+                  <div class="cfg-text">
+                    <h4>Sky, on-prem, eller hybrid.</h4>
+                    <p>Implementer der det passer din sikkerhetsprofil. Samme produkt, samme instrukser, samme varsler, uansett hvor arbeidsbelastningen ligger.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Aktiv"></span>
+                </li>
+                <li>
+                  <span class="cfg-num">04</span>
+                  <div class="cfg-text">
+                    <h4>Forblir på ditt nettverk.</h4>
+                    <p>Kryptert ende-til-ende og autentisert i begge ender. Ingen eksponering mot åpent internett.</p>
+                  </div>
+                  <span class="cfg-toggle" role="img" aria-label="Aktiv"></span>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" />
+
+        <!-- FINAL CTA -->
+        <section class="final-cta">
+          <div class="container">
+            <div class="animate-fade-in-up">
+              <p class="sn-eyebrow" style="justify-content: center;">
+                <span class="bracket">[</span> Norske Forespørsler <span class="bracket">]</span>
+              </p>
+              <h2 class="section-title">Se det på <span class="text-gradient">dine kameraer</span>.</h2>
+              <p class="section-subtitle" style="font-style: italic;">
+                Ekte opptak. Ekte instrukser. Ekte varsler.
+              </p>
+              <p class="section-subtitle" style="max-width: 620px; margin: 1.5rem auto 2rem;">
+                Avtal en utforskningssamtale. Vi vil vise deg Sentinel kjørende på en sektor som speiler din, med Stormberry som leder utrullingen i Norge.
+              </p>
+              <a href="mailto:marcos@onsideai.org?subject=Sentinel%20%C2%B7%20Forespørsel%20Norge" class="btn btn-primary" style="font-size: 1.05rem; padding: 0.85rem 2rem;">
+                <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+                Bestill en samtale
+              </a>
+              <p class="final-cta-mark">
+                <span style="display:block;">OnSide AI Inc. · Stormberry AS</span>
+                <span style="display:block;">Tenk det. Skriv det. Beskyttet.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer" lang="en">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <div class="logo">Stormberry<span class="text-gradient">.</span></div>
+              <p class="footer-desc">Smarter sales. Global culture. AI-driven strategy.</p>
+            </div>
+            <div class="footer-links">
+              <a href="/no/services">Slik jobber vi</a>
+              <a href="/no/partnerships">OnSide AI</a>
+              <a href="/labs">Labs</a>
+              <a href="/blog">Blogg</a>
+            <a href="/no/about">Om oss</a>
+              <a href="/no/contact">Kontakt oss</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+                        <div class="footer-social">
+              <a href="https://linkedin.com/company/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+<a href="https://github.com/StormberryAS" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.26c3 0 6-2 6-6a4.6 4.6 0 0 0-1.39-3.23 4.1 4.1 0 0 0 0-3.24s-1.1-.35-3.5 1.25a11.3 11.3 0 0 0-6 0c-2.4-1.6-3.5-1.25-3.5-1.25a4.1 4.1 0 0 0 0 3.24A4.6 4.6 0 0 0 2 10.74c0 4 3 6 6 6a4.8 4.8 0 0 0-1 3.26v4"/><path d="M9 20c-4.1 1.4-5-2.5-5-2.5"/></svg></a>
+              <a href="nostr:npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa" target="_blank" rel="noopener noreferrer" aria-label="Nostr" title="Nostr: npub1zz9w77p2jkn95t0st9tcuea8zdn2vknf0ctrwyd4g46w3kswdccqesr0pa"><svg width="24" height="24" viewBox="0 0 875 875" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="m684.72,485.57c.22,12.59-11.93,51.47-38.67,81.3-26.74,29.83-56.02,20.85-58.42,20.16s-3.09-4.46-7.89-3.77-9.6,6.17-18.86,7.2-17.49,1.71-26.06-1.37c-4.46.69-5.14.71-7.2,2.24s-17.83,10.79-21.6,11.47c0,7.2-1.37,44.57,0,55.89s3.77,25.71,7.54,36c3.77,10.29,2.74,10.63,7.54,9.94s13.37.34,15.77,4.11c2.4,3.77,1.37,6.51,5.49,8.23s60.69,17.14,99.43,19.2c26.74.69,42.86,2.74,52.12,19.54,1.37,7.89,7.54,13.03,11.31,14.06s8.23,2.06,12,5.83,1.03,8.23,5.49,11.66c4.46,3.43,14.74,8.57,25.37,13.71,10.63,5.14,15.09,13.37,15.77,16.11s1.71,10.97,1.71,10.97c0,0-8.91,0-10.97-2.06s-2.74-5.83-2.74-5.83c0,0-6.17,1.03-7.54,3.43s.69,2.74-7.89.69-11.66-3.77-18.17-8.57c-6.51-4.8-16.46-17.14-25.03-16.8,4.11,8.23,5.83,8.23,10.63,10.97s8.23,5.83,8.23,5.83l-7.2,4.46s-4.46,2.06-14.74-.69-11.66-4.46-12.69-10.63,0-9.26-2.74-14.4-4.11-15.77-22.29-21.26c-18.17-5.49-66.52-21.26-100.12-24.69s-22.63-2.74-28.11-1.37-15.77,4.46-26.4-1.37c-10.63-5.83-16.8-13.71-17.49-20.23s-1.71-10.97,0-19.2,3.43-19.89,1.71-26.74-14.06-55.89-19.89-64.12c-13.03,1.03-50.74-.69-50.74-.69,0,0-2.4-.69-17.49,5.83s-36.48,13.76-46.77,19.93-14.4,9.7-16.12,13.13c.12,3-1.23,7.72-2.79,9.06s-12.48,2.42-12.48,2.42c0,0-5.85,5.86-8.25,9.97-6.86,9.6-55.2,125.14-66.52,149.83-13.54,32.57-9.77,27.43-37.71,27.43s-8.06.3-8.06.3c0,0-12.34,5.88-16.8,5.88s-18.86-2.4-26.4,0-16.46,9.26-23.31,10.29-4.95-1.34-8.38-3.74c-4-.21-14.27-.12-14.27-.12,0,0,1.74-6.51,7.91-10.88,8.23-5.83,25.37-16.11,34.63-21.26s17.49-7.89,23.31-9.26,18.51-6.17,30.51-9.94,19.54-8.23,29.83-31.54c10.29-23.31,50.4-111.43,51.43-116.23.63-2.96,3.73-6.48,4.8-15.09.66-5.35-2.49-13.04,1.71-22.63,10.97-25.03,21.6-20.23,26.4-20.23s17.14.34,26.4-1.37,15.43-2.74,24.69-7.89,11.31-8.91,11.31-8.91l-19.89-3.43s-18.51.69-25.03-4.46-15.43-15.77-15.43-15.77l-7.54-7.2,1.03,8.57s-5.14-8.91-6.51-10.29-8.57-6.51-11.31-11.31-7.54-25.03-7.54-25.03l-6.17,13.03-1.71-18.86-5.14,7.2-2.74-16.11-4.8,8.23-3.43-14.4-5.83,4.46-2.4-10.29-5.83-3.43s-14.06-9.26-16.46-9.6-4.46,3.43-4.46,3.43l1.37,12-12.2-6.27-7-11.9s2.36,4.01-9.62,7.53c-20.55,0-21.89-2.28-24.93-3.94-1.31-6.56-5.57-10.11-5.57-10.11h-20.57l-.34-6.86-7.89,3.09.69-10.29h-14.06l1.03-11.31h-8.91s3.09-9.26,25.71-22.97,25.03-16.46,46.29-17.14c21.26-.69,32.91,2.74,46.29,8.23s38.74,13.71,43.89,17.49c11.31-9.94,28.46-19.89,34.29-19.89,1.03-2.4,6.19-12.33,17.96-17.6,35.31-15.81,108.13-34,131.53-35.54,31.2-2.06,7.89-1.37,39.09,2.06,31.2,3.43,54.17,7.54,69.6,12.69,12.58,4.19,25.03,9.6,34.29,2.06,4.33-1.81,11.81-1.34,17.83-5.14,30.69-25.09,34.72-32.35,43.63-41.95s20.14-24.91,22.54-45.14,4.46-58.29-10.63-88.12-28.8-45.26-34.63-69.26c-5.83-24-8.23-61.03-6.17-73.03,2.06-12,5.14-22.29,6.86-30.51s9.94-14.74,19.89-16.46c9.94-1.71,17.83,1.37,22.29,4.8,4.46,3.43,11.65,6.28,13.37,10.29.34,1.71-1.37,6.51,8.23,8.23,9.6,1.71,16.05,4.16,16.05,4.16,0,0,15.64,4.29,3.11,7.73-12.69,2.06-20.52-.71-24.29,1.69s-7.21,10.08-9.61,11.1-7.2.34-12,4.11-9.6,6.86-12.69,14.4-5.49,15.77-3.43,26.74,8.57,31.54,14.4,43.2c5.83,11.66,20.23,40.8,24.34,47.66s15.77,29.49,16.8,53.83,1.03,44.23,0,54.86-10.84,51.65-35.53,85.94c-8.16,14.14-23.21,31.9-24.67,35.03-1.45,3.13-3.02,4.88-1.61,7.65,4.62,9.05,12.87,22.13,14.71,29.22,2.29,6.64,6.99,16.13,7.22,28.72Z"/></svg></a>
+              <a href="http://stormberryr7fz5xdopi7f265d7id27bgizc6uxeliaepzstompcfpyd.onion" target="_blank" rel="noopener noreferrer" aria-label="Tor onion site" title="Tor (.onion): stormberryr7fz5xdopi7f265d7id27bgizc6uxeliaepzstompcfpyd.onion"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4.7c.4-1.4 1.8-2.1 3.1-1.7-.1 1.4-1.4 2.3-2.7 2Z"/><path d="M12 4.6C8.2 7.9 5 11.2 5 15.1a7 7 0 0 0 14 0c0-3.9-3.2-7.2-7-10.5Z"/></svg></a>
+            </div>
+            <p>&copy; 2026 Stormberry AS · Org.nr. NO 937 751 249 · Askøy, Norway · <a href="#" class="protected-email" data-user="info" data-domain="stormberry.as"></a> · <a href="/no/privacy">Privacy</a></p>
+            <p class="privacy-notice" style="margin-top: 5px; opacity: 0.8; font-size: 0.9rem;">Privacy First: We do not collect cookies or personal data.</p>
+            <p class="ai-notice" style="margin-top: 5px; opacity: 0.8; font-size: 0.9rem;">Proudly powered by sovereign AI agents.</p>
+            <p class="proff-badge" style="margin-top: 10px; opacity: 0.85; font-size: 0.9rem;">
+              <a href="https://www.proff.no/selskap/stormberry-as/kleppest%C3%B8/bedriftsr%C3%A5dgivning/IFIB9HT043Z-1" target="_blank" rel="noopener noreferrer" aria-label="Stormberry AS company profile on Proff.no" style="display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; padding: 4px 10px; border: 1px solid currentColor; border-radius: 4px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Verified on Proff</span>
+              </a>
+            </p>
+          </div></div>
+        </div>
+      </footer>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded',function(){lucide.createIcons();});</script>
+  </body>
+</html>
