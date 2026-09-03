@@ -28,7 +28,8 @@ sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
 sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
 sitemap += '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
 
-lastmod = "2026-09-02"
+# ISO date stamp representing the most recent site update (used for search engine crawler freshness indexing)
+lastmod = "2026-09-03"
 
 for page, has_no in pages:
     en_loc = f"https://stormberry.as/{page}" if page else "https://stormberry.as/"
