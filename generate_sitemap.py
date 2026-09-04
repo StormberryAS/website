@@ -83,6 +83,3 @@ sitemap += '</urlset>\n'
 with open('sitemap.xml', 'w') as f:
     f.write(sitemap)
 
-if os.path.exists('dist'):
-    with open('dist/sitemap.xml', 'w') as f:
-        f.write(sitemap)
