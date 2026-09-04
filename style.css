@@ -1301,6 +1301,7 @@ ul {
 .lang-switch{display:inline-flex;align-items:center;gap:8px;margin-left:10px}
 .lang-switch a{display:inline-flex;line-height:0;opacity:.85;transition:opacity .15s ease}
 .lang-switch a:hover{opacity:1}
+.lang-switch a[aria-current]{opacity:1;box-shadow:0 0 0 2px var(--accent-primary);border-radius:3px}
 .lang-switch img{height:16px;width:auto;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 
 /* Visible keyboard focus (WCAG 2.4.7) */

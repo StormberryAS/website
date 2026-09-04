@@ -23,12 +23,16 @@ Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritim
 
 ## Norsk
 
-- [Stormberry AS på norsk](https://stormberry.as/no/): The Norwegian version of the site, with its own pages for the loop, sales, strategy, culture and contact.
-- [KI-rådgivning i Bergen og Vestland](https://stormberry.as/no): Regional landing page for AI advisory in Bergen and Vestland county.
-- [Om Stormberry AS](https://stormberry.as/no/about): The company and the founder, in Norwegian.
-- [Kretsløpet i sin helhet](https://stormberry.as/no/ai): The operational AI practice described in full, in Norwegian.
-- [OnSide AI-partnerskap](https://stormberry.as/no/partnerships): The OnSide AI distribution partnership, in Norwegian.
-- [llms.txt på norsk](https://stormberry.as/no/llms.txt): This file in Norwegian.
+- [Stormberry AS på norsk](https://stormberry.as/no): The Norwegian version of the site, with its own pages for the loop, sales, strategy, culture and contact.
+- [Slik jobber vi](https://stormberry.as/no-tjenester): The three motions of the loop, in Norwegian.
+- [KI i salgspipelinen](https://stormberry.as/no-salg): AI on the sales pipeline, in Norwegian.
+- [KI i strategien](https://stormberry.as/no-strategi): AI in strategy, in Norwegian.
+- [Global leveranse](https://stormberry.as/no-kultur): Cross-cultural delivery, in Norwegian.
+- [Kontakt](https://stormberry.as/no-kontakt): Contact page, in Norwegian.
+- [Om Stormberry AS](https://stormberry.as/no-om-oss): The company and the founder, in Norwegian.
+- [Kretsløpet i sin helhet](https://stormberry.as/no-ki): The operational AI practice described in full, in Norwegian.
+- [OnSide AI-partnerskap](https://stormberry.as/no-partnerskap): The OnSide AI distribution partnership, in Norwegian.
+- [llms.txt på norsk](https://stormberry.as/no-llms.txt): This file in Norwegian.
 
 ## Blog
 
@@ -42,7 +46,7 @@ Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritim
 ## Optional
 
 - [Privacy policy](https://stormberry.as/privacy): No cookies, no analytics, and no data sold, shared or monetised.
-- [Personvernerklæring](https://stormberry.as/no/privacy): The privacy policy in Norwegian.
+- [Personvernerklæring](https://stormberry.as/no-personvern): The privacy policy in Norwegian.
 - [Contact card](https://stormberry.as/qr): vCard and QR code for the founder.
 - [PGP public key](https://stormberry.as/marcos.asc): Public key for signed and encrypted email to security@stormberry.as.
 - [security.txt](https://stormberry.as/.well-known/security.txt): RFC 9116 security contact.
