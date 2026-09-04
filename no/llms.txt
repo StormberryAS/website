@@ -1,30 +1,28 @@
-# Stormberry AS - Operasjonell KI-partner
+# Stormberry AS
 
-> Stormberry AS er en operasjonell KI-partner basert i Norge, som leverer KI-funksjonalitet integrert direkte i daglig drift, salgspipelines og strategisk planlegging, på tvers av kulturer og språk.
+> Stormberry AS er en operasjonell KI-partner basert i Norge. Vi setter KI inn i den daglige driften, vurderer salgspipelinen mot strategien, og gjør resultatet om til en syntese klar for neste strategigjennomgang. Suveren som utgangspunkt: dine data blir liggende på din egen infrastruktur, og agentene kjører bak din brannmur.
 
-## Om Oss
-Grunnlagt av Marcos Thomassen Povoa etter 14 år med salg av komplekse industrielle og maritime systemer. Vi hjelper virksomheter med å strukturere sitt salg og sin strategi i en global kontekst, og kjører et kontinuerlig KI-kretsløp for å holde denne strukturen skarp. Vi er sovereign by default: dine data forblir på din infrastruktur, og agentene kjører bak din sikkerhetsmur.
+Grunnlagt av Marcos Thomassen Povoa etter fjorten år med salg av komplekse industrielle og maritime systemer. Praksisen kjører som ett kretsløp i tre bevegelser: daglig drift, salgspipeline, strategi. Spesialisert bedriftsopplæring i KI-forordningen (EU AI Act) artikkel 4 om KI-kompetanse leveres inne i den første bevegelsen. Vi jobber naturlig på engelsk, norsk, portugisisk og fransk, og leveransene tilpasses lokale kommunikasjonsstiler. Kontakt: info@stormberry.as, +47 950 43 789, Askøy, Vestland, Norge.
 
-## Kretsløpet
-Vår KI-praksis opererer i tre kontinuerlige bevegelser:
+## Viktige lenker
 
-1. **Daglig Drift (Bevegelse 1)**: KI håndterer rapportering, datavask, vedlikeholdsplanlegging og kundekommunikasjon. Dette inkluderer spesialisert bedriftsopplæring i henhold til EU AI Act Artikkel 4 (KI-kompetanse og Samsvar).
-2. **Salgspipeline (Bevegelse 2)**: KI vurderer hver avtale mot dine strategiske prioriteringer og fremhever muligheter som stemmer overens med dine faktiske mål. Mindre tid på støy, mer tid på de rette avtalene.
-3. **Strategi (Bevegelse 3)**: En syntese av feltintelligens klar for din neste strategigjennomgang. Vi bruker faktiske pipeline- og driftsdata til å oppdatere strategien, slik at den blir en beskrivelse av virkeligheten pluss et mål, ikke en ønskeliste.
+- [Hovedside](https://stormberry.as/no/): Hva en operasjonell KI-partner er, kretsløpet i tre bevegelser, og hvem det er for.
+- [Slik jobber vi](https://stormberry.as/no/services): De tre bevegelsene i kretsløpet, én for én, og hva en kunde faktisk får.
+- [Kretsløpet i sin helhet](https://stormberry.as/no/ai): Den mest utfyllende beskrivelsen av den operasjonelle KI-praksisen.
+- [KI i salgspipelinen](https://stormberry.as/no/sales): Hver avtale vurdert mot dine strategiske prioriteringer, slik at de rette mulighetene kommer fram.
+- [KI i strategien](https://stormberry.as/no/strategy): Faktiske pipeline- og driftsdata brukt til å oppdatere strategien, slik at den beskriver virkeligheten pluss et mål.
+- [Global leveranse](https://stormberry.as/no/culture): Krysskulturell kommunikasjon innbakt i hver bevegelse, ikke solgt som en egen tjeneste.
+- [Om Stormberry AS](https://stormberry.as/no/about): Selskapet, grunnleggeren og bakgrunnen fra industrielt og maritimt salg.
+- [Kontakt](https://stormberry.as/no/contact): Kryptert skjema og PGP-signert e-post. Ingen informasjonskapsler og ingen analyse. Vi svarer innen én virkedag.
 
-## Global Leveranse
-Krysskulturell kommunikasjon er innbakt i hver bevegelse av vårt kretsløp. Vi jobber naturlig på fire språk: engelsk, norsk, portugisisk og fransk. Våre leveranser tilpasses lokale kommunikasjonsstiler, enten det er direkte i Oslo, varmt i Rio, eller indirekte i Tokyo.
+## Spesialiserte tilbud
 
-## Viktige Lenker
-- Hovedside: https://stormberry.as/no/
-- Slik jobber vi (Kretsløpet): https://stormberry.as/no/services
-- KI i Salg: https://stormberry.as/no/sales
-- KI i Strategi: https://stormberry.as/no/strategy
-- Global Leveranse: https://stormberry.as/no/culture
-- Kontakt: https://stormberry.as/no/contact
-- Personvern: https://stormberry.as/no/privacy
+- [KI-forordningen artikkel 4, opplæring](https://stormberry.as/ai-act-artikkel-4-opplaering): Halvdags- og heldagskurs i KI-kompetanse for norske bedrifter, oppdatert etter regelendringen i juli 2026.
+- [OnSide AI-partnerskap](https://stormberry.as/no/partnerships): Stormberry AS er offisiell distribusjonspartner for OnSide AI i Norge, med sanntids KI-videointelligens for norsk industri.
+- [KI-rådgivning i Bergen og Vestland](https://stormberry.as/no): Regional landingsside for KI-rådgivning i Bergen og Vestland.
 
-## Kontaktinformasjon
-- E-post: info@stormberry.as
-- Adresse: Askøy, Vestland, Norge
-- Telefon: +47 950 43 789
+## Valgfritt
+
+- [Personvernerklæring](https://stormberry.as/no/privacy): Ingen informasjonskapsler, ingen analyse, og ingen data som selges, deles eller tjenes penger på.
+- [Stormberry Labs](https://stormberry.as/labs): En levende portefølje av fungerende KI-prototyper, hver bygget i én økt og publisert som et fungerende verktøy. På engelsk.
+- [Engelsk llms.txt](https://stormberry.as/llms.txt): Denne filen på engelsk, med blogg og Labs.
