@@ -4,14 +4,14 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/InterVariable.woff2') format('woff2');
+  src: url('/fonts/Inter-latin-v4001.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Inter';
   font-style: italic;
   font-weight: 100 900;
   font-display: swap;
-  src: url('/fonts/InterVariable-Italic.woff2') format('woff2');
+  src: url('/fonts/Inter-Italic-latin-v4001.woff2') format('woff2');
 }
 
 :root {
@@ -193,8 +193,13 @@ ul {
   }
 }
 
+@keyframes riseIn {
+  from { transform: translateY(20px); }
+  to   { transform: translateY(0); }
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease backwards;
+  animation: riseIn 0.8s ease backwards;
 }
 
 .delay-100 { animation-delay: 100ms; }
@@ -423,7 +428,7 @@ ul {
   display: inline-block;
   padding: 0.5rem 1rem;
   background: rgba(59, 130, 246, 0.1);
-  color: var(--accent-primary);
+  color: var(--accent-primary-hover);
   border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 20px;
   font-size: 0.875rem;
@@ -1082,15 +1087,15 @@ ul {
 .ai-notice {
   margin-top: 0.5rem;
   font-size: 0.75rem;
-  color: var(--text-muted);
-  opacity: 0.7;
+  color: #5B6472;
+  opacity: 1 !important;
 }
 
 .privacy-notice {
   margin-top: 0.25rem;
   font-size: 0.75rem;
-  color: var(--text-muted);
-  opacity: 0.8;
+  color: #5B6472;
+  opacity: 1 !important;
 }
 
 @media (max-width: 768px) {
@@ -1301,3 +1306,14 @@ ul {
 /* Visible keyboard focus (WCAG 2.4.7) */
 :focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px;border-radius:4px}
 button:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: -1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
