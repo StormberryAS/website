@@ -1,0 +1,31 @@
+# GitHub Pages serves stormberry.as from this repository root.
+#
+# Without this file Jekyll publishes the WHOLE repository, so the tooling scripts, the
+# README and the licence were all reachable from the live site. Nothing here was secret,
+# these repos are public, but source and tooling have no business being served next to
+# the product.
+#
+# Added 2026-09-05 in the estate-wide sweep that followed finding
+# scheduler.stormberry.as/index.dev.html live, a second working rendering of that app.
+#
+# Jekyll's `exclude` REPLACES its defaults rather than adding to them, which is why
+# node_modules/ and friends are listed where they apply.
+#
+# disclaimer.html and privacy.html are deliberately NOT excluded: they are the published
+# pages the footer links to. Only the Markdown sources are withheld.
+#
+# .npmrc holds only legacy-peer-deps=true, but tooling config has no business being
+# served. The hex-named .txt at the root is a live domain-verification file and is
+# deliberately NOT excluded; removing it from the site would break the verification.
+exclude:
+  - .npmrc
+  - LICENSE
+  - PREVIEW-V2.md
+  - README.md
+  - __pycache__/
+  - add_llms_link.py
+  - bump_assets.py
+  - generate_sitemap.py
+  - make_svg.py
+  - patch_title.py
+  - trace.py
