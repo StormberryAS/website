@@ -14,11 +14,41 @@
 //                           info@ failing is itself delivered to info@. Falls back to
 //                           ADMIN_EMAIL so the Worker still runs before it is set.
 
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
+// CORS is restricted to the two real site origins. This is defence in depth only:
+// CORS is browser-enforced and stops nothing from curl.
+//
+// The controls that actually bound abuse are Turnstile, the field caps below, and
+// the Worker-native rate-limit bindings declared in wrangler.toml. NOTE: this
+// Worker is published to its workers.dev subdomain with no [[routes]] block, so a
+// zone WAF rate-limiting rule could never apply to it; the binding is the only
+// route to a real limit here. If the bindings are absent at runtime the Worker
+// logs and continues, so an unconfigured limiter degrades to the pre-2026-09-20
+// behaviour rather than taking the contact form down.
+const ALLOWED_ORIGINS = new Set([
+  "https://stormberry.as",
+  "https://www.stormberry.as",
+]);
+
+// `service` is a fixed select on contact.html / no-kontakt.html, so it is an
+// allow-list, never free text. The label map is what reaches the autoreply, so
+// no caller-supplied string is ever interpolated into mail sent to a
+// caller-supplied address.
+const SERVICE_LABELS = {
+  ai: "AI and automation",
+  culture: "Cross-cultural communication",
+  other: "Other",
+  sales: "Sales and business development",
+  strategy: "Strategy",
 };
+
+// Caps stop an unbounded body reaching Resend. 254 is the RFC 5321 maximum for a
+// complete address; the others are generous against real enquiries.
+const LIMITS = { name: 100, email: 254, message: 5000 };
+
+// Deliberately conservative: no quoted local parts, no unescaped separators, one
+// or more dot-separated labels in the domain. Malformed addresses that reach the
+// Resend API can create suppressions, which is the failure this prevents.
+const EMAIL_RE = /^[^\s@,;:<>"]+@[^\s@.,;:<>"]+(?:\.[^\s@.,;:<>"]+)+$/;
 
 // Admin notification is sent FROM a different local part than it is sent TO.
 // Using info@ for both made every enquiry a self-addressed message through a
@@ -27,10 +57,28 @@ const CORS = {
 const FROM_NOTIFICATION = "Stormberry Website <noreply@stormberry.as>";
 const FROM_AUTOREPLY = "Stormberry AS <info@stormberry.as>";
 
-const json = (obj, status = 200) =>
+// The alert mail's own subject prefix. Used as a loop guard: an alert that itself
+// bounces must never generate a second alert.
+const ALERT_SUBJECT_PREFIX = "Contact form delivery problem";
+
+function corsHeaders(request) {
+  const headers = {
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    // Responses differ by Origin, so caches must not share them.
+    Vary: "Origin",
+  };
+  const origin = request.headers.get("Origin");
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    headers["Access-Control-Allow-Origin"] = origin;
+  }
+  return headers;
+}
+
+const json = (obj, status = 200, cors = {}) =>
   new Response(JSON.stringify(obj), {
     status,
-    headers: { "Content-Type": "application/json", ...CORS },
+    headers: { "Content-Type": "application/json", ...cors },
   });
 
 const escapeHtml = (value) =>
@@ -43,35 +91,83 @@ const escapeHtml = (value) =>
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const cors = corsHeaders(request);
 
     if (request.method === "OPTIONS") {
-      return new Response(null, { headers: CORS });
+      return new Response(null, { headers: cors });
     }
 
     if (request.method !== "POST") {
-      return new Response("Method Not Allowed", { status: 405 });
+      return new Response("Method Not Allowed", { status: 405, headers: cors });
     }
 
     if (url.pathname === "/resend-webhook") {
-      return handleResendWebhook(request, env);
+      return handleResendWebhook(request, env, cors);
     }
 
-    return handleContactForm(request, env);
+    return handleContactForm(request, env, cors);
   },
 };
 
-async function handleContactForm(request, env) {
+// Rate limiting. Two independent keys, because they bound different abuses:
+// per-IP caps a single source hammering the form, and per-recipient caps how often
+// ANY source can cause mail to be sent to one address, which is the sendCopy
+// nuisance vector. A missing binding is logged, not fatal: see the note at the top.
+async function overRateLimit(limiter, key, label, containerHint) {
+  if (!limiter || typeof limiter.limit !== "function") {
+    console.warn(`Rate limiter ${label} is not bound; request not limited`);
+    return false;
+  }
+  try {
+    const { success } = await limiter.limit({ key });
+    if (!success) console.warn(`Rate limit ${label} exceeded`, containerHint);
+    return !success;
+  } catch (error) {
+    // A limiter fault must not take the contact form down.
+    console.error(`Rate limiter ${label} failed:`, String(error));
+    return false;
+  }
+}
+
+// Trim, type-check and cap a single free-text field.
+function cleanField(value, max) {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  if (!trimmed || trimmed.length > max) return null;
+  return trimmed;
+}
+
+async function handleContactForm(request, env, cors) {
   try {
     const body = await request.json();
-    const { name, email, service, message, sendCopy } = body;
     const turnstileToken = body["cf-turnstile-response"];
 
-    if (!name || !email || !service || !message) {
-      return new Response("Missing required fields", { status: 400, headers: CORS });
+    const name = cleanField(body.name, LIMITS.name);
+    const email = cleanField(body.email, LIMITS.email);
+    const message = cleanField(body.message, LIMITS.message);
+    const service = typeof body.service === "string" ? body.service.trim() : "";
+    const sendCopy = body.sendCopy === true;
+
+    if (!name || !email || !message || !service) {
+      return json({ error: "Missing or oversized required fields" }, 400, cors);
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(SERVICE_LABELS, service)) {
+      return json({ error: "Unknown service" }, 400, cors);
+    }
+
+    if (!EMAIL_RE.test(email)) {
+      return json({ error: "Invalid email address" }, 400, cors);
     }
 
     if (!turnstileToken) {
-      return json({ error: "Missing captcha verification" }, 400);
+      return json({ error: "Missing captcha verification" }, 400, cors);
+    }
+
+    // Before the Turnstile round trip, so a flood costs us nothing outbound.
+    const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
+    if (await overRateLimit(env.CONTACT_RATE_LIMIT_IP, clientIp, "per-IP", { ip: clientIp })) {
+      return json({ error: "Too many requests" }, 429, cors);
     }
 
     const turnstileResult = await fetch(
@@ -95,21 +191,25 @@ async function handleContactForm(request, env) {
       // an ordinary stale user token ("timeout-or-duplicate").
       const codes = turnstileData["error-codes"] || [];
       console.error("Turnstile rejected submission:", JSON.stringify(codes));
-      return json({ error: "Captcha verification failed", codes }, 403);
+      return json({ error: "Captcha verification failed", codes }, 403, cors);
     }
 
     const resendApiKey = env.RESEND_API_KEY;
     const adminEmail = env.ADMIN_EMAIL;
 
     if (!resendApiKey) {
-      return json({ error: "Server error: Missing API Key" }, 500);
+      console.error("RESEND_API_KEY is not set");
+      return json({ error: "Server error" }, 500, cors);
     }
+
+    const serviceLabel = SERVICE_LABELS[service];
 
     const htmlBody = `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Service:</strong> ${escapeHtml(service)}</p>
+        <p><strong>Service:</strong> ${escapeHtml(serviceLabel)}</p>
+        <p><strong>Copy requested:</strong> ${sendCopy ? "yes" : "no"}</p>
         <p><strong>Message:</strong></p>
         <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
       `;
@@ -118,23 +218,45 @@ async function handleContactForm(request, env) {
       {
         from: FROM_NOTIFICATION,
         to: [adminEmail],
-        subject: `New Inquiry: ${service} from ${name}`,
+        subject: `New Inquiry: ${serviceLabel} from ${name}`,
         html: htmlBody,
         reply_to: email,
       },
     ];
 
-    if (sendCopy) {
+    // The confirmation copy goes to a caller-supplied address, so it carries NO
+    // caller-supplied content: not the message, not even the name. Only the
+    // allow-listed service label is interpolated. Without this, one Turnstile
+    // solve bought a send of arbitrary text from the verified domain to any
+    // address, which is an open relay in everything but name and is exactly the
+    // path that leads to bounces, complaints and Resend suppression.
+    // The complete fix is double opt-in (only send to an address that has
+    // round-tripped), which needs storage this Worker does not have.
+    // Per-recipient limit: one Turnstile solve must not buy repeated branded mail
+    // to a victim address, no matter how many IPs the solves come from.
+    const copyAllowed =
+      sendCopy &&
+      !(await overRateLimit(
+        env.CONTACT_RATE_LIMIT_RECIPIENT,
+        email.toLowerCase(),
+        "per-recipient",
+        { to: email },
+      ));
+
+    if (copyAllowed) {
       emailsToSend.push({
         from: FROM_AUTOREPLY,
         to: [email],
-        subject: `Copy of your inquiry to Stormberry: ${service}`,
+        subject: `Copy of your enquiry to Stormberry: ${serviceLabel}`,
         html: `
-            <p>Hi ${escapeHtml(name)},</p>
-            <p>Thank you for reaching out to Stormberry AS. We have received your message and will get back to you as soon as possible.</p>
-            <hr />
-            <p><strong>Your Message:</strong></p>
-            <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
+            <p>Hello,</p>
+            <p>Thank you for contacting Stormberry AS. We have received your
+            enquiry about <strong>${escapeHtml(serviceLabel)}</strong> and will
+            reply as soon as we can.</p>
+            <p>This is an automated confirmation. Your message is deliberately
+            not repeated here, because this address was supplied in the form and
+            has not been verified.</p>
+            <p>Stormberry AS</p>
           `,
       });
     }
@@ -145,16 +267,14 @@ async function handleContactForm(request, env) {
 
     const failed = responses.filter((r) => !r.ok);
     if (failed.length > 0) {
-      console.error("Resend API errors:", JSON.stringify(failed));
-      return json(
-        {
-          error: "Email provider rejected the message",
-          // Resend's own status and message, so a failure is self-describing in
-          // the browser console instead of collapsing into a blank 500.
-          detail: failed.map((f) => ({ status: f.status, message: f.message })),
-        },
-        502,
+      // Detail goes to Workers Logs (observability is enabled in wrangler.toml),
+      // never to the client: it is provider-side information and some of it
+      // describes account state.
+      console.error(
+        "Resend API errors:",
+        JSON.stringify(failed.map((f) => ({ status: f.status, message: f.message }))),
       );
+      return json({ error: "Email provider rejected the message" }, 502, cors);
     }
 
     // NB: a 200 from Resend means "accepted", NOT "delivered". A suppressed
@@ -164,10 +284,10 @@ async function handleContactForm(request, env) {
     const ids = responses.map((r) => r.id).filter(Boolean);
     console.log("Contact form accepted by Resend:", JSON.stringify({ service, ids }));
 
-    return json({ success: true, ids });
+    return json({ success: true, ids }, 200, cors);
   } catch (error) {
     console.error("Contact form error:", error && error.stack ? error.stack : String(error));
-    return json({ error: error.message }, 500);
+    return json({ error: "Internal error" }, 500, cors);
   }
 }
 
@@ -193,66 +313,93 @@ async function sendViaResend(apiKey, payload) {
 
 // --- Resend delivery events -------------------------------------------------
 
+// email.delivery_delayed is deliberately NOT here. It is transient, Resend
+// retries on its own, and alerting on it generated mail for problems that
+// resolved themselves, which is how an alert channel gets ignored.
 const ALERT_EVENTS = new Set([
   "email.bounced",
   "email.complained",
-  "email.delivery_delayed",
   "email.failed",
 ]);
 
-async function handleResendWebhook(request, env) {
-  const payload = await request.text();
-
-  if (!env.RESEND_WEBHOOK_SECRET) {
-    console.error("Webhook received but RESEND_WEBHOOK_SECRET is not set");
-    return json({ error: "Webhook not configured" }, 500);
-  }
-
-  const valid = await verifySvixSignature(env.RESEND_WEBHOOK_SECRET, request.headers, payload);
-  if (!valid) {
-    console.error("Webhook signature verification failed");
-    return json({ error: "Invalid signature" }, 401);
-  }
-
-  let event;
+async function handleResendWebhook(request, env, cors) {
   try {
-    event = JSON.parse(payload);
-  } catch {
-    return json({ error: "Malformed payload" }, 400);
-  }
+    const payload = await request.text();
 
-  const type = event.type || "unknown";
-  const data = event.data || {};
-  const recipients = Array.isArray(data.to) ? data.to.join(", ") : String(data.to ?? "");
+    if (!env.RESEND_WEBHOOK_SECRET) {
+      console.error("Webhook received but RESEND_WEBHOOK_SECRET is not set");
+      return json({ error: "Webhook not configured" }, 500, cors);
+    }
 
-  // Every event is logged, so `wrangler tail` and Workers Logs show the full
-  // delivery history even for events that do not warrant an alert.
-  console.log(
-    "Resend event:",
-    JSON.stringify({ type, to: recipients, subject: data.subject, email_id: data.email_id }),
-  );
+    const valid = await verifySvixSignature(env.RESEND_WEBHOOK_SECRET, request.headers, payload);
+    if (!valid) {
+      console.error("Webhook signature verification failed");
+      return json({ error: "Invalid signature" }, 401, cors);
+    }
 
-  if (!ALERT_EVENTS.has(type)) {
-    return json({ ok: true });
-  }
+    let event;
+    try {
+      event = JSON.parse(payload);
+    } catch {
+      return json({ error: "Malformed payload" }, 400, cors);
+    }
 
-  const reason =
-    (data.bounce && (data.bounce.message || data.bounce.subType || data.bounce.type)) ||
-    (data.failed && data.failed.reason) ||
-    "no reason supplied by Resend";
+    const type = event.type || "unknown";
+    const data = event.data || {};
+    const recipientList = (Array.isArray(data.to) ? data.to : [data.to])
+      .filter((r) => r !== undefined && r !== null && r !== "")
+      .map((r) => String(r));
+    const recipients = recipientList.join(", ");
 
-  console.error("Resend delivery problem:", JSON.stringify({ type, to: recipients, reason }));
+    // Every event is logged, so `wrangler tail` and Workers Logs show the full
+    // delivery history even for events that do not warrant an alert.
+    console.log(
+      "Resend event:",
+      JSON.stringify({ type, to: recipients, subject: data.subject, email_id: data.email_id }),
+    );
 
-  const alertTo = env.ALERT_EMAIL || env.ADMIN_EMAIL;
-  if (!alertTo || !env.RESEND_API_KEY) {
-    return json({ ok: true, alerted: false });
-  }
+    if (!ALERT_EVENTS.has(type)) {
+      return json({ ok: true }, 200, cors);
+    }
 
-  const alert = await sendViaResend(env.RESEND_API_KEY, {
-    from: FROM_NOTIFICATION,
-    to: [alertTo],
-    subject: `Contact form delivery problem: ${type}`,
-    html: `
+    // Loop guard 1: the failing message is itself an alert. Without this, a
+    // bouncing alert recipient generates an alert about the alert, for ever.
+    if (String(data.subject ?? "").startsWith(ALERT_SUBJECT_PREFIX)) {
+      console.error(
+        "Alert suppressed: the failing message was itself an alert",
+        JSON.stringify({ type, to: recipients }),
+      );
+      return json({ ok: true, alerted: false, reason: "alert-loop-guard" }, 200, cors);
+    }
+
+    const reason =
+      (data.bounce && (data.bounce.message || data.bounce.subType || data.bounce.type)) ||
+      (data.failed && data.failed.reason) ||
+      "no reason supplied by Resend";
+
+    console.error("Resend delivery problem:", JSON.stringify({ type, to: recipients, reason }));
+
+    const alertTo = env.ALERT_EMAIL || env.ADMIN_EMAIL;
+    if (!alertTo || !env.RESEND_API_KEY) {
+      return json({ ok: true, alerted: false }, 200, cors);
+    }
+
+    // Loop guard 2: the address we would alert is the one that just failed.
+    // This is the ALERT_EMAIL-falls-back-to-ADMIN_EMAIL case, where mail to
+    // info@ bouncing would be reported by mail to info@.
+    if (recipientList.some((r) => r.toLowerCase() === String(alertTo).toLowerCase())) {
+      console.error(
+        "Alert suppressed: the alert recipient is the address that failed",
+        JSON.stringify({ type, to: recipients, alertTo }),
+      );
+      return json({ ok: true, alerted: false, reason: "alert-recipient-is-failing-address" }, 200, cors);
+    }
+
+    const alert = await sendViaResend(env.RESEND_API_KEY, {
+      from: FROM_NOTIFICATION,
+      to: [alertTo],
+      subject: `${ALERT_SUBJECT_PREFIX}: ${type}`,
+      html: `
         <h2>A contact-form email did not reach its recipient</h2>
         <p><strong>Event:</strong> ${escapeHtml(type)}</p>
         <p><strong>Recipient:</strong> ${escapeHtml(recipients)}</p>
@@ -264,13 +411,19 @@ async function handleResendWebhook(request, env) {
         permanently. Until it is cleared at resend.com, every further enquiry to
         that address is accepted by the API and silently discarded.</p>
       `,
-  });
+    });
 
-  if (!alert.ok) {
-    console.error("Alert email failed:", JSON.stringify(alert));
+    if (!alert.ok) {
+      console.error("Alert email failed:", JSON.stringify(alert));
+    }
+
+    return json({ ok: true, alerted: alert.ok }, 200, cors);
+  } catch (error) {
+    // crypto.subtle.importKey throws on a malformed secret, and without this the
+    // failure was an unlogged 500 with no way to tell it from a Resend outage.
+    console.error("Webhook error:", error && error.stack ? error.stack : String(error));
+    return json({ error: "Internal error" }, 500, cors);
   }
-
-  return json({ ok: true, alerted: alert.ok });
 }
 
 // Resend signs webhooks with Svix. Signed content is `${id}.${timestamp}.${body}`,

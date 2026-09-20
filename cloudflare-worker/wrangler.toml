@@ -19,3 +19,22 @@ enabled = true
 # Resend webhook endpoint to register in the dashboard:
 #   https://stormberry-contact-form.marcos-495.workers.dev/resend-webhook
 #   events: email.bounced, email.complained, email.delivery_delayed, email.failed
+
+# Worker-native rate limiting. This Worker has no [[routes]] block, so it is
+# served from its workers.dev subdomain and NO zone WAF rate-limiting rule can
+# apply to it. These bindings are therefore the only real limit on the endpoint.
+#   *_IP        caps one source hammering the form.
+#   *_RECIPIENT caps how often any source can cause mail to one address, which is
+#               the sendCopy nuisance vector.
+# period must be 10 or 60.
+[[unsafe.bindings]]
+name = "CONTACT_RATE_LIMIT_IP"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
+
+[[unsafe.bindings]]
+name = "CONTACT_RATE_LIMIT_RECIPIENT"
+type = "ratelimit"
+namespace_id = "1002"
+simple = { limit = 2, period = 60 }
