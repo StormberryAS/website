@@ -137,14 +137,16 @@ export default {
 // per-IP caps a single source hammering the form, and per-recipient caps how often
 // ANY source can cause mail to be sent to one address, which is the sendCopy
 // nuisance vector. A missing binding is logged, not fatal: see the note at the top.
-async function overRateLimit(limiter, key, label, containerHint) {
+// Log lines carry the limiter label only, never the key: the key is an IP address
+// or an email address, and Workers Logs are not where personal data belongs.
+async function overRateLimit(limiter, key, label) {
   if (!limiter || typeof limiter.limit !== "function") {
     console.warn(`Rate limiter ${label} is not bound; request not limited`);
     return false;
   }
   try {
     const { success } = await limiter.limit({ key });
-    if (!success) console.warn(`Rate limit ${label} exceeded`, containerHint);
+    if (!success) console.warn(`Rate limit ${label} exceeded`);
     return !success;
   } catch (error) {
     // A limiter fault must not take the contact form down.
@@ -173,7 +175,17 @@ function cleanField(value, max) {
 
 async function handleContactForm(request, env, cors) {
   try {
-    const body = await request.json();
+    // A parse error message can quote the start of the body, so it must not
+    // reach the catch-all below, which logs the error text.
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ error: "Malformed request" }, 400, cors);
+    }
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return json({ error: "Malformed request" }, 400, cors);
+    }
     const turnstileToken = body["cf-turnstile-response"];
 
     const name = cleanField(body.name, LIMITS.name);
@@ -201,7 +213,7 @@ async function handleContactForm(request, env, cors) {
 
     // Before the Turnstile round trip, so a flood costs us nothing outbound.
     const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
-    if (await overRateLimit(env.CONTACT_RATE_LIMIT_IP, clientIp, "per-IP", { ip: clientIp })) {
+    if (await overRateLimit(env.CONTACT_RATE_LIMIT_IP, clientIp, "per-IP")) {
       return json({ error: "Too many requests" }, 429, cors);
     }
 
@@ -276,14 +288,13 @@ async function handleContactForm(request, env, cors) {
         env.CONTACT_RATE_LIMIT_RECIPIENT,
         email.toLowerCase(),
         "per-recipient",
-        { to: email },
       ));
 
     if (copyAllowed) {
       emailsToSend.push({
         from: FROM_AUTOREPLY,
         to: [email],
-        subject: `Copy of your enquiry to Stormberry: ${serviceLabel}`,
+        subject: `We have received your enquiry: ${serviceLabel}`,
         html: `
             <p>Hello,</p>
             <p>Thank you for contacting Stormberry AS. We have received your
@@ -347,7 +358,7 @@ async function sendViaResend(apiKey, payload) {
   };
 }
 
-// --- Resend delivery events -------------------------------------------------
+// Resend delivery events.
 
 // email.delivery_delayed is deliberately NOT here. It is transient, Resend
 // retries on its own, and alerting on it generated mail for problems that
@@ -388,11 +399,12 @@ async function handleResendWebhook(request, env, cors) {
     const recipients = recipientList.join(", ");
 
     // Every event is logged, so `wrangler tail` and Workers Logs show the full
-    // delivery history even for events that do not warrant an alert.
-    console.log(
-      "Resend event:",
-      JSON.stringify({ type, to: recipients, subject: data.subject, email_id: data.email_id }),
-    );
+    // delivery history even for events that do not warrant an alert. The log
+    // carries the event type and Resend's email id only: recipients can be
+    // enquirers, and the admin subject contains the enquirer's name. The id
+    // finds the full record in the Resend dashboard, and the alert mail below
+    // carries the recipient and subject to Stormberry's own mailbox.
+    console.log("Resend event:", JSON.stringify({ type, email_id: data.email_id }));
 
     if (!ALERT_EVENTS.has(type)) {
       return json({ ok: true }, 200, cors);
@@ -403,7 +415,7 @@ async function handleResendWebhook(request, env, cors) {
     if (String(data.subject ?? "").startsWith(ALERT_SUBJECT_PREFIX)) {
       console.error(
         "Alert suppressed: the failing message was itself an alert",
-        JSON.stringify({ type, to: recipients }),
+        JSON.stringify({ type, email_id: data.email_id }),
       );
       return json({ ok: true, alerted: false, reason: "alert-loop-guard" }, 200, cors);
     }
@@ -413,7 +425,7 @@ async function handleResendWebhook(request, env, cors) {
       (data.failed && data.failed.reason) ||
       "no reason supplied by Resend";
 
-    console.error("Resend delivery problem:", JSON.stringify({ type, to: recipients, reason }));
+    console.error("Resend delivery problem:", JSON.stringify({ type, email_id: data.email_id, reason }));
 
     const alertTo = env.ALERT_EMAIL || env.ADMIN_EMAIL;
     if (!alertTo || !env.RESEND_API_KEY) {
@@ -426,7 +438,7 @@ async function handleResendWebhook(request, env, cors) {
     if (recipientList.some((r) => r.toLowerCase() === String(alertTo).toLowerCase())) {
       console.error(
         "Alert suppressed: the alert recipient is the address that failed",
-        JSON.stringify({ type, to: recipients, alertTo }),
+        JSON.stringify({ type, email_id: data.email_id, alertTo }),
       );
       return json({ ok: true, alerted: false, reason: "alert-recipient-is-failing-address" }, 200, cors);
     }
