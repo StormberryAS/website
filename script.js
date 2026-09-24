@@ -8,8 +8,12 @@ const siteConfig = {
 let turnstileToken = '';
 
 window.onloadTurnstileCallback = function () {
-  const tContainer = document.getElementById('turnstile-container');
-  if (tContainer && window.turnstile) {
+  // api.js is async, so it can finish before the form below is parsed (Rocket Loader
+  // used to hide this by delaying every script). Render once the container exists.
+  const render = function () {
+    const tContainer = document.getElementById('turnstile-container');
+    if (!tContainer || !window.turnstile || tContainer.dataset.rendered) return;
+    tContainer.dataset.rendered = '1';
     window.turnstile.render('#turnstile-container', {
       sitekey: siteConfig.contact.turnstileSiteKey,
       callback: function(token) {
@@ -20,6 +24,11 @@ window.onloadTurnstileCallback = function () {
       },
       theme: 'light'
     });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', render, { once: true });
+  } else {
+    render();
   }
 };
 
