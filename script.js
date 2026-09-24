@@ -98,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         service: document.getElementById('service').value,
+        // Optional "How did you hear about us?"; empty when not chosen.
+        source: document.getElementById('source') ? document.getElementById('source').value : '',
         message: document.getElementById('message').value,
         sendCopy: document.getElementById('sendCopy').checked,
         'cf-turnstile-response': turnstileToken

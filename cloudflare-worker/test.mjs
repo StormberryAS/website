@@ -444,6 +444,148 @@ await check("a throwing limiter does not take the form down", async () => {
   });
 });
 
+// Optional "How did you hear about us?" source field.
+
+const heardLine = (html) => {
+  const m = /<strong>Heard about us via:<\/strong> ([^<]*)<\/p>/.exec(html);
+  if (!m) throw new Error("admin notification has no 'Heard about us via' line");
+  return m[1];
+};
+
+// Sends one form through the mocked providers and returns the admin mail.
+async function adminMailFor(over) {
+  let admin;
+  await withMockedFetch(async (sent) => {
+    const res = await worker.fetch(formRequest(over), sendEnv);
+    eq(res.status, 200, "status");
+    admin = sent.find((m) => m.to[0] === "info@stormberry.as");
+    if (!admin) throw new Error("no admin notification sent");
+  });
+  return admin;
+}
+
+await check("source: a known value reaches the admin mail as its English label", async () => {
+  eq(heardLine((await adminMailFor({ source: "1881" })).html), "1881", "1881");
+  eq(heardLine((await adminMailFor({ source: "other_directory" })).html), "Another business directory", "other_directory");
+});
+
+await check("source: an old page that sends no source still succeeds -> not given", async () => {
+  // goodForm has no source key at all, exactly like the pre-field pages.
+  eq(heardLine((await adminMailFor({})).html), "not given", "missing source");
+});
+
+await check("source: the empty default option -> not given", async () => {
+  eq(heardLine((await adminMailFor({ source: "" })).html), "not given", "empty source");
+});
+
+await check("source: an unknown value is NOT echoed, it becomes not given", async () => {
+  const admin = await adminMailFor({ source: "EVILSOURCE<b>" });
+  eq(heardLine(admin.html), "not given", "unknown source");
+  if (admin.html.includes("EVILSOURCE")) throw new Error("raw source echoed into the admin mail");
+  if (admin.subject.includes("EVILSOURCE")) throw new Error("raw source echoed into the subject");
+});
+
+// The admin mail is not the only way out. Workers Logs (console) and the
+// response body are the paths back to Cloudflare and to the caller, so an
+// unknown source must not reach either, on any outcome of the request.
+await check("source: an unknown value never reaches logs, responses or any send", async () => {
+  const MARK = "SRCMARKER";
+  const hostile = `${MARK}<b>"x"`;
+  const logged = [];
+  const saved = { log: console.log, warn: console.warn, error: console.error };
+  for (const level of ["log", "warn", "error"]) {
+    console[level] = (...args) => logged.push(args.map((a) => (typeof a === "string" ? a : JSON.stringify(a))).join(" "));
+  }
+  const realFetch = globalThis.fetch;
+  const payloads = [];
+  const mockFetch = ({ turnstile = true, resendStatus = 200, throws = false } = {}) =>
+    async (input, init) => {
+      if (throws) throw new Error("network down");
+      const target = typeof input === "string" ? input : input.url;
+      if (init && init.body) payloads.push(String(init.body));
+      if (target.includes("challenges.cloudflare.com")) {
+        return new Response(JSON.stringify({ success: turnstile, "error-codes": turnstile ? [] : ["invalid-input-response"] }));
+      }
+      return new Response(JSON.stringify(resendStatus === 200 ? { id: "id-1" } : { message: "rejected" }), { status: resendStatus });
+    };
+  const deny = { limit() { return { success: false }; } };
+  const paths = [
+    ["200", {}, {}, sendEnv],
+    ["400 missing field", { message: "" }, {}, sendEnv],
+    ["400 unknown service", { service: "nope" }, {}, sendEnv],
+    ["400 invalid email", { email: "bad" }, {}, sendEnv],
+    ["400 missing captcha", { "cf-turnstile-response": "" }, {}, sendEnv],
+    ["403 turnstile", {}, { turnstile: false }, sendEnv],
+    ["429 per-IP", {}, {}, { ...sendEnv, CONTACT_RATE_LIMIT_IP: deny }],
+    ["200 per-recipient drop", { sendCopy: true }, {}, { ...sendEnv, CONTACT_RATE_LIMIT_RECIPIENT: deny }],
+    ["502 resend", {}, { resendStatus: 422 }, sendEnv],
+    ["500 thrown", {}, { throws: true }, sendEnv],
+    ["500 no api key", {}, {}, { ...sendEnv, RESEND_API_KEY: "" }],
+  ];
+  try {
+    for (const [what, over, mock, pathEnv] of paths) {
+      globalThis.fetch = mockFetch(mock);
+      const res = await worker.fetch(formRequest({ ...over, source: hostile }), pathEnv);
+      const bodyText = await res.text();
+      const headerText = JSON.stringify([...res.headers]);
+      if (bodyText.includes(MARK) || headerText.includes(MARK)) {
+        throw new Error(`${what}: raw source echoed in the response`);
+      }
+    }
+  } finally {
+    Object.assign(console, saved);
+    globalThis.fetch = realFetch;
+  }
+  if (logged.some((line) => line.includes(MARK))) throw new Error("raw source reached the logs");
+  if (payloads.some((p) => p.includes(MARK))) throw new Error("raw source reached an outbound call");
+  eq(logged.length > 0, true, "the probe exercised paths that log");
+});
+
+await check("source: prototype keys are not treated as allow-listed", async () => {
+  for (const key of ["constructor", "__proto__", "toString", "hasOwnProperty"]) {
+    eq(heardLine((await adminMailFor({ source: key })).html), "not given", key);
+  }
+});
+
+await check("source: a non-string value does not break the form -> not given", async () => {
+  eq(heardLine((await adminMailFor({ source: 42 })).html), "not given", "number");
+  eq(heardLine((await adminMailFor({ source: { key: "linkedin" } })).html), "not given", "object");
+});
+
+await check("source: an oversized value is dropped even if it trims to a real key", async () => {
+  // Without the length cap this would trim to "linkedin" and be accepted.
+  const padded = `linkedin${" ".repeat(64)}`;
+  eq(heardLine((await adminMailFor({ source: padded })).html), "not given", "padded source");
+});
+
+await check("source: never appears in the confirmation sent to the caller", async () => {
+  await withMockedFetch(async (sent) => {
+    const res = await worker.fetch(formRequest({ sendCopy: true, source: "linkedin" }), sendEnv);
+    eq(res.status, 200, "status");
+    eq(sent.length, 2, "two sends");
+    const admin = sent.find((m) => m.to[0] === "info@stormberry.as");
+    const copy = sent.find((m) => m.to[0] === "ada@example.com");
+    eq(heardLine(admin.html), "LinkedIn", "admin label");
+    const copyText = `${copy.subject} ${copy.html}`;
+    if (/linkedin|heard about/i.test(copyText)) throw new Error("source leaked into the confirmation");
+  });
+});
+
+await check("source: the option values on both contact pages match the Worker allow-list", async () => {
+  const block = /const SOURCE_LABELS = \{([\s\S]*?)\};/.exec(source);
+  if (!block) throw new Error("SOURCE_LABELS not found in index.js");
+  const workerKeys = [...block[1].matchAll(/^\s*"?([\w]+)"?:/gm)].map((m) => m[1]).sort();
+  for (const page of ["contact.html", "no-kontakt.html"]) {
+    const html = await readFile(join(here, "..", page), "utf8");
+    const select = /<select id="source"[^>]*>([\s\S]*?)<\/select>/.exec(html);
+    if (!select) throw new Error(`${page} has no source select`);
+    const values = [...select[1].matchAll(/<option value="([^"]*)"/g)].map((m) => m[1]);
+    eq(values[0], "", `${page} default option`);
+    const pageKeys = values.slice(1).sort();
+    eq(JSON.stringify(pageKeys), JSON.stringify(workerKeys), `${page} option values`);
+  }
+});
+
 for (const [state, label] of results) console.log(`${state}  ${label}`);
 const failed = results.filter(([s]) => s === "FAIL").length;
 console.log(`\n${results.length - failed}/${results.length} passed`);

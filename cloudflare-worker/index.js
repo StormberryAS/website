@@ -41,9 +41,33 @@ const SERVICE_LABELS = {
   strategy: "Strategy",
 };
 
+// `source` answers "How did you hear about us?", an OPTIONAL select on both
+// contact pages. It is an allow-list like `service`, with one difference: it is
+// optional, so a missing, oversized or unknown value never rejects the enquiry.
+// It becomes SOURCE_NOT_GIVEN and the caller's string is never echoed anywhere.
+// That also keeps both deploy orders working: a page without the field sends
+// nothing, and an older Worker simply ignores the extra key.
+// The label reaches the admin notification only, never the confirmation sent
+// to the caller-supplied address. Keys match the <option> values on
+// contact.html and no-kontakt.html; test.mjs fails if they drift apart.
+const SOURCE_LABELS = {
+  search: "Search engine",
+  google_maps: "Google Maps or Google business listing",
+  linkedin: "LinkedIn",
+  1881: "1881",
+  proff: "Proff",
+  other_directory: "Another business directory",
+  referral: "Recommended by someone",
+  event: "Event, trade fair or business network",
+  other: "Other",
+};
+const SOURCE_NOT_GIVEN = "not given";
+
 // Caps stop an unbounded body reaching Resend. 254 is the RFC 5321 maximum for a
-// complete address; the others are generous against real enquiries.
-const LIMITS = { name: 100, email: 254, message: 5000 };
+// complete address; the others are generous against real enquiries. `source` is
+// capped well above its longest key, so an oversized value is dropped before any
+// work is done on it.
+const LIMITS = { name: 100, email: 254, message: 5000, source: 32 };
 
 // Deliberately conservative: no quoted local parts, no unescaped separators, one
 // or more dot-separated labels in the domain. Malformed addresses that reach the
@@ -129,6 +153,16 @@ async function overRateLimit(limiter, key, label, containerHint) {
   }
 }
 
+// Map the optional `source` field to its fixed English label. Anything that is
+// not a known key, including a missing field from an older page, is "not given".
+function sourceLabel(value) {
+  if (typeof value !== "string") return SOURCE_NOT_GIVEN;
+  if (value.length > LIMITS.source) return SOURCE_NOT_GIVEN;
+  const key = value.trim();
+  if (!Object.prototype.hasOwnProperty.call(SOURCE_LABELS, key)) return SOURCE_NOT_GIVEN;
+  return SOURCE_LABELS[key];
+}
+
 // Trim, type-check and cap a single free-text field.
 function cleanField(value, max) {
   if (typeof value !== "string") return null;
@@ -147,6 +181,7 @@ async function handleContactForm(request, env, cors) {
     const message = cleanField(body.message, LIMITS.message);
     const service = typeof body.service === "string" ? body.service.trim() : "";
     const sendCopy = body.sendCopy === true;
+    const heardVia = sourceLabel(body.source);
 
     if (!name || !email || !message || !service) {
       return json({ error: "Missing or oversized required fields" }, 400, cors);
@@ -209,6 +244,7 @@ async function handleContactForm(request, env, cors) {
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Service:</strong> ${escapeHtml(serviceLabel)}</p>
+        <p><strong>Heard about us via:</strong> ${escapeHtml(heardVia)}</p>
         <p><strong>Copy requested:</strong> ${sendCopy ? "yes" : "no"}</p>
         <p><strong>Message:</strong></p>
         <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
