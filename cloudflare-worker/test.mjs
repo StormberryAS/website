@@ -165,7 +165,7 @@ await check("GET is still rejected", async () => {
   eq((await worker.fetch(new Request(BASE, { method: "GET" }), env)).status, 405, "status");
 });
 
-// --- validation and abuse-surface coverage ---------------------------------
+// Validation and abuse-surface coverage.
 
 const goodForm = {
   name: "Ada",
@@ -303,7 +303,7 @@ await check("unhandled error returns a generic 500, no stack or message", async 
   }
 });
 
-// --- webhook alert-loop coverage -------------------------------------------
+// Webhook alert-loop coverage.
 
 const bouncedAlert = {
   type: "email.bounced",
@@ -389,7 +389,7 @@ await check("zero-length secret reaches importKey and is caught -> logged 500", 
   }
 });
 
-// --- rate limiting -------------------------------------------------------
+// Rate limiting.
 
 const limiterStub = (allow) => ({ calls: [], limit(arg) { this.calls.push(arg.key); return { success: allow }; } });
 
@@ -584,6 +584,101 @@ await check("source: the option values on both contact pages match the Worker al
     const pageKeys = values.slice(1).sort();
     eq(JSON.stringify(pageKeys), JSON.stringify(workerKeys), `${page} option values`);
   }
+});
+
+// Personal data stays out of Workers Logs. The privacy page says the form
+// handler uses the IP address only to limit repeated submissions and does not
+// keep it; a log line carrying it would make that untrue.
+
+async function captureLogs(fn) {
+  const lines = [];
+  const saved = { log: console.log, warn: console.warn, error: console.error };
+  for (const level of ["log", "warn", "error"]) {
+    console[level] = (...args) => lines.push(args.map((a) => (typeof a === "string" ? a : JSON.stringify(a))).join(" "));
+  }
+  try {
+    await fn();
+  } finally {
+    Object.assign(console, saved);
+  }
+  return lines.join("\n");
+}
+
+await check("logs: a per-IP limit hit logs the label, not the IP", async () => {
+  const deny = { limit() { return { success: false }; } };
+  const logs = await captureLogs(async () => {
+    const res = await worker.fetch(
+      formRequest({}, { "CF-Connecting-IP": "198.51.100.77" }),
+      { ...sendEnv, CONTACT_RATE_LIMIT_IP: deny },
+    );
+    eq(res.status, 429, "status");
+  });
+  if (!logs.includes("Rate limit per-IP exceeded")) throw new Error("limit hit was not logged");
+  if (logs.includes("198.51.100.77")) throw new Error("IP address reached the logs");
+});
+
+await check("logs: a per-recipient limit hit logs the label, not the address", async () => {
+  const deny = { limit() { return { success: false }; } };
+  const logs = await captureLogs(() =>
+    withMockedFetch(async () => {
+      const res = await worker.fetch(
+        formRequest({ sendCopy: true, email: "victim.address@example.org" }),
+        { ...sendEnv, CONTACT_RATE_LIMIT_RECIPIENT: deny },
+      );
+      eq(res.status, 200, "status");
+    }),
+  );
+  if (!logs.includes("Rate limit per-recipient exceeded")) throw new Error("limit hit was not logged");
+  if (logs.includes("victim.address")) throw new Error("recipient address reached the logs");
+});
+
+await check("logs: a malformed body is a 400 and is not quoted in the logs", async () => {
+  const logs = await captureLogs(async () => {
+    const res = await worker.fetch(
+      new Request(BASE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "BODYMARKER not json",
+      }),
+      sendEnv,
+    );
+    eq(res.status, 400, "status");
+    eq((await res.json()).error, "Malformed request", "error");
+    const arr = await worker.fetch(
+      new Request(BASE, { method: "POST", headers: { "Content-Type": "application/json" }, body: "[1]" }),
+      sendEnv,
+    );
+    eq(arr.status, 400, "array body status");
+  });
+  if (logs.includes("BODYMARKER")) throw new Error("request body quoted in the logs");
+});
+
+await check("logs: webhook events log the type and id, not recipient or subject", async () => {
+  const event = {
+    type: "email.bounced",
+    data: {
+      email_id: "abc-321",
+      to: ["someone.private@example.net"],
+      subject: "New Inquiry: Sales from PRIVATENAME",
+      bounce: { message: "mailbox full" },
+    },
+  };
+  const logs = await captureLogs(async () => {
+    const res = await worker.fetch(webhookRequest(event), env);
+    eq(res.status, 200, "status");
+  });
+  if (!logs.includes("abc-321")) throw new Error("email id missing from the log");
+  if (logs.includes("someone.private") || logs.includes("PRIVATENAME")) {
+    throw new Error("recipient or subject reached the logs");
+  }
+});
+
+await check("confirmation subject says received, not copy", async () => {
+  await withMockedFetch(async (sent) => {
+    await worker.fetch(formRequest({ sendCopy: true }), sendEnv);
+    const copy = sent.find((m) => m.to[0] === "ada@example.com");
+    eq(copy.subject, "We have received your enquiry: Sales and business development", "subject");
+  });
 });
 
 for (const [state, label] of results) console.log(`${state}  ${label}`);
