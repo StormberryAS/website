@@ -17,6 +17,10 @@
 # .npmrc holds only legacy-peer-deps=true, but tooling config has no business being
 # served. The hex-named .txt at the root is a live domain-verification file and is
 # deliberately NOT excluded; removing it from the site would break the verification.
+#
+# cloudflare-worker/ is deployed by wrangler, not by Pages. Excluded 2026-09-24:
+# before that its source, tests and wrangler.toml (with the exact rate-limit
+# thresholds) were served from stormberry.as next to the product.
 exclude:
   - .npmrc
   - LICENSE
@@ -24,6 +28,7 @@ exclude:
   - README.md
   - __pycache__/
   - add_llms_link.py
+  - cloudflare-worker/
   - bump_assets.py
   - generate_sitemap.py
   - make_svg.py
