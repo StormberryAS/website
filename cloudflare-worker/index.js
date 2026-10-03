@@ -262,11 +262,14 @@ async function handleContactForm(request, env, cors) {
         <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
       `;
 
+    // The subject carries only the allow-listed service label, never the name.
+    // Subjects travel further than bodies (inbox previews, notifications, the
+    // daily briefs), so the enquirer's name stays in the body only.
     const emailsToSend = [
       {
         from: FROM_NOTIFICATION,
         to: [adminEmail],
-        subject: `New Inquiry: ${serviceLabel} from ${name}`,
+        subject: `New enquiry: ${serviceLabel}`,
         html: htmlBody,
         reply_to: email,
       },
@@ -401,7 +404,8 @@ async function handleResendWebhook(request, env, cors) {
     // Every event is logged, so `wrangler tail` and Workers Logs show the full
     // delivery history even for events that do not warrant an alert. The log
     // carries the event type and Resend's email id only: recipients can be
-    // enquirers, and the admin subject contains the enquirer's name. The id
+    // enquirers, and admin subjects sent before October 2026 carried the
+    // enquirer's name. The id
     // finds the full record in the Resend dashboard, and the alert mail below
     // carries the recipient and subject to Stormberry's own mailbox.
     console.log("Resend event:", JSON.stringify({ type, email_id: data.email_id }));

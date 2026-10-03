@@ -13,7 +13,7 @@ Grunnlagt av Marcos Thomassen Povoa etter fjorten år med salg av komplekse indu
 - [KI i strategien](https://stormberry.as/no-strategi): Faktiske pipeline- og driftsdata brukt til å oppdatere strategien, slik at den beskriver virkeligheten pluss et mål.
 - [Global leveranse](https://stormberry.as/no-kultur): Krysskulturell kommunikasjon innbakt i hver bevegelse, ikke solgt som en egen tjeneste.
 - [Om Stormberry AS](https://stormberry.as/no-om-oss): Selskapet, grunnleggeren og bakgrunnen fra industrielt og maritimt salg.
-- [Kontakt](https://stormberry.as/no-kontakt): Kryptert skjema og PGP-signert e-post. Ingen informasjonskapsler og ingen analyse. Vi svarer innen én virkedag.
+- [Kontakt](https://stormberry.as/no-kontakt): Skjema sendt over kryptert forbindelse (HTTPS) og PGP-signert e-post. Ingen informasjonskapsler og ingen analyseskript. Vi svarer innen én virkedag.
 
 ## Spesialiserte tilbud
 
@@ -22,6 +22,6 @@ Grunnlagt av Marcos Thomassen Povoa etter fjorten år med salg av komplekse indu
 
 ## Valgfritt
 
-- [Personvernerklæring](https://stormberry.as/no-personvern): Ingen informasjonskapsler, ingen analyse, og ingen data som selges, deles eller tjenes penger på.
+- [Personvernerklæring](https://stormberry.as/no-personvern): Ingen informasjonskapsler, ingen analyseskript, og ingen data som selges, deles eller tjenes penger på.
 - [Stormberry Labs](https://stormberry.as/labs): En levende portefølje av fungerende KI-prototyper, hver bygget i én økt og publisert som et fungerende verktøy. På engelsk.
 - [Engelsk llms.txt](https://stormberry.as/llms.txt): Denne filen på engelsk, med blogg og Labs.

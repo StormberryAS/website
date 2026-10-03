@@ -681,6 +681,25 @@ await check("confirmation subject says received, not copy", async () => {
   });
 });
 
+// Subjects reach inbox previews and the daily briefs, which leave the machine,
+// so the admin subject must carry the service label and nothing the caller typed.
+await check("admin subject is the service label only, never the enquirer's name", async () => {
+  await withMockedFetch(async (sent) => {
+    const res = await worker.fetch(
+      formRequest({ name: "SUBJECTNAME Person", service: "strategy", sendCopy: true }),
+      sendEnv,
+    );
+    eq(res.status, 200, "status");
+    const admin = sent.find((m) => m.to[0] === "info@stormberry.as");
+    if (!admin) throw new Error("no admin notification");
+    eq(admin.subject, "New enquiry: Strategy", "admin subject");
+    for (const m of sent) {
+      if (m.subject.includes("SUBJECTNAME")) throw new Error(`name in subject to ${m.to[0]}`);
+    }
+    if (!admin.html.includes("SUBJECTNAME Person")) throw new Error("name missing from the admin body");
+  });
+});
+
 for (const [state, label] of results) console.log(`${state}  ${label}`);
 const failed = results.filter(([s]) => s === "FAIL").length;
 console.log(`\n${results.length - failed}/${results.length} passed`);
