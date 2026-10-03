@@ -13,7 +13,7 @@ Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritim
 - [AI in your strategy](https://stormberry.as/strategy): The year's actual pipeline and operations data used to update the strategy, so it describes reality plus an aim rather than a wish list.
 - [Global delivery](https://stormberry.as/culture): Cross-cultural communication built into how every motion is delivered, not sold as a separate service line.
 - [About Stormberry AS](https://stormberry.as/about): The company, the founder, and the industrial and maritime sales background behind it.
-- [Contact](https://stormberry.as/contact): Encrypted form and PGP-signed email. No cookies and no analytics. We reply within one business day.
+- [Contact](https://stormberry.as/contact): Form sent over an encrypted connection (HTTPS) and PGP-signed email. No cookies and no analytics scripts. We reply within one business day.
 
 ## Specialist offerings
 
@@ -45,7 +45,7 @@ Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritim
 
 ## Optional
 
-- [Privacy policy](https://stormberry.as/privacy): No cookies, no analytics, and no data sold, shared or monetised.
+- [Privacy policy](https://stormberry.as/privacy): No cookies, no analytics scripts, and no data sold, shared or monetised.
 - [Personvernerklæring](https://stormberry.as/no-personvern): The privacy policy in Norwegian.
 - [Contact card](https://stormberry.as/qr): vCard and QR code for the founder.
 - [PGP public key](https://stormberry.as/marcos.asc): Public key for signed and encrypted email to security@stormberry.as.

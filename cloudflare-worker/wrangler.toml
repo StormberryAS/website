@@ -10,6 +10,12 @@ ADMIN_EMAIL = "info@stormberry.as"
 [observability]
 enabled = true
 
+# Keep the console lines above (already scrubbed of personal data) but drop the
+# automatic per-request invocation log, which records request metadata for every
+# submission whether or not anything went wrong.
+[observability.logs]
+invocation_logs = false
+
 # Secrets (set with `wrangler secret put <NAME>`, never committed):
 #   RESEND_API_KEY         sending key for the verified stormberry.as domain
 #   TURNSTILE_SECRET_KEY   Turnstile secret for sitekey 0x4AAAAAACsqoaM-PpNxpS3n

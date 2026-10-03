@@ -7,6 +7,74 @@ const siteConfig = {
 
 let turnstileToken = '';
 
+// Turnstile starts only once someone begins using the contact form. A visitor who
+// only reads the page loads nothing from challenges.cloudflare.com and gets no
+// Turnstile storage. The privacy policy (section 6) promises exactly this, so do
+// not put a static api.js tag back in the page head.
+// CSP: script-src and frame-src already allow https://challenges.cloudflare.com,
+// and a script element added from here is checked against the same list.
+const TURNSTILE_API_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit';
+// How long Send waits for a token that is still on its way (an interactive
+// challenge needs a click, so leave room for a person to do it).
+const TURNSTILE_WAIT_MS = 30000;
+const TURNSTILE_START_EVENTS = ['focusin', 'input', 'change'];
+let turnstileRequested = false;
+let turnstileWaiters = [];
+
+function settleTurnstileWaiters(token) {
+  const waiters = turnstileWaiters;
+  turnstileWaiters = [];
+  waiters.forEach(function (resolve) { resolve(token); });
+}
+
+function startTurnstile() {
+  if (turnstileRequested) return;
+  turnstileRequested = true;
+  TURNSTILE_START_EVENTS.forEach(function (type) {
+    document.removeEventListener(type, startTurnstileFromForm, true);
+  });
+  if (window.turnstile) {
+    window.onloadTurnstileCallback();
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = TURNSTILE_API_URL;
+  script.async = true;
+  script.onerror = function () {
+    // Blocked or offline: let the next Send try again, and release anyone waiting.
+    script.remove();
+    turnstileRequested = false;
+    settleTurnstileWaiters('');
+  };
+  document.head.appendChild(script);
+}
+
+function startTurnstileFromForm(event) {
+  const target = event.target;
+  if (target && target.closest && target.closest('#contact-form')) startTurnstile();
+}
+
+// Listening on the document (capture phase) catches the first focus or keystroke
+// in the form even if it happens before DOMContentLoaded.
+TURNSTILE_START_EVENTS.forEach(function (type) {
+  document.addEventListener(type, startTurnstileFromForm, true);
+});
+
+function waitForTurnstileToken(ms) {
+  if (turnstileToken) return Promise.resolve(turnstileToken);
+  return new Promise(function (resolve) {
+    const done = function (token) {
+      clearTimeout(timer);
+      resolve(token);
+    };
+    const timer = setTimeout(function () {
+      turnstileWaiters = turnstileWaiters.filter(function (w) { return w !== done; });
+      resolve('');
+    }, ms);
+    turnstileWaiters.push(done);
+  });
+}
+
 window.onloadTurnstileCallback = function () {
   // api.js is async, so it can finish before the form below is parsed (Rocket Loader
   // used to hide this by delaying every script). Render once the container exists.
@@ -18,6 +86,7 @@ window.onloadTurnstileCallback = function () {
       sitekey: siteConfig.contact.turnstileSiteKey,
       callback: function(token) {
         turnstileToken = token;
+        settleTurnstileWaiters(token);
       },
       'expired-callback': function() {
         turnstileToken = '';
@@ -88,33 +157,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = contactForm.querySelector('.submit-btn');
     const successMessage = document.getElementById('success-message');
     const errorMessage = document.getElementById('error-message');
+    const waitMessage = document.getElementById('wait-message');
+    let sending = false;
 
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      if (!turnstileToken) {
-        errorMessage.style.display = 'flex';
-        return;
-      }
+      if (sending) return;
+      sending = true;
 
       const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-2 spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Send Message...';
       successMessage.style.display = 'none';
       errorMessage.style.display = 'none';
 
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        service: document.getElementById('service').value,
-        // Optional "How did you hear about us?"; empty when not chosen.
-        source: document.getElementById('source') ? document.getElementById('source').value : '',
-        message: document.getElementById('message').value,
-        sendCopy: document.getElementById('sendCopy').checked,
-        'cf-turnstile-response': turnstileToken
-      };
-
       try {
+        if (!turnstileToken) {
+          // Someone quick, or a browser that never fired focusin, can press Send
+          // before Turnstile has a token. Start it if needed, say so, and wait.
+          startTurnstile();
+          if (waitMessage) waitMessage.style.display = 'flex';
+          await waitForTurnstileToken(TURNSTILE_WAIT_MS);
+          if (waitMessage) waitMessage.style.display = 'none';
+          if (!turnstileToken) {
+            errorMessage.style.display = 'flex';
+            return;
+          }
+        }
+
+        submitBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-2 spin"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Send Message...';
+
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          service: document.getElementById('service').value,
+          // Optional "How did you hear about us?"; empty when not chosen.
+          source: document.getElementById('source') ? document.getElementById('source').value : '',
+          message: document.getElementById('message').value,
+          sendCopy: document.getElementById('sendCopy').checked,
+          'cf-turnstile-response': turnstileToken
+        };
+
         const response = await fetch(siteConfig.contact.formsgUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -130,8 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       } catch (error) {
         console.error('Submission error:', error);
+        if (waitMessage) waitMessage.style.display = 'none';
         errorMessage.style.display = 'flex';
       } finally {
+        sending = false;
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       }
