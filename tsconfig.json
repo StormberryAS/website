@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "ES2017",
+      "DOM"
+    ],
+    "types": [],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "rootDir": "ts",
+    "outDir": ".",
+    "newLine": "lf",
+    "removeComments": true,
+    "noEmitOnError": true
+  },
+  "include": [
+    "ts/**/*.ts"
+  ],
+  "exclude": []
+}

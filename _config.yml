@@ -14,13 +14,19 @@
 # disclaimer.html and privacy.html are deliberately NOT excluded: they are the published
 # pages the footer links to. Only the Markdown sources are withheld.
 #
-# .npmrc holds only legacy-peer-deps=true, but tooling config has no business being
+# .npmrc holds only npm settings, no secrets, but tooling config has no business being
 # served. The hex-named .txt at the root is a live domain-verification file and is
 # deliberately NOT excluded; removing it from the site would break the verification.
 #
 # cloudflare-worker/ is deployed by wrangler, not by Pages. Excluded 2026-09-24:
 # before that its source, tests and wrangler.toml (with the exact rate-limit
 # thresholds) were served from stormberry.as next to the product.
+#
+# The TypeScript sources (ts/), their build tooling (tools/, package.json, package-lock.json,
+# tsconfig.json) and the installed compiler (node_modules/, never committed) are excluded
+# too: the pages load only the compiled script.js and calendar.js at the root. Added with the
+# TypeScript move. Keep every list item bare, with no comment on its line:
+# stormberry-nsite-build.py reads this list to curate the nsite as well.
 exclude:
   - .npmrc
   - LICENSE
@@ -34,3 +40,9 @@ exclude:
   - make_svg.py
   - patch_title.py
   - trace.py
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - ts/
+  - tools/

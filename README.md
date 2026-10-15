@@ -5,7 +5,7 @@ Source code for the Stormberry AS corporate website.
 **Live:** [stormberry.as](https://stormberry.as)
 
 ## Architecture
-- **Vanilla HTML/CSS/JS**, no frameworks, no build step.
+- **Vanilla HTML/CSS**, no frameworks. The site's own scripts are written in **TypeScript** (`ts/`) and compiled to plain JavaScript (`script.js`, `calendar.js`) that is committed next to the pages, so GitHub Pages and the nsite still publish the repository as it is.
 - **Privacy first**, no cookies, no trackers, no external dependencies that compromise user privacy.
 - **Sovereign AI**, built and maintained using high-speed agentic workflows.
 
@@ -21,6 +21,15 @@ The blog follows a strict monthly archiving rule to keep the feed clean and the 
 ### Image management
 - Use `1.91:1` aspect ratio (1200x628 minimum) for LinkedIn compatibility.
 - **Blog/social images only:** generate them in a dark, cinematic, glassmorphism style. This art direction applies to generated post imagery — it is **not** the visual identity of the website itself, which is light and clean (off-white surfaces, charcoal text, a single red accent).
+
+## Scripts (TypeScript)
+Edit `ts/script.ts` or `ts/calendar.ts`, never the compiled `.js` at the root. Then:
+```bash
+tools/build-ts.sh           # installs the pinned compiler (npm ci), compiles, restamps ?v= on the pages
+tools/build-ts.sh --check   # changes nothing; fails if a .js is not what ts/ compiles to, or a stamp is stale
+tools/build-ts.sh --force   # like the plain build, but overwrites a .js that holds a hand edit
+```
+The build refuses to overwrite a `.js` that was edited by hand: port the edit into `ts/` and build again. Run the check before every commit that touches `ts/`, a root `.js` or a page; `git config core.hooksPath tools/hooks` makes git run it for you in that clone. The compiler is the one exact version in `package-lock.json`; nothing from npm is ever published with the site. `lucide.min.js` is third-party and stays as it is.
 
 ## Local development
 Static site, runnable with any simple web server:
