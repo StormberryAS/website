@@ -1,0 +1,20 @@
+#!/bin/sh
+# Optional pre-commit hook: runs tools/build-ts.sh --check before a commit that touches the
+# TypeScript sources, a root .js, a page or the build configuration. Off until enabled, per
+# clone, with:
+#
+#   git config core.hooksPath tools/hooks
+#
+# (core.hooksPath replaces .git/hooks for that clone; undo with git config --unset core.hooksPath.)
+# The check reads the working tree, so the hook stops when those paths have unstaged changes:
+# stage them or stash them first. git commit --no-verify skips the hook.
+set -eu
+cd "$(git rev-parse --show-toplevel)"
+if ! git diff --cached --name-only | grep -Eq '^(ts/|[^/]*\.js$|[^/]*\.html$|no/[^/]*\.html$|tsconfig\.json$|package(-lock)?\.json$|bump_assets\.py$|tools/build-ts\.sh$)'; then
+  exit 0
+fi
+if ! git diff --quiet -- ts tsconfig.json package.json package-lock.json bump_assets.py tools/build-ts.sh ':(glob)*.js' ':(glob)*.html' ':(glob)no/*.html'; then
+  echo "pre-commit: unstaged changes in ts/, a root .js, a page or the build config; the check reads the working tree, so stage or stash them first" >&2
+  exit 1
+fi
+exec tools/build-ts.sh --check
