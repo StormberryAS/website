@@ -31,6 +31,14 @@ tools/build-ts.sh --force   # like the plain build, but overwrites a .js that ho
 ```
 The build refuses to overwrite a `.js` that was edited by hand: port the edit into `ts/` and build again. Run the check before every commit that touches `ts/`, a root `.js` or a page; `git config core.hooksPath tools/hooks` makes git run it for you in that clone. The compiler is the one exact version in `package-lock.json`; nothing from npm is ever published with the site. `lucide.min.js` is third-party and stays as it is.
 
+## Contact-form Worker (TypeScript)
+`cloudflare-worker/` is the contact form's Cloudflare Worker. It is deployed by wrangler, never by GitHub Pages or the nsite (both leave the folder out). Edit `cloudflare-worker/index.ts`; wrangler compiles it when it deploys, but it only strips the types and never checks them, so check first:
+```bash
+tools/check-worker.sh       # type check, the offline tests, and (with wrangler installed) the types and a dry-run bundle
+cd cloudflare-worker && wrangler deploy   # with the API token, never wrangler login
+```
+`cloudflare-worker/worker-configuration.d.ts` is generated: after changing `wrangler.toml`, or after upgrading wrangler, run `wrangler types` in `cloudflare-worker/` (offline, no credentials) and commit the result. The check fails until you do.
+
 ## Local development
 Static site, runnable with any simple web server:
 ```bash

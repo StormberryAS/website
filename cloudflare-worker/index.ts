@@ -13,6 +13,81 @@
 //                           same mailbox as ADMIN_EMAIL, otherwise an alert about
 //                           info@ failing is itself delivered to info@. Falls back to
 //                           ADMIN_EMAIL so the Worker still runs before it is set.
+//
+// TypeScript. wrangler compiles this file itself when it deploys (main in wrangler.toml),
+// but it only strips the types and never checks them: run tools/check-worker.sh before a
+// commit or a deploy. Only erasable type syntax is used (no enum, namespace or parameter
+// property), so the deployed bundle is the JavaScript this file was before the move, and
+// test.mjs can load it through Node's own type stripping. Env and the Workers runtime types
+// (Request, Response, RateLimit, ExportedHandler and the rest) come from
+// worker-configuration.d.ts, which `wrangler types` generates from wrangler.toml.
+
+// What the code reads from env. wrangler types knows ADMIN_EMAIL and the two rate limiters
+// from wrangler.toml, but not the secrets: they are set with `wrangler secret put` and are
+// in no file. The limiters are optional here although wrangler.toml binds both, because the
+// code is written to run without them (see overRateLimit). The secrets are optional too:
+// RESEND_API_KEY, RESEND_WEBHOOK_SECRET and ALERT_EMAIL are checked where they are used, and
+// a missing TURNSTILE_SECRET_KEY is reported by Turnstile itself (missing-input-secret).
+interface WorkerEnv extends Omit<Env, "CONTACT_RATE_LIMIT_IP" | "CONTACT_RATE_LIMIT_RECIPIENT"> {
+  CONTACT_RATE_LIMIT_IP?: RateLimit;
+  CONTACT_RATE_LIMIT_RECIPIENT?: RateLimit;
+  RESEND_API_KEY?: string;
+  TURNSTILE_SECRET_KEY?: string;
+  RESEND_WEBHOOK_SECRET?: string;
+  ALERT_EMAIL?: string;
+}
+
+type CorsHeaders = Record<string, string>;
+
+// A parsed JSON value: what request.json() can return for any body.
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
+// Turnstile's siteverify answer, the fields read here.
+interface SiteverifyReply {
+  success: boolean;
+  "error-codes"?: string[];
+}
+
+// One email as Resend's POST /emails takes it, with the fields this Worker sets.
+interface OutgoingEmail {
+  from: string;
+  to: string[];
+  subject: string;
+  html: string;
+  reply_to?: string;
+}
+
+// Resend's answer to POST /emails: { id } when accepted, { name, message } on an error.
+interface ResendReply {
+  id?: string;
+  name?: string;
+  message?: string;
+}
+
+// A value caught by the catch-alls, as far as they read it: when it is an Error, its stack.
+type Thrown = { stack?: string };
+
+// What sendViaResend reports back.
+interface SendResult {
+  ok: boolean;
+  status: number;
+  id: string | null;
+  message: string | null;
+}
+
+// A Resend webhook event, the fields read here. The payload is signed (see
+// verifySvixSignature), so its shape is Resend's; every field is still optional, because
+// the code checks each one before use.
+interface ResendEvent {
+  type?: string;
+  data?: {
+    email_id?: string;
+    to?: string | string[] | null;
+    subject?: string;
+    bounce?: { message?: string; subType?: string; type?: string };
+    failed?: { reason?: string };
+  };
+}
 
 // CORS is restricted to the two real site origins. This is defence in depth only:
 // CORS is browser-enforced and stops nothing from curl.
@@ -85,8 +160,8 @@ const FROM_AUTOREPLY = "Stormberry AS <info@stormberry.as>";
 // bounces must never generate a second alert.
 const ALERT_SUBJECT_PREFIX = "Contact form delivery problem";
 
-function corsHeaders(request) {
-  const headers = {
+function corsHeaders(request: Request): CorsHeaders {
+  const headers: CorsHeaders = {
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     // Responses differ by Origin, so caches must not share them.
@@ -99,13 +174,13 @@ function corsHeaders(request) {
   return headers;
 }
 
-const json = (obj, status = 200, cors = {}) =>
+const json = (obj: Record<string, unknown>, status = 200, cors: CorsHeaders = {}): Response =>
   new Response(JSON.stringify(obj), {
     status,
     headers: { "Content-Type": "application/json", ...cors },
   });
 
-const escapeHtml = (value) =>
+const escapeHtml = (value: unknown): string =>
   String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -113,7 +188,7 @@ const escapeHtml = (value) =>
     .replace(/"/g, "&quot;");
 
 export default {
-  async fetch(request, env) {
+  async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     const url = new URL(request.url);
     const cors = corsHeaders(request);
 
@@ -131,7 +206,7 @@ export default {
 
     return handleContactForm(request, env, cors);
   },
-};
+} satisfies ExportedHandler<WorkerEnv>;
 
 // Rate limiting. Two independent keys, because they bound different abuses:
 // per-IP caps a single source hammering the form, and per-recipient caps how often
@@ -139,7 +214,7 @@ export default {
 // nuisance vector. A missing binding is logged, not fatal: see the note at the top.
 // Log lines carry the limiter label only, never the key: the key is an IP address
 // or an email address, and Workers Logs are not where personal data belongs.
-async function overRateLimit(limiter, key, label) {
+async function overRateLimit(limiter: RateLimit | undefined, key: string, label: string): Promise<boolean> {
   if (!limiter || typeof limiter.limit !== "function") {
     console.warn(`Rate limiter ${label} is not bound; request not limited`);
     return false;
@@ -157,29 +232,30 @@ async function overRateLimit(limiter, key, label) {
 
 // Map the optional `source` field to its fixed English label. Anything that is
 // not a known key, including a missing field from an older page, is "not given".
-function sourceLabel(value) {
+function sourceLabel(value: unknown): string {
   if (typeof value !== "string") return SOURCE_NOT_GIVEN;
   if (value.length > LIMITS.source) return SOURCE_NOT_GIVEN;
   const key = value.trim();
   if (!Object.prototype.hasOwnProperty.call(SOURCE_LABELS, key)) return SOURCE_NOT_GIVEN;
-  return SOURCE_LABELS[key];
+  // The own-property check above makes key one of SOURCE_LABELS's keys.
+  return SOURCE_LABELS[key as keyof typeof SOURCE_LABELS];
 }
 
 // Trim, type-check and cap a single free-text field.
-function cleanField(value, max) {
+function cleanField(value: unknown, max: number): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
   if (!trimmed || trimmed.length > max) return null;
   return trimmed;
 }
 
-async function handleContactForm(request, env, cors) {
+async function handleContactForm(request: Request, env: WorkerEnv, cors: CorsHeaders): Promise<Response> {
   try {
     // A parse error message can quote the start of the body, so it must not
     // reach the catch-all below, which logs the error text.
-    let body;
+    let body: JsonValue;
     try {
-      body = await request.json();
+      body = await request.json<JsonValue>();
     } catch {
       return json({ error: "Malformed request" }, 400, cors);
     }
@@ -230,7 +306,7 @@ async function handleContactForm(request, env, cors) {
       },
     );
 
-    const turnstileData = await turnstileResult.json();
+    const turnstileData = await turnstileResult.json<SiteverifyReply>();
 
     if (!turnstileData.success) {
       // Surface Turnstile's own error codes. Without them, a rotated or missing
@@ -249,7 +325,8 @@ async function handleContactForm(request, env, cors) {
       return json({ error: "Server error" }, 500, cors);
     }
 
-    const serviceLabel = SERVICE_LABELS[service];
+    // The own-property check above makes service one of SERVICE_LABELS's keys.
+    const serviceLabel = SERVICE_LABELS[service as keyof typeof SERVICE_LABELS];
 
     const htmlBody = `
         <h2>New Contact Form Submission</h2>
@@ -265,7 +342,7 @@ async function handleContactForm(request, env, cors) {
     // The subject carries only the allow-listed service label, never the name.
     // Subjects travel further than bodies (inbox previews, notifications, the
     // daily briefs), so the enquirer's name stays in the body only.
-    const emailsToSend = [
+    const emailsToSend: OutgoingEmail[] = [
       {
         from: FROM_NOTIFICATION,
         to: [adminEmail],
@@ -336,12 +413,12 @@ async function handleContactForm(request, env, cors) {
 
     return json({ success: true, ids }, 200, cors);
   } catch (error) {
-    console.error("Contact form error:", error && error.stack ? error.stack : String(error));
+    console.error("Contact form error:", error && (error as Thrown).stack ? (error as Thrown).stack : String(error));
     return json({ error: "Internal error" }, 500, cors);
   }
 }
 
-async function sendViaResend(apiKey, payload) {
+async function sendViaResend(apiKey: string, payload: OutgoingEmail): Promise<SendResult> {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -351,7 +428,7 @@ async function sendViaResend(apiKey, payload) {
     body: JSON.stringify(payload),
   });
 
-  const data = await response.json().catch(() => null);
+  const data = await response.json<ResendReply>().catch(() => null);
 
   return {
     ok: response.ok,
@@ -372,7 +449,7 @@ const ALERT_EVENTS = new Set([
   "email.failed",
 ]);
 
-async function handleResendWebhook(request, env, cors) {
+async function handleResendWebhook(request: Request, env: WorkerEnv, cors: CorsHeaders): Promise<Response> {
   try {
     const payload = await request.text();
 
@@ -387,7 +464,7 @@ async function handleResendWebhook(request, env, cors) {
       return json({ error: "Invalid signature" }, 401, cors);
     }
 
-    let event;
+    let event: ResendEvent;
     try {
       event = JSON.parse(payload);
     } catch {
@@ -473,7 +550,7 @@ async function handleResendWebhook(request, env, cors) {
   } catch (error) {
     // crypto.subtle.importKey throws on a malformed secret, and without this the
     // failure was an unlogged 500 with no way to tell it from a Resend outage.
-    console.error("Webhook error:", error && error.stack ? error.stack : String(error));
+    console.error("Webhook error:", error && (error as Thrown).stack ? (error as Thrown).stack : String(error));
     return json({ error: "Internal error" }, 500, cors);
   }
 }
@@ -481,7 +558,7 @@ async function handleResendWebhook(request, env, cors) {
 // Resend signs webhooks with Svix. Signed content is `${id}.${timestamp}.${body}`,
 // HMAC-SHA256 under the base64-decoded secret, compared against the base64
 // signatures in the `svix-signature` header (space-separated, `v1,` prefixed).
-async function verifySvixSignature(secret, headers, payload) {
+async function verifySvixSignature(secret: string, headers: Headers, payload: string): Promise<boolean> {
   const id = headers.get("svix-id");
   const timestamp = headers.get("svix-timestamp");
   const signatureHeader = headers.get("svix-signature");
@@ -495,7 +572,7 @@ async function verifySvixSignature(secret, headers, payload) {
   }
 
   const secretBody = secret.startsWith("whsec_") ? secret.slice(6) : secret;
-  let keyBytes;
+  let keyBytes: Uint8Array;
   try {
     keyBytes = Uint8Array.from(atob(secretBody), (c) => c.charCodeAt(0));
   } catch {
@@ -524,7 +601,7 @@ async function verifySvixSignature(secret, headers, payload) {
     .some((candidate) => constantTimeEqual(candidate, expected));
 }
 
-function constantTimeEqual(a, b) {
+function constantTimeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let diff = 0;
   for (let i = 0; i < a.length; i++) {

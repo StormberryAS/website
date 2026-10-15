@@ -1,20 +1,39 @@
 #!/bin/sh
-# Optional pre-commit hook: runs tools/build-ts.sh --check before a commit that touches the
-# TypeScript sources, a root .js, a page or the build configuration. Off until enabled, per
-# clone, with:
+# Optional pre-commit hook. Off until enabled, per clone, with:
 #
 #   git config core.hooksPath tools/hooks
 #
 # (core.hooksPath replaces .git/hooks for that clone; undo with git config --unset core.hooksPath.)
-# The check reads the working tree, so the hook stops when those paths have unstaged changes:
+# - A commit that touches the TypeScript sources, a root .js, a page or the build configuration
+#   runs tools/build-ts.sh --check.
+# - A commit that touches the contact-form Worker (cloudflare-worker/), its check script or the
+#   package files runs tools/check-worker.sh (type check, tests, and with wrangler installed the
+#   types and bundle checks).
+# Both checks read the working tree, so the hook stops when those paths have unstaged changes:
 # stage them or stash them first. git commit --no-verify skips the hook.
 set -eu
 cd "$(git rev-parse --show-toplevel)"
-if ! git diff --cached --name-only | grep -Eq '^(ts/|[^/]*\.js$|[^/]*\.html$|no/[^/]*\.html$|tsconfig\.json$|package(-lock)?\.json$|bump_assets\.py$|tools/build-ts\.sh$)'; then
-  exit 0
+staged="$(git diff --cached --name-only)"
+site=0
+worker=0
+if printf '%s\n' "$staged" | grep -Eq '^(ts/|[^/]*\.js$|[^/]*\.html$|no/[^/]*\.html$|tsconfig\.json$|package(-lock)?\.json$|bump_assets\.py$|tools/build-ts\.sh$)'; then
+  site=1
 fi
-if ! git diff --quiet -- ts tsconfig.json package.json package-lock.json bump_assets.py tools/build-ts.sh ':(glob)*.js' ':(glob)*.html' ':(glob)no/*.html'; then
-  echo "pre-commit: unstaged changes in ts/, a root .js, a page or the build config; the check reads the working tree, so stage or stash them first" >&2
-  exit 1
+if printf '%s\n' "$staged" | grep -Eq '^(cloudflare-worker/|tools/check-worker\.sh$|package(-lock)?\.json$)'; then
+  worker=1
 fi
-exec tools/build-ts.sh --check
+if [ "$site" = 1 ]; then
+  if ! git diff --quiet -- ts tsconfig.json package.json package-lock.json bump_assets.py tools/build-ts.sh ':(glob)*.js' ':(glob)*.html' ':(glob)no/*.html'; then
+    echo "pre-commit: unstaged changes in ts/, a root .js, a page or the build config; the check reads the working tree, so stage or stash them first" >&2
+    exit 1
+  fi
+  tools/build-ts.sh --check
+fi
+if [ "$worker" = 1 ]; then
+  if ! git diff --quiet -- cloudflare-worker tools/check-worker.sh package.json package-lock.json; then
+    echo "pre-commit: unstaged changes in cloudflare-worker/, tools/check-worker.sh or the package files; the check reads the working tree, so stage or stash them first" >&2
+    exit 1
+  fi
+  tools/check-worker.sh
+fi
+exit 0
