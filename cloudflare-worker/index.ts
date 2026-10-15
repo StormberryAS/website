@@ -18,7 +18,7 @@
 // but it only strips the types and never checks them: run tools/check-worker.sh before a
 // commit or a deploy. Only erasable type syntax is used (no enum, namespace or parameter
 // property), so the deployed bundle is the JavaScript this file was before the move, and
-// test.mjs can load it through Node's own type stripping. Env and the Workers runtime types
+// test.ts can load it through Node's own type stripping. Env and the Workers runtime types
 // (Request, Response, RateLimit, ExportedHandler and the rest) come from
 // worker-configuration.d.ts, which `wrangler types` generates from wrangler.toml.
 
@@ -124,7 +124,7 @@ const SERVICE_LABELS = {
 // nothing, and an older Worker simply ignores the extra key.
 // The label reaches the admin notification only, never the confirmation sent
 // to the caller-supplied address. Keys match the <option> values on
-// contact.html and no-kontakt.html; test.mjs fails if they drift apart.
+// contact.html and no-kontakt.html; test.ts fails if they drift apart.
 const SOURCE_LABELS = {
   search: "Search engine",
   google_maps: "Google Maps or Google business listing",
