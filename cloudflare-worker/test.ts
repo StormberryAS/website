@@ -1,10 +1,18 @@
-// Offline tests for the contact-form Worker.  Run:  node test.mjs  (Node 22.13 or later)
+// Offline tests for the contact-form Worker.  Run:  node test.ts  (Node 22.18 or later)
+//
+// TypeScript, run as it is by Node's built-in type stripping: no build step, no flag and no
+// package beyond the compiler. Only erasable type syntax is used (no enum, namespace or
+// parameter property), as in index.ts. tools/check-worker.sh type-checks this file with
+// tsconfig.test.json before it runs it; the parts of Node it uses are declared by hand in
+// node-test.d.ts.
 //
 // index.ts is loaded through a data: URL so this file needs no package.json
 // ("type": "module") and cannot affect how wrangler builds or deploys. Node's own
 // type stripping (module.stripTypeScriptTypes) erases the type annotations first,
 // replacing them with spaces, so line and column numbers stay those of index.ts.
-// Node prints one ExperimentalWarning for it.
+// Node prints an ExperimentalWarning for that, and a MODULE_TYPELESS_PACKAGE_JSON warning
+// for this file: no package.json says whether a .ts file is an ES module, so Node reads
+// the syntax to decide. Both are harmless; naming this file test.mts would silence the second.
 // Webhook signatures are produced with node:crypto, an implementation
 // independent of the Web Crypto one inside the Worker, so a pass is a real
 // cross-check rather than the code agreeing with itself.
@@ -15,28 +23,39 @@ import { stripTypeScriptTypes } from "node:module";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
+// What index.ts exports. The module is loaded below from a data: URL, which the compiler
+// cannot follow, so its type is taken from the file and applied to the loaded module.
+type ContactWorker = typeof import("./index").default;
+type TestEnv = Parameters<ContactWorker["fetch"]>[1];
+
+// A reply body as these tests read it: only a few fields, each compared as it comes.
+type JsonReply = Record<string, unknown>;
+
 const here = dirname(fileURLToPath(import.meta.url));
 const source = await readFile(join(here, "index.ts"), "utf8");
-const { default: worker } = await import(
+const { default: worker } = (await import(
   `data:text/javascript;base64,${Buffer.from(stripTypeScriptTypes(source)).toString("base64")}`
-);
+)) as { default: ContactWorker };
 
 const SECRET_BODY = randomBytes(24).toString("base64");
 const SECRET = `whsec_${SECRET_BODY}`;
 const BASE = "https://stormberry-contact-form.marcos-495.workers.dev";
 
-const env = {
+const env: TestEnv = {
   ADMIN_EMAIL: "info@stormberry.as",
   RESEND_WEBHOOK_SECRET: SECRET,
   TURNSTILE_SECRET_KEY: "unused-in-these-tests",
 };
 
-const sign = (id, timestamp, body) =>
+const sign = (id: string, timestamp: string, body: string): string =>
   createHmac("sha256", Buffer.from(SECRET_BODY, "base64"))
     .update(`${id}.${timestamp}.${body}`)
     .digest("base64");
 
-function webhookRequest(event, { id = "msg_test_1", skew = 0, badSig = false } = {}) {
+function webhookRequest(
+  event: unknown,
+  { id = "msg_test_1", skew = 0, badSig = false }: { id?: string; skew?: number; badSig?: boolean } = {},
+): Request {
   const body = JSON.stringify(event);
   const ts = String(Math.floor(Date.now() / 1000) + skew);
   const sig = badSig ? "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" : sign(id, ts, body);
@@ -52,16 +71,16 @@ function webhookRequest(event, { id = "msg_test_1", skew = 0, badSig = false } =
   });
 }
 
-const results = [];
-async function check(label, fn) {
+const results: [state: string, label: string][] = [];
+async function check(label: string, fn: () => Promise<void>): Promise<void> {
   try {
     await fn();
     results.push(["PASS", label]);
   } catch (err) {
-    results.push(["FAIL", `${label} :: ${err.message}`]);
+    results.push(["FAIL", `${label} :: ${err instanceof Error ? err.message : String(err)}`]);
   }
 }
-const eq = (actual, expected, what) => {
+const eq = <T>(actual: T, expected: T, what: string): void => {
   if (actual !== expected) throw new Error(`${what}: expected ${expected}, got ${actual}`);
 };
 
@@ -82,7 +101,7 @@ const bounced = {
 await check("valid signature is accepted", async () => {
   const res = await worker.fetch(webhookRequest(delivered), env);
   eq(res.status, 200, "status");
-  eq((await res.json()).ok, true, "ok");
+  eq((await res.json<JsonReply>()).ok, true, "ok");
 });
 
 await check("forged signature is rejected", async () => {
@@ -122,7 +141,7 @@ await check("unconfigured webhook secret returns 500, not a bypass", async () =>
 await check("bounce event without an API key skips the alert cleanly", async () => {
   const res = await worker.fetch(webhookRequest(bounced), env);
   eq(res.status, 200, "status");
-  eq((await res.json()).alerted, false, "alerted");
+  eq((await res.json<JsonReply>()).alerted, false, "alerted");
 });
 
 await check("form: missing fields -> 400", async () => {
@@ -143,7 +162,7 @@ await check("form: missing captcha token -> 400", async () => {
     env,
   );
   eq(res.status, 400, "status");
-  eq((await res.json()).error, "Missing captcha verification", "error");
+  eq((await res.json<JsonReply>()).error, "Missing captcha verification", "error");
 });
 
 await check("OPTIONS from an allowed origin reflects that origin, not *", async () => {
@@ -178,7 +197,7 @@ const goodForm = {
   message: "hello",
   "cf-turnstile-response": "tok",
 };
-const formRequest = (over = {}, headers = {}) =>
+const formRequest = (over: Record<string, unknown> = {}, headers: Record<string, string> = {}): Request =>
   new Request(BASE, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...headers },
@@ -188,13 +207,13 @@ const formRequest = (over = {}, headers = {}) =>
 await check("unknown service is rejected", async () => {
   const res = await worker.fetch(formRequest({ service: "<script>" }), env);
   eq(res.status, 400, "status");
-  eq((await res.json()).error, "Unknown service", "error");
+  eq((await res.json<JsonReply>()).error, "Unknown service", "error");
 });
 
 await check("invalid email is rejected", async () => {
   const res = await worker.fetch(formRequest({ email: "not an address" }), env);
   eq(res.status, 400, "status");
-  eq((await res.json()).error, "Invalid email address", "error");
+  eq((await res.json<JsonReply>()).error, "Invalid email address", "error");
 });
 
 await check("oversized message is rejected", async () => {
@@ -207,19 +226,39 @@ await check("oversized name is rejected", async () => {
   eq(res.status, 400, "status");
 });
 
+// One mail as the Worker posts it to Resend: the fields these tests read.
+interface SentEmail {
+  to: string[];
+  subject: string;
+  html: string;
+  reply_to?: string;
+}
+
+// The first mail a mocked send captured. The tests check the count first (eq on sent.length),
+// but noUncheckedIndexedAccess cannot know that, so the lookup states it once.
+const firstOf = (sent: SentEmail[]): SentEmail => {
+  const mail = sent[0];
+  if (!mail) throw new Error("no mail was sent");
+  return mail;
+};
+
+// The URL a fetch() call was made with.
+const urlOf = (input: RequestInfo | URL): string =>
+  typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+
 // Mock Turnstile + Resend so the send path can be inspected offline.
-function withMockedFetch(fn) {
+function withMockedFetch<T>(fn: (sent: SentEmail[]) => Promise<T>): Promise<T> {
   const real = globalThis.fetch;
-  const sent = [];
+  const sent: SentEmail[] = [];
   globalThis.fetch = async (input, init) => {
-    const target = typeof input === "string" ? input : input.url;
+    const target = urlOf(input);
     if (target.includes("challenges.cloudflare.com")) {
       return new Response(JSON.stringify({ success: true }), {
         headers: { "Content-Type": "application/json" },
       });
     }
     if (target.includes("api.resend.com")) {
-      sent.push(JSON.parse(init.body));
+      sent.push(JSON.parse(String(init?.body)));
       return new Response(JSON.stringify({ id: `id-${sent.length}` }), {
         headers: { "Content-Type": "application/json" },
       });
@@ -231,7 +270,7 @@ function withMockedFetch(fn) {
   });
 }
 
-const sendEnv = { ...env, RESEND_API_KEY: "re_test", TURNSTILE_SECRET_KEY: "ts_test" };
+const sendEnv: TestEnv = { ...env, RESEND_API_KEY: "re_test", TURNSTILE_SECRET_KEY: "ts_test" };
 
 await check("sendCopy leaks NO caller-supplied text to the caller's address", async () => {
   await withMockedFetch(async (sent) => {
@@ -258,16 +297,17 @@ await check("admin notification still carries the full message", async () => {
   await withMockedFetch(async (sent) => {
     await worker.fetch(formRequest({ message: "FULLTEXT" }), sendEnv);
     eq(sent.length, 1, "one send");
-    eq(sent[0].to[0], "info@stormberry.as", "recipient");
-    if (!sent[0].html.includes("FULLTEXT")) throw new Error("admin lost the message body");
-    eq(sent[0].reply_to, "ada@example.com", "reply_to");
+    const admin = firstOf(sent);
+    eq(admin.to[0], "info@stormberry.as", "recipient");
+    if (!admin.html.includes("FULLTEXT")) throw new Error("admin lost the message body");
+    eq(admin.reply_to, "ada@example.com", "reply_to");
   });
 });
 
 await check("provider failure returns a generic 502, no provider detail", async () => {
   const real = globalThis.fetch;
   globalThis.fetch = async (input) => {
-    const target = typeof input === "string" ? input : input.url;
+    const target = urlOf(input);
     if (target.includes("challenges.cloudflare.com")) {
       return new Response(JSON.stringify({ success: true }), {
         headers: { "Content-Type": "application/json" },
@@ -326,7 +366,7 @@ await check("an alert that itself bounces does NOT generate another alert", asyn
     ALERT_EMAIL: "alerts@stormberry.as",
   });
   eq(res.status, 200, "status");
-  const body = await res.json();
+  const body = await res.json<JsonReply>();
   eq(body.alerted, false, "alerted");
   eq(body.reason, "alert-loop-guard", "reason");
 });
@@ -338,7 +378,7 @@ await check("alert is suppressed when the alert address is the failing one", asy
     ALERT_EMAIL: "info@stormberry.as",
   });
   eq(res.status, 200, "status");
-  const body = await res.json();
+  const body = await res.json<JsonReply>();
   eq(body.alerted, false, "alerted");
   eq(body.reason, "alert-recipient-is-failing-address", "reason");
 });
@@ -354,7 +394,7 @@ await check("delivery_delayed is logged but no longer alerts", async () => {
     ALERT_EMAIL: "alerts@stormberry.as",
   });
   eq(res.status, 200, "status");
-  const body = await res.json();
+  const body = await res.json<JsonReply>();
   eq(body.ok, true, "ok");
   eq(body.alerted, undefined, "must not have attempted an alert");
 });
@@ -374,7 +414,7 @@ await check("non-base64 secret is caught by the atob guard -> 401", async () => 
 // reached and throws DataError. Without the handleResendWebhook try/catch this
 // is an unlogged 500 from the runtime. THIS is the regression test for finding 7.
 await check("zero-length secret reaches importKey and is caught -> logged 500", async () => {
-  const seen = [];
+  const seen: string[] = [];
   const realError = console.error;
   console.error = (...args) => seen.push(args.join(" "));
   try {
@@ -383,7 +423,7 @@ await check("zero-length secret reaches importKey and is caught -> logged 500", 
       RESEND_WEBHOOK_SECRET: "whsec_",
     });
     eq(res.status, 500, "status");
-    const body = await res.json();
+    const body = await res.json<JsonReply>();
     eq(body.error, "Internal error", "generic error body");
     if (!seen.some((line) => line.includes("Webhook error"))) {
       throw new Error("importKey failure was not logged by the catch-all");
@@ -395,7 +435,18 @@ await check("zero-length secret reaches importKey and is caught -> logged 500", 
 
 // Rate limiting.
 
-const limiterStub = (allow) => ({ calls: [], limit(arg) { this.calls.push(arg.key); return { success: allow }; } });
+// The stubs answer straight away, or throw, where the real binding answers with a promise.
+// The Worker awaits the result either way, so the stubs stay plain and asLimiter casts them,
+// once, to the type the env field expects.
+interface LimiterStub {
+  calls: string[];
+  limit(arg: { key: string }): { success: boolean };
+}
+const limiterStub = (allow: boolean): LimiterStub => ({
+  calls: [],
+  limit(arg) { this.calls.push(arg.key); return { success: allow }; },
+});
+const asLimiter = (stub: object): RateLimit => stub as unknown as RateLimit;
 
 await check("per-IP limit returns 429 before any outbound call", async () => {
   const real = globalThis.fetch;
@@ -406,7 +457,7 @@ await check("per-IP limit returns 429 before any outbound call", async () => {
     const limiter = limiterStub(false);
     const res = await worker.fetch(
       formRequest({}, { "CF-Connecting-IP": "203.0.113.9" }),
-      { ...sendEnv, CONTACT_RATE_LIMIT_IP: limiter },
+      { ...sendEnv, CONTACT_RATE_LIMIT_IP: asLimiter(limiter) },
     );
     eq(res.status, 429, "status");
     eq(limiter.calls[0], "203.0.113.9", "keyed on client IP");
@@ -420,11 +471,11 @@ await check("per-recipient limit drops the copy but still notifies the admin", a
     const limiter = limiterStub(false);
     const res = await worker.fetch(formRequest({ sendCopy: true }), {
       ...sendEnv,
-      CONTACT_RATE_LIMIT_RECIPIENT: limiter,
+      CONTACT_RATE_LIMIT_RECIPIENT: asLimiter(limiter),
     });
     eq(res.status, 200, "status");
     eq(sent.length, 1, "copy suppressed, admin mail still sent");
-    eq(sent[0].to[0], "info@stormberry.as", "recipient");
+    eq(firstOf(sent).to[0], "info@stormberry.as", "recipient");
     eq(limiter.calls[0], "ada@example.com", "keyed on the recipient address");
   });
 });
@@ -441,7 +492,7 @@ await check("a throwing limiter does not take the form down", async () => {
   await withMockedFetch(async (sent) => {
     const res = await worker.fetch(formRequest(), {
       ...sendEnv,
-      CONTACT_RATE_LIMIT_IP: { limit() { throw new Error("limiter exploded"); } },
+      CONTACT_RATE_LIMIT_IP: asLimiter({ limit() { throw new Error("limiter exploded"); } }),
     });
     eq(res.status, 200, "status");
     eq(sent.length, 1, "admin mail still sent");
@@ -450,22 +501,21 @@ await check("a throwing limiter does not take the form down", async () => {
 
 // Optional "How did you hear about us?" source field.
 
-const heardLine = (html) => {
-  const m = /<strong>Heard about us via:<\/strong> ([^<]*)<\/p>/.exec(html);
-  if (!m) throw new Error("admin notification has no 'Heard about us via' line");
-  return m[1];
+const heardLine = (html: string): string => {
+  const line = /<strong>Heard about us via:<\/strong> ([^<]*)<\/p>/.exec(html)?.[1];
+  if (line === undefined) throw new Error("admin notification has no 'Heard about us via' line");
+  return line;
 };
 
 // Sends one form through the mocked providers and returns the admin mail.
-async function adminMailFor(over) {
-  let admin;
-  await withMockedFetch(async (sent) => {
+function adminMailFor(over: Record<string, unknown>): Promise<SentEmail> {
+  return withMockedFetch(async (sent) => {
     const res = await worker.fetch(formRequest(over), sendEnv);
     eq(res.status, 200, "status");
-    admin = sent.find((m) => m.to[0] === "info@stormberry.as");
+    const admin = sent.find((m) => m.to[0] === "info@stormberry.as");
     if (!admin) throw new Error("no admin notification sent");
+    return admin;
   });
-  return admin;
 }
 
 await check("source: a known value reaches the admin mail as its English label", async () => {
@@ -495,25 +545,27 @@ await check("source: an unknown value is NOT echoed, it becomes not given", asyn
 await check("source: an unknown value never reaches logs, responses or any send", async () => {
   const MARK = "SRCMARKER";
   const hostile = `${MARK}<b>"x"`;
-  const logged = [];
+  const logged: string[] = [];
   const saved = { log: console.log, warn: console.warn, error: console.error };
-  for (const level of ["log", "warn", "error"]) {
+  for (const level of ["log", "warn", "error"] as const) {
     console[level] = (...args) => logged.push(args.map((a) => (typeof a === "string" ? a : JSON.stringify(a))).join(" "));
   }
   const realFetch = globalThis.fetch;
-  const payloads = [];
-  const mockFetch = ({ turnstile = true, resendStatus = 200, throws = false } = {}) =>
-    async (input, init) => {
+  const payloads: string[] = [];
+  const mockFetch = (
+    { turnstile = true, resendStatus = 200, throws = false }: { turnstile?: boolean; resendStatus?: number; throws?: boolean } = {},
+  ) =>
+    async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
       if (throws) throw new Error("network down");
-      const target = typeof input === "string" ? input : input.url;
+      const target = urlOf(input);
       if (init && init.body) payloads.push(String(init.body));
       if (target.includes("challenges.cloudflare.com")) {
         return new Response(JSON.stringify({ success: turnstile, "error-codes": turnstile ? [] : ["invalid-input-response"] }));
       }
       return new Response(JSON.stringify(resendStatus === 200 ? { id: "id-1" } : { message: "rejected" }), { status: resendStatus });
     };
-  const deny = { limit() { return { success: false }; } };
-  const paths = [
+  const deny = asLimiter({ limit() { return { success: false }; } });
+  const paths: [what: string, over: Record<string, unknown>, mock: Parameters<typeof mockFetch>[0], pathEnv: TestEnv][] = [
     ["200", {}, {}, sendEnv],
     ["400 missing field", { message: "" }, {}, sendEnv],
     ["400 unknown service", { service: "nope" }, {}, sendEnv],
@@ -569,6 +621,7 @@ await check("source: never appears in the confirmation sent to the caller", asyn
     eq(sent.length, 2, "two sends");
     const admin = sent.find((m) => m.to[0] === "info@stormberry.as");
     const copy = sent.find((m) => m.to[0] === "ada@example.com");
+    if (!admin || !copy) throw new Error("admin notification or confirmation missing");
     eq(heardLine(admin.html), "LinkedIn", "admin label");
     const copyText = `${copy.subject} ${copy.html}`;
     if (/linkedin|heard about/i.test(copyText)) throw new Error("source leaked into the confirmation");
@@ -576,14 +629,14 @@ await check("source: never appears in the confirmation sent to the caller", asyn
 });
 
 await check("source: the option values on both contact pages match the Worker allow-list", async () => {
-  const block = /const SOURCE_LABELS = \{([\s\S]*?)\};/.exec(source);
-  if (!block) throw new Error("SOURCE_LABELS not found in index.ts");
-  const workerKeys = [...block[1].matchAll(/^\s*"?([\w]+)"?:/gm)].map((m) => m[1]).sort();
+  const block = /const SOURCE_LABELS = \{([\s\S]*?)\};/.exec(source)?.[1];
+  if (block === undefined) throw new Error("SOURCE_LABELS not found in index.ts");
+  const workerKeys = [...block.matchAll(/^\s*"?([\w]+)"?:/gm)].map((m) => m[1]).sort();
   for (const page of ["contact.html", "no-kontakt.html"]) {
     const html = await readFile(join(here, "..", page), "utf8");
-    const select = /<select id="source"[^>]*>([\s\S]*?)<\/select>/.exec(html);
-    if (!select) throw new Error(`${page} has no source select`);
-    const values = [...select[1].matchAll(/<option value="([^"]*)"/g)].map((m) => m[1]);
+    const select = /<select id="source"[^>]*>([\s\S]*?)<\/select>/.exec(html)?.[1];
+    if (select === undefined) throw new Error(`${page} has no source select`);
+    const values = [...select.matchAll(/<option value="([^"]*)"/g)].map((m) => m[1]);
     eq(values[0], "", `${page} default option`);
     const pageKeys = values.slice(1).sort();
     eq(JSON.stringify(pageKeys), JSON.stringify(workerKeys), `${page} option values`);
@@ -594,10 +647,10 @@ await check("source: the option values on both contact pages match the Worker al
 // handler uses the IP address only to limit repeated submissions and does not
 // keep it; a log line carrying it would make that untrue.
 
-async function captureLogs(fn) {
-  const lines = [];
+async function captureLogs(fn: () => Promise<void>): Promise<string> {
+  const lines: string[] = [];
   const saved = { log: console.log, warn: console.warn, error: console.error };
-  for (const level of ["log", "warn", "error"]) {
+  for (const level of ["log", "warn", "error"] as const) {
     console[level] = (...args) => lines.push(args.map((a) => (typeof a === "string" ? a : JSON.stringify(a))).join(" "));
   }
   try {
@@ -609,7 +662,7 @@ async function captureLogs(fn) {
 }
 
 await check("logs: a per-IP limit hit logs the label, not the IP", async () => {
-  const deny = { limit() { return { success: false }; } };
+  const deny = asLimiter({ limit() { return { success: false }; } });
   const logs = await captureLogs(async () => {
     const res = await worker.fetch(
       formRequest({}, { "CF-Connecting-IP": "198.51.100.77" }),
@@ -622,7 +675,7 @@ await check("logs: a per-IP limit hit logs the label, not the IP", async () => {
 });
 
 await check("logs: a per-recipient limit hit logs the label, not the address", async () => {
-  const deny = { limit() { return { success: false }; } };
+  const deny = asLimiter({ limit() { return { success: false }; } });
   const logs = await captureLogs(() =>
     withMockedFetch(async () => {
       const res = await worker.fetch(
@@ -647,7 +700,7 @@ await check("logs: a malformed body is a 400 and is not quoted in the logs", asy
       sendEnv,
     );
     eq(res.status, 400, "status");
-    eq((await res.json()).error, "Malformed request", "error");
+    eq((await res.json<JsonReply>()).error, "Malformed request", "error");
     const arr = await worker.fetch(
       new Request(BASE, { method: "POST", headers: { "Content-Type": "application/json" }, body: "[1]" }),
       sendEnv,
@@ -681,6 +734,7 @@ await check("confirmation subject says received, not copy", async () => {
   await withMockedFetch(async (sent) => {
     await worker.fetch(formRequest({ sendCopy: true }), sendEnv);
     const copy = sent.find((m) => m.to[0] === "ada@example.com");
+    if (!copy) throw new Error("no confirmation sent to the caller");
     eq(copy.subject, "We have received your enquiry: Sales and business development", "subject");
   });
 });

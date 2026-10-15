@@ -1,0 +1,8 @@
+# GitHub's language bar counts what people write, not what a tool generates. These two files
+# are generated, so they are marked as such and left out of the statistics (and their diffs
+# are collapsed by default on GitHub).
+#
+# script.js is compiled from ts/script.ts by tools/build-ts.sh; edit the TypeScript.
+/script.js linguist-generated=true
+# worker-configuration.d.ts is written by `wrangler types`; see the README.
+cloudflare-worker/worker-configuration.d.ts linguist-generated=true

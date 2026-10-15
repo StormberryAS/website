@@ -8,8 +8,11 @@
 # nothing tracked by git (wrangler keeps its cache in cloudflare-worker/.wrangler/, git-ignored):
 #   1. installs the pinned compiler (npm ci from package-lock.json, install scripts off), as
 #      tools/build-ts.sh does;
-#   2. type-checks the Worker with cloudflare-worker/tsconfig.json (strict, no emit);
-#   3. runs the offline tests, node cloudflare-worker/test.mjs (Node 22.13 or later);
+#   2. type-checks the Worker with cloudflare-worker/tsconfig.json (strict, no emit), then its
+#      test, cloudflare-worker/test.ts, with cloudflare-worker/tsconfig.test.json (the same
+#      flags; the parts of Node the test uses are declared by hand in node-test.d.ts);
+#   3. runs the offline tests, node cloudflare-worker/test.ts (Node 22.18 or later, which runs
+#      TypeScript by stripping the types, with no flag and no build step);
 #   4. when wrangler is installed (it needs Node 22 or later): checks that
 #      cloudflare-worker/worker-configuration.d.ts is what `wrangler types` generates from
 #      wrangler.toml and the installed wrangler (`wrangler types --check`), then bundles the
@@ -44,8 +47,10 @@ TSC=(node "$ROOT/node_modules/typescript/bin/tsc")
 
 "${TSC[@]}" -p "$W/tsconfig.json" || die "cloudflare-worker/index.ts does not type-check"
 echo "check-worker: type check passed (TypeScript $("${TSC[@]}" --version | sed 's/^Version //'))"
+"${TSC[@]}" -p "$W/tsconfig.test.json" || die "cloudflare-worker/test.ts does not type-check"
+echo "check-worker: test type check passed"
 
-node "$W/test.mjs" > "$tmp/test.log" 2>&1 \
+node "$W/test.ts" > "$tmp/test.log" 2>&1 \
   || { grep '^FAIL' "$tmp/test.log" >&2 || tail -n 20 "$tmp/test.log" >&2; die "the Worker tests fail"; }
 echo "check-worker: tests $(tail -n 1 "$tmp/test.log")"
 
