@@ -1,7 +1,7 @@
 {
   "name": "stormberry-website",
   "private": true,
-  "description": "Build tooling only: compiles ts/ into the site's script.js and calendar.js, and type-checks the contact-form Worker in cloudflare-worker/. The published site has no runtime dependencies.",
+  "description": "Build tooling only: compiles ts/ into the site's script.js, and type-checks the contact-form Worker in cloudflare-worker/. The published site has no runtime dependencies.",
   "license": "MIT",
   "scripts": {
     "build": "tools/build-ts.sh",

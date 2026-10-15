@@ -5,7 +5,7 @@ Source code for the Stormberry AS corporate website.
 **Live:** [stormberry.as](https://stormberry.as)
 
 ## Architecture
-- **Vanilla HTML/CSS**, no frameworks. The site's own scripts are written in **TypeScript** (`ts/`) and compiled to plain JavaScript (`script.js`, `calendar.js`) that is committed next to the pages, so GitHub Pages and the nsite still publish the repository as it is.
+- **Vanilla HTML/CSS**, no frameworks. The site's own scripts are written in **TypeScript** (`ts/`) and compiled to plain JavaScript (`script.js`) that is committed next to the pages, so GitHub Pages and the nsite still publish the repository as it is.
 - **Privacy first**, no cookies, no trackers, no external dependencies that compromise user privacy.
 - **Sovereign AI**, built and maintained using high-speed agentic workflows.
 
@@ -23,7 +23,7 @@ The blog follows a strict monthly archiving rule to keep the feed clean and the 
 - **Blog/social images only:** generate them in a dark, cinematic, glassmorphism style. This art direction applies to generated post imagery — it is **not** the visual identity of the website itself, which is light and clean (off-white surfaces, charcoal text, a single red accent).
 
 ## Scripts (TypeScript)
-Edit `ts/script.ts` or `ts/calendar.ts`, never the compiled `.js` at the root. Then:
+Edit `ts/script.ts`, never the compiled `.js` at the root. Then:
 ```bash
 tools/build-ts.sh           # installs the pinned compiler (npm ci), compiles, restamps ?v= on the pages
 tools/build-ts.sh --check   # changes nothing; fails if a .js is not what ts/ compiles to, or a stamp is stale
