@@ -2,7 +2,7 @@
 
 > Stormberry AS is an operational AI partner based in Norway. We put AI into daily operations, score the sales pipeline against strategy, and turn the result into a synthesis ready for the next strategy review. Sovereign by default: your data stays on your infrastructure and the agents run behind your firewall.
 
-Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritime sales. The practice runs as one loop in three motions: daily operations, sales pipeline, strategy. Specialised corporate training for EU AI Act Article 4 (AI literacy and compliance) is delivered inside the first motion. We work natively in English, Norwegian, Portuguese and French, and our deliverables adapt to local communication styles. Contact: info@stormberry.as, +47 950 43 789, Askøy, Vestland, Norway.
+Founded by Marcos Thomassen Povoa after fourteen years in industrial and maritime sales. The practice runs as one loop in three motions: daily operations, sales pipeline, strategy. Specialised corporate training for EU AI Act Article 4 (AI literacy and compliance) is delivered inside the first motion. We work natively in English, Norwegian and Portuguese, and our deliverables adapt to local communication styles. Contact: info@stormberry.as, +47 950 43 789, Askøy, Vestland, Norway.
 
 ## Core pages
 

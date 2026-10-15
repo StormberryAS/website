@@ -2,7 +2,7 @@
 
 > Stormberry AS er en operasjonell KI-partner basert i Norge. Vi setter KI inn i den daglige driften, vurderer salgspipelinen mot strategien, og gjør resultatet om til en syntese klar for neste strategigjennomgang. Suveren som utgangspunkt: dine data blir liggende på din egen infrastruktur, og agentene kjører bak din brannmur.
 
-Grunnlagt av Marcos Thomassen Povoa etter fjorten år med salg av komplekse industrielle og maritime systemer. Praksisen kjører som ett kretsløp i tre bevegelser: daglig drift, salgspipeline, strategi. Spesialisert bedriftsopplæring i KI-forordningen (EU AI Act) artikkel 4 om KI-kompetanse leveres inne i den første bevegelsen. Vi jobber naturlig på engelsk, norsk, portugisisk og fransk, og leveransene tilpasses lokale kommunikasjonsstiler. Kontakt: info@stormberry.as, +47 950 43 789, Askøy, Vestland, Norge.
+Grunnlagt av Marcos Thomassen Povoa etter fjorten år med salg av komplekse industrielle og maritime systemer. Praksisen kjører som ett kretsløp i tre bevegelser: daglig drift, salgspipeline, strategi. Spesialisert bedriftsopplæring i KI-forordningen (EU AI Act) artikkel 4 om KI-kompetanse leveres inne i den første bevegelsen. Vi jobber naturlig på engelsk, norsk og portugisisk, og leveransene tilpasses lokale kommunikasjonsstiler. Kontakt: info@stormberry.as, +47 950 43 789, Askøy, Vestland, Norge.
 
 ## Viktige lenker
 
