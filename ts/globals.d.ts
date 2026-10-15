@@ -1,5 +1,5 @@
 // Types for the globals the site's scripts share with the page and with Cloudflare Turnstile.
-// Type information only: nothing in this file is compiled into script.js or calendar.js.
+// Type information only: nothing in this file is compiled into script.js.
 //
 // Only the parts of Turnstile's api.js that script.ts uses are described here, after
 // https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/ .

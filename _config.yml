@@ -24,7 +24,7 @@
 #
 # The TypeScript sources (ts/), their build tooling (tools/, package.json, package-lock.json,
 # tsconfig.json) and the installed compiler (node_modules/, never committed) are excluded
-# too: the pages load only the compiled script.js and calendar.js at the root. Added with the
+# too: the pages load only the compiled script.js at the root. Added with the
 # TypeScript move. Keep every list item bare, with no comment on its line:
 # stormberry-nsite-build.py reads this list to curate the nsite as well.
 exclude:
