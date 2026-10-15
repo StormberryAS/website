@@ -151,7 +151,7 @@
   </url>
   <url>
     <loc>https://stormberry.as/blog</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-10-15</lastmod>
   </url>
   <url>
     <loc>https://stormberry.as/blog202604</loc>
@@ -172,5 +172,9 @@
   <url>
     <loc>https://stormberry.as/blog202608</loc>
     <lastmod>2026-09-03</lastmod>
+  </url>
+  <url>
+    <loc>https://stormberry.as/blog202609</loc>
+    <lastmod>2026-10-15</lastmod>
   </url>
 </urlset>
