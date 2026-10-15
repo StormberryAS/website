@@ -5,6 +5,15 @@ const siteConfig = {
   }
 };
 
+// The contact form works only on these two hosts: the contact Worker accepts requests
+// (CORS) from these two origins alone, and the Turnstile sitekey is bound to them. Every
+// other host that serves this file (the Tor onion mirror, the Nostr nsite gateways, a
+// local preview) hides the form, shows a pointer to the email address and phone number
+// instead, and never contacts Cloudflare. An allowlist on purpose: a new copy of the site
+// gets the pointer until someone adds its host here AND to the Worker and the sitekey.
+const CONTACT_FORM_HOSTS = ['stormberry.as', 'www.stormberry.as'];
+const contactFormLive = CONTACT_FORM_HOSTS.indexOf(window.location.hostname) !== -1;
+
 let turnstileToken = '';
 
 // Turnstile starts only once someone begins using the contact form. A visitor who
@@ -17,9 +26,20 @@ const TURNSTILE_API_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js
 // How long Send waits for a token that is still on its way (an interactive
 // challenge needs a click, so leave room for a person to do it).
 const TURNSTILE_WAIT_MS = 30000;
-const TURNSTILE_START_EVENTS = ['focusin', 'input', 'change'];
+// click counts only on the Send button (see startTurnstileFromForm): Safari does not
+// focus a button when it is pressed, so a tap on Send fires no focusin. A click, unlike
+// pointerdown, never fires for a finger that lands on Send only to scroll the page, so a
+// visitor who only reads the page still loads nothing.
+const TURNSTILE_START_EVENTS = ['focusin', 'input', 'change', 'click'];
 let turnstileRequested = false;
 let turnstileWaiters = [];
+
+// The form cannot get a token, so say so now, with the email address and phone number,
+// rather than after the visitor has written the whole message.
+function showFormProblem() {
+  const errorMessage = document.getElementById('error-message');
+  if (errorMessage) errorMessage.style.display = 'flex';
+}
 
 function settleTurnstileWaiters(token) {
   const waiters = turnstileWaiters;
@@ -28,7 +48,7 @@ function settleTurnstileWaiters(token) {
 }
 
 function startTurnstile() {
-  if (turnstileRequested) return;
+  if (!contactFormLive || turnstileRequested) return;
   turnstileRequested = true;
   TURNSTILE_START_EVENTS.forEach(function (type) {
     document.removeEventListener(type, startTurnstileFromForm, true);
@@ -41,24 +61,30 @@ function startTurnstile() {
   script.src = TURNSTILE_API_URL;
   script.async = true;
   script.onerror = function () {
-    // Blocked or offline: let the next Send try again, and release anyone waiting.
+    // Blocked or offline: let the next Send try again, release anyone waiting, and
+    // give the visitor the email address and phone number straight away.
     script.remove();
     turnstileRequested = false;
     settleTurnstileWaiters('');
+    showFormProblem();
   };
   document.head.appendChild(script);
 }
 
 function startTurnstileFromForm(event) {
   const target = event.target;
-  if (target && target.closest && target.closest('#contact-form')) startTurnstile();
+  if (!target || !target.closest) return;
+  const selector = event.type === 'click' ? '#contact-form .submit-btn' : '#contact-form';
+  if (target.closest(selector)) startTurnstile();
 }
 
 // Listening on the document (capture phase) catches the first focus or keystroke
 // in the form even if it happens before DOMContentLoaded.
-TURNSTILE_START_EVENTS.forEach(function (type) {
-  document.addEventListener(type, startTurnstileFromForm, true);
-});
+if (contactFormLive) {
+  TURNSTILE_START_EVENTS.forEach(function (type) {
+    document.addEventListener(type, startTurnstileFromForm, true);
+  });
+}
 
 function waitForTurnstileToken(ms) {
   if (turnstileToken) return Promise.resolve(turnstileToken);
@@ -153,7 +179,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Contact Form
   const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
+  if (contactForm && !contactFormLive) {
+    // A copy of the site (see CONTACT_FORM_HOSTS): hide the form, which cannot send
+    // from here, and show the pointer to the email address and phone number.
+    contactForm.style.display = 'none';
+    const formPointer = document.getElementById('form-pointer');
+    if (formPointer) formPointer.style.display = 'flex';
+  } else if (contactForm) {
     const submitBtn = contactForm.querySelector('.submit-btn');
     const successMessage = document.getElementById('success-message');
     const errorMessage = document.getElementById('error-message');
@@ -214,6 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Submission error:', error);
         if (waitMessage) waitMessage.style.display = 'none';
         errorMessage.style.display = 'flex';
+        // A token is single use, and the Worker may have spent this one before the send
+        // failed, so a retry needs a fresh one: reset the widget, and the next Send waits
+        // for its new token.
+        try { if (window.turnstile) window.turnstile.reset(); } catch (err) { /* nothing to reset */ }
+        turnstileToken = '';
       } finally {
         sending = false;
         submitBtn.disabled = false;

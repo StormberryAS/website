@@ -9,20 +9,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Contact Stormberry AS: a form sent over an encrypted connection (HTTPS), PGP-signed email, no cookies and no analytics scripts. We reply within one business day in English, Norwegian, Portuguese or French." />
+    <meta name="description" content="Contact Stormberry AS by email or phone, or use the form on stormberry.as, which sends your message over an encrypted connection (HTTPS). No cookies and no analytics scripts. We reply within two working days in English, Norwegian, Portuguese or French." />
     <meta name="theme-color" content="#F8F9FA" />
     <link rel="apple-touch-icon" href="/logo.webp" />
     <link rel="canonical" href="https://stormberry.as/contact" />
     <link rel="alternate" hreflang="en" href="https://stormberry.as/contact" />
     <link rel="alternate" hreflang="no" href="https://stormberry.as/no-kontakt" />
     <link rel="alternate" hreflang="x-default" href="https://stormberry.as/contact" />
-    <script src="/script.js?v=720e2c1f"></script>
+    <script src="/script.js?v=83daafe0"></script>
     <script src="/lucide.min.js?v=5b477729" defer></script>
     <link rel="preload" href="/fonts/Inter-latin-v4001.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css?v=04859db5" />
+    <noscript><style>#contact-form { display: none; }</style></noscript>
     <title>Contact Stormberry AS | Operational AI Partner</title>
       <meta property="og:title" content="Contact Stormberry AS | Operational AI Partner" />
-    <meta property="og:description" content="Contact Stormberry AS: a form sent over an encrypted connection (HTTPS), PGP-signed email, no cookies and no analytics scripts. We reply within one business day in English, Norwegian, Portuguese or French." />
+    <meta property="og:description" content="Contact Stormberry AS by email or phone, or use the form on stormberry.as, which sends your message over an encrypted connection (HTTPS). No cookies and no analytics scripts. We reply within two working days in English, Norwegian, Portuguese or French." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://stormberry.as/contact" />
     <meta property="og:image" content="https://stormberry.as/og-image.jpg" />
@@ -34,7 +35,7 @@
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Contact Stormberry AS | Operational AI Partner" />
-    <meta name="twitter:description" content="Contact Stormberry AS: a form sent over an encrypted connection (HTTPS), PGP-signed email, no cookies and no analytics scripts. We reply within one business day in English, Norwegian, Portuguese or French." />
+    <meta name="twitter:description" content="Contact Stormberry AS by email or phone, or use the form on stormberry.as, which sends your message over an encrypted connection (HTTPS). No cookies and no analytics scripts. We reply within two working days in English, Norwegian, Portuguese or French." />
     <meta name="twitter:image" content="https://stormberry.as/og-image.jpg" />
     <script type="application/ld+json">
 {
@@ -142,6 +143,13 @@
               </div>
               
               <div class="contact-form-container glass-panel animate-fade-in-up delay-200">
+                <div id="form-pointer" class="form-status form-pointer" style="display: none; align-items: center; gap: 0.5rem; color: var(--text-secondary, #4B5563); padding: 1rem; background: var(--bg-tertiary, #F1F3F5); border-radius: var(--radius); font-size: 0.95rem; line-height: 1.6;">
+                  <i data-lucide="mail" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+                  <span>The contact form works only on stormberry.as, not on this copy of our site. Email us at <a href="#" class="protected-email" data-user="info" data-domain="stormberry.as" style="color: inherit; text-decoration: underline;"></a> or call <a href="tel:+4795043789" style="color: inherit; text-decoration: underline;">+47 950 43 789</a> (Signal, Telegram, WhatsApp).</span>
+                </div>
+                <noscript>
+                  <p class="form-status form-pointer" style="color: var(--text-secondary, #4B5563); padding: 1rem; background: var(--bg-tertiary, #F1F3F5); border-radius: var(--radius); font-size: 0.95rem; line-height: 1.6;">The contact form needs JavaScript and works only on stormberry.as. Email us at <a href="mailto:info@stormberry.as" style="color: inherit; text-decoration: underline;">info@stormberry.as</a> or call <a href="tel:+4795043789" style="color: inherit; text-decoration: underline;">+47 950 43 789</a> (Signal, Telegram, WhatsApp).</p>
+                </noscript>
                 <form id="contact-form" class="contact-form">
                   <div class="form-row">
                     <div class="form-group">
@@ -161,7 +169,7 @@
                       <option value="strategy">Strategic Growth</option>
                       <option value="culture">Cross-Cultural Communications</option>
                       <option value="ai">AI (also EU AI Act Article 4)</option>
-                      <option value="other">Other Inquiry</option>
+                      <option value="other">Other Enquiry</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -195,21 +203,21 @@
                     <span>One moment: we are running a quick spam check before sending. If a box appears above, tick it and your message will be sent.</span>
                   </div>
 
-                  <div id="success-message" class="form-status success-message" style="display: none; align-items: center; gap: 0.5rem; color: var(--success-color, #10b981); margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius); font-size: 0.9rem;">
+                  <div id="success-message" class="form-status success-message" role="status" style="display: none; align-items: center; gap: 0.5rem; color: var(--success-color, #10b981); margin-bottom: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius); font-size: 0.9rem;">
                     <i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i>
                     <span>Thank you for your message, we will come back to you as soon as possible.</span>
                   </div>
                   
-                  <div id="error-message" class="form-status error-message" style="display: none; align-items: center; gap: 0.5rem; color: var(--danger-color, #ef4444); margin-bottom: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: var(--radius); font-size: 0.9rem;">
-                    <i data-lucide="alert-circle" style="width: 18px; height: 18px;"></i>
-                    <span>Failed to send message. Please try again later.</span>
+                  <div id="error-message" class="form-status error-message" role="alert" style="display: none; align-items: center; gap: 0.5rem; color: var(--danger-color, #b91c1c); margin-bottom: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: var(--radius); font-size: 0.9rem;">
+                    <i data-lucide="alert-circle" style="width: 18px; height: 18px; flex-shrink: 0;"></i>
+                    <span>The form cannot send your message right now. Email us at <a href="#" class="protected-email" data-user="info" data-domain="stormberry.as" style="color: inherit; text-decoration: underline;"></a> or call <a href="tel:+4795043789" style="color: inherit; text-decoration: underline;">+47 950 43 789</a> (Signal, Telegram, WhatsApp) instead.</span>
                   </div>
 
                   <button type="submit" class="btn btn-primary submit-btn">
                     Send Message <i data-lucide="send" style="width: 18px; height: 18px;"></i>
                   </button>
                   <p class="form-privacy-note" style="margin-top: 0.75rem; margin-bottom: 0; font-size: 0.85rem; opacity: 0.75; text-align: center;">
-                    We use what you send us to answer your enquiry, never for marketing. A Cloudflare spam check starts when you begin filling in the form. <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy policy</a>.
+                    We use what you send us to answer your enquiry, never for marketing. A Cloudflare spam check starts when you begin using the form. <a href="/privacy" style="color: inherit; text-decoration: underline;">Privacy policy</a>.
                   </p>
                   <p style="margin-top: 1rem; margin-bottom: 0; font-size: 0.85rem; opacity: 0.75; text-align: center;">
                     Want occasional updates? <a href="https://linkedin.com/company/StormberryAS" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Follow us on LinkedIn</a>.
