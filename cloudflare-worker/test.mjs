@@ -1,20 +1,24 @@
-// Offline tests for the contact-form Worker.  Run:  node test.mjs
+// Offline tests for the contact-form Worker.  Run:  node test.mjs  (Node 22.13 or later)
 //
-// index.js is loaded through a data: URL so this file needs no package.json
-// ("type": "module") and cannot affect how wrangler builds or deploys.
+// index.ts is loaded through a data: URL so this file needs no package.json
+// ("type": "module") and cannot affect how wrangler builds or deploys. Node's own
+// type stripping (module.stripTypeScriptTypes) erases the type annotations first,
+// replacing them with spaces, so line and column numbers stay those of index.ts.
+// Node prints one ExperimentalWarning for it.
 // Webhook signatures are produced with node:crypto, an implementation
 // independent of the Web Crypto one inside the Worker, so a pass is a real
 // cross-check rather than the code agreeing with itself.
 
 import { createHmac, randomBytes } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { stripTypeScriptTypes } from "node:module";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const source = await readFile(join(here, "index.js"), "utf8");
+const source = await readFile(join(here, "index.ts"), "utf8");
 const { default: worker } = await import(
-  `data:text/javascript;base64,${Buffer.from(source).toString("base64")}`
+  `data:text/javascript;base64,${Buffer.from(stripTypeScriptTypes(source)).toString("base64")}`
 );
 
 const SECRET_BODY = randomBytes(24).toString("base64");
@@ -573,7 +577,7 @@ await check("source: never appears in the confirmation sent to the caller", asyn
 
 await check("source: the option values on both contact pages match the Worker allow-list", async () => {
   const block = /const SOURCE_LABELS = \{([\s\S]*?)\};/.exec(source);
-  if (!block) throw new Error("SOURCE_LABELS not found in index.js");
+  if (!block) throw new Error("SOURCE_LABELS not found in index.ts");
   const workerKeys = [...block[1].matchAll(/^\s*"?([\w]+)"?:/gm)].map((m) => m[1]).sort();
   for (const page of ["contact.html", "no-kontakt.html"]) {
     const html = await readFile(join(here, "..", page), "utf8");
