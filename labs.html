@@ -19,11 +19,13 @@
     <link rel="stylesheet" href="/style.css?v=04859db5" />
     <style>
       /* Cards with a store link: the whole card still opens the app (the Launch App link
-         stretches over it), and the Zapstore button sits above that layer. */
+         stretches over it), and the store buttons (Zapstore, Google Play) sit above that layer. */
       .store-card { position: relative; }
       .store-card .card-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; align-self: flex-start; }
       .store-card .card-launch::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
       .store-card .card-store { position: relative; z-index: 1; }
+      /* Three buttons (Launch App, Zapstore, Google Play) fit one line on a desktop card. */
+      .store-card .card-actions .btn { padding-left: 1.1rem; padding-right: 1.1rem; }
     </style>
     <title>Stormberry Labs | Functioning Prototypes</title>
       <meta property="og:title" content="Stormberry Labs" />
@@ -142,6 +144,7 @@
                 <div class="card-actions">
                   <a href="https://metadata.stormberry.as" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-launch">Launch App <i data-lucide="external-link" style="width: 16px; height: 16px;"></i></a>
                   <a href="https://zapstore.dev/apps/no.stormberry.metadatascrubber" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-store" aria-label="Get MetadataScrubber for Android on Zapstore">Zapstore <i data-lucide="download" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=no.stormberry.metadatascrubber.play" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-store" aria-label="Get MetadataScrubber for Android on Google Play">Google Play <i data-lucide="play" style="width: 16px; height: 16px;"></i></a>
                 </div>
               </div>
 
@@ -179,6 +182,7 @@
                 <div class="card-actions">
                   <a href="https://username.stormberry.as" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-launch">Launch App <i data-lucide="external-link" style="width: 16px; height: 16px;"></i></a>
                   <a href="https://zapstore.dev/apps/no.stormberry.usernamegenerator" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-store" aria-label="Get UsernameGenerator for Android on Zapstore">Zapstore <i data-lucide="download" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=no.stormberry.usernamegenerator.play" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-store" aria-label="Get UsernameGenerator for Android on Google Play">Google Play <i data-lucide="play" style="width: 16px; height: 16px;"></i></a>
                 </div>
               </div>
 
@@ -352,7 +356,7 @@
               </a>
 
               <!-- EclipseTracker -->
-              <a href="https://eclipse.stormberry.as" target="_blank" rel="noopener noreferrer" class="glass-panel service-card animate-fade-in-up delay-100">
+              <div class="glass-panel service-card store-card animate-fade-in-up delay-100">
                 <div class="service-icon">
                   <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="4"/>
@@ -363,8 +367,11 @@
                 <p class="service-desc">
                   An offline countdown to the next major solar and lunar eclipses worldwide. Fully deterministic, calculated in your browser with no APIs.
                 </p>
-                <span class="btn btn-outline" style="margin-top: 1.5rem; align-self: flex-start;">Launch App <i data-lucide="external-link" style="width: 16px; height: 16px;"></i></span>
-              </a>
+                <div class="card-actions">
+                  <a href="https://eclipse.stormberry.as" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-launch">Launch App <i data-lucide="external-link" style="width: 16px; height: 16px;"></i></a>
+                  <a href="https://zapstore.dev/apps/no.stormberry.eclipsetracker" target="_blank" rel="noopener noreferrer" class="btn btn-outline card-store" aria-label="Get EclipseTracker for Android on Zapstore">Zapstore <i data-lucide="download" style="width: 16px; height: 16px;"></i></a>
+                </div>
+              </div>
 
               <!-- NightModeScheduler -->
               <a href="https://nightmode.stormberry.as" target="_blank" rel="noopener noreferrer" class="glass-panel service-card animate-fade-in-up delay-200">
