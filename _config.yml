@@ -27,6 +27,10 @@
 # too: the pages load only the compiled script.js at the root. Added with the
 # TypeScript move. Keep every list item bare, with no comment on its line:
 # stormberry-nsite-build.py reads this list to curate the nsite as well.
+# posts/ holds the drafts of two LinkedIn posts (posts/2026-04-20 and posts/2026-04-22) as
+# README.md files. No page links them. Until 2026-11-06 GitHub Pages rendered each one as a page
+# in its own theme (not in Inter) and also served the Markdown itself. Excluded on 2026-11-06,
+# so every path under /posts/ answers 404. The files stay in the repository.
 # Jekyll skips every path that starts with a dot, so the Web Key Directory under
 # .well-known/openpgpkey/ (added 2026-10-17: mail apps find the mail key for
 # marcos@stormberry.as there) must be included explicitly. .well-known/nostr.json is
@@ -53,3 +57,4 @@ exclude:
   - tsconfig.json
   - ts/
   - tools/
+  - posts/
